@@ -68,18 +68,17 @@ class AuthController extends Controller
                     'token' => $token,
                     'id' => $user->id,
                     'message' => 'Se ha iniciado sesión correctamente!',
-                ]);
+                ], 200);
             }
         }
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        auth()->user()->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
 
         return response()->json([
-            'status' => 200,
             'message' => 'Se ha cerrado la sesión!',
-        ]);
+        ], 200);
     }
 }
