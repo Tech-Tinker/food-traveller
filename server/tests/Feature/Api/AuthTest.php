@@ -23,4 +23,14 @@ class AuthTest extends TestCase
 
         $this->assertCount(1, User::all());
     }
+
+    public function test_user_can_not_authenticate_with_invalid_password(): void
+    {
+        $user = User::factory()->create();
+        $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'wrong password',
+        ]);
+        $this->assertGuest();
+    }
 }
