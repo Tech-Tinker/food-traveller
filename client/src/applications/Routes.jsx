@@ -1,17 +1,21 @@
+
+
 import { createBrowserRouter } from "react-router-dom";
-import RegisterForm from '../pages/register/registerView';
+import RegisterView from "../pages/registerView/RegisterView";
+
 
 
 const routes = [
-    {
+    /*{
         path: "/",
         element: <Home />,
-    },
+    },*/
 
     {
         path: "/register",
-        element: <RegisterForm />,
+        element: <RegisterView />,
     },
+
 ]
 
 const router = createBrowserRouter(routes);

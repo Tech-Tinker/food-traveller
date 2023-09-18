@@ -1,0 +1,16 @@
+.bttn{
+    width: 7.5rem;
+    height: 2.5rem;
+    border-style: none;
+    margin-top: 2rem;
+    border-radius: 1.25rem;
+    color: var(--color-background);
+}
+
+.bttn.bttn-primary {
+    background-color: var(--color-primary);
+}
+
+.bttn.bttn-secondary {
+    background-color: var(--color-secondary);
+}
