@@ -44,7 +44,7 @@ const RegisterForm = () => {
     return (
         <main className="d-flex justify-content-center">
             <form onSubmit={handleSubmit} className="reg-form" action="/register" method="POST">
-                <h2 className="text-center mb-3 pink-color border-bottom border-3 pb-2 bold">Registro de usuario</h2>
+                <h2 className="text-center mb-3 pink-color border-bottom border-3 pb-2 bold">Regístrate</h2>
 
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label blue-color bold">Nombre</label>
@@ -58,7 +58,7 @@ const RegisterForm = () => {
                     <span>{registerInput.error_list.name}</span>
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="email" className="form-label blue-color bold">E-mail</label>
+                    <label htmlFor="email" className="form-label blue-color bold">Email</label>
                     <input
                         onChange={handleInput}
                         value={registerInput.email}
@@ -82,10 +82,9 @@ const RegisterForm = () => {
 
                 </div>
                 <div className="d-flex justify-content-evenly">
-                    <Button backgroundColorClass="bttn-primary" text="Aceptar" />
-                    <Link to={`/`}><Button backgroundColorClass="bttn-secondary" text="Cancelar" /></Link>
+                    <Button backgroundColorClass="bttn-primary" text="Regístrate" />
                 </div>
-                <p className="accede bold">¿Ya tienes una cuenta? Accede <Link to={`/login`} className="aqui">aquí</Link></p>
+                <p className="accede bold">¿Ya eres miembro? <Link to={`/login`} className="aqui">Inicia tu sesión</Link></p>
             </form>
         </main>
     )
