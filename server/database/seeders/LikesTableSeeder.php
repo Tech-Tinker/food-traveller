@@ -14,35 +14,35 @@ class LikesTableSeeder extends Seeder
     public function run(): void
     {
         
-            // Obtén todas las recetas
-        $recetas = Receta::all();
+        //     // Obtén todas las recetas
+        // $recetas = Receta::all();
 
-        // Obtén todos los usuarios registrados
-        $usuariosRegistrados = User::all();
+        // // Obtén todos los usuarios registrados
+        // $usuariosRegistrados = User::all();
 
-        // Simula "likes" aleatorios
-        foreach ($recetas as $receta) {
-            // Verifica si hay usuarios registrados
-            if ($usuariosRegistrados->isNotEmpty()) {
-                // Cuántos "likes" aleatorios deseas asignar a cada receta
-                $numLikes = rand(1, $usuariosRegistrados->count());
+        // // Simula "likes" aleatorios
+        // foreach ($recetas as $receta) {
+        //     // Verifica si hay usuarios registrados
+        //     if ($usuariosRegistrados->isNotEmpty()) {
+        //         // Cuántos "likes" aleatorios deseas asignar a cada receta
+        //         $numLikes = rand(1, $usuariosRegistrados->count());
 
-                // Selecciona usuarios aleatorios de entre los registrados
-                $usuariosAleatorios = $usuariosRegistrados->random($numLikes);
+        //         // Selecciona usuarios aleatorios de entre los registrados
+        //         $usuariosAleatorios = $usuariosRegistrados->random($numLikes);
 
-                // Asigna "likes" a la receta
-                foreach ($usuariosAleatorios as $usuario) {
-                    // Registra el "like" en la tabla de likes
-                    DB::table('likes')->insert([
-                        'user_id' => $usuario->id,
-                        'recipe_id' => $receta->id,
-                    ]);
+        //         // Asigna "likes" a la receta
+        //         foreach ($usuariosAleatorios as $usuario) {
+        //             // Registra el "like" en la tabla de likes
+        //             DB::table('likes')->insert([
+        //                 'user_id' => $usuario->id,
+        //                 'recipe_id' => $receta->id,
+        //             ]);
 
-                    // También podrías registrar el "like" en el perfil del usuario
-                    $usuario->favoritos()->attach($receta->id);
-                    }
-                }
-            }
+        //             // También podrías registrar el "like" en el perfil del usuario
+        //             $usuario->favoritos()->attach($receta->id);
+        //             }
+        //         }
+        //     }
         }
     
 }
