@@ -40,10 +40,10 @@ const LoginForm = () => {
                     <input type="password" name="password" onChange={handleOnChange} value={login.password}></input>
                 </div>
                 <button type="submit">A donde quieres viajar hoy?</button>
-                <p>No tienes una cuenta? <Link to="">Regístrate</Link></p>
+                <p>No tienes una cuenta? <Link to="/register">Regístrate</Link></p>
             </form>
         </div>
     )
 }
 
-export default LoginForm
+export default LoginForm;
