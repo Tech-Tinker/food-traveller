@@ -39,4 +39,46 @@ class AuthController extends Controller
             ], 201);
         }
     }
+
+    public function login(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|max:191',
+            'password' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'validation_errors' => $validator->messages(),
+            ]);
+        } else {
+            $user = User::where('email', $request->email)->first();
+
+            if (!$user || !Hash::check($request->password, $user->password)) {
+                return response()->json([
+                    'status' => 401,
+                    'message' => 'Credenciales incorrectas',
+                ]);
+            } else {
+                $token = $user->createToken($user->email . '_Token')->plainTextToken;
+
+                return response()->json([
+                    'username' => $user->name,
+                    'token' => $token,
+                    'id' => $user->id,
+                    'message' => 'Se ha iniciado sesión correctamente!',
+                ], 200);
+            }
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => 'Se ha cerrado la sesión!',
+        ], 200);
+    }
 }
