@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RecipesTableSeeder extends Seeder
 {
@@ -20,21 +21,21 @@ class RecipesTableSeeder extends Seeder
             Asegúrate de que la migración de la tabla de recetas incluya el campo "video_url". Puedes modificar la migración existente o crear una nueva si aún no tienes una.  */
         
             // Insertar una receta ficticia con un enlace de video
-         DB::table('recetas')->insert([
-            'titulo' => 'Receta con Video',
-            'descripcion' => 'Esta receta tiene un video.',
+         DB::table('recipes')->insert([
+            'name' => 'Receta con Video',
+            'description' => 'Esta receta tiene un video.',
             //Tiempo de preparació, dificultad y la imagen al principio.
-            'ingredientes' => 'Ingrediente 1, Ingrediente 2',
-            'instrucciones' => 'Paso 1, Paso 2, Paso 3',
+            'ingredients' => 'Ingrediente 1, Ingrediente 2',
+            'preparation' => 'Paso 1, Paso 2, Paso 3',
             'video_url' => 'https://www.ejemplo.com/video.mp4', // URL de video ficticia
         ]);
 
         // Insertar otras recetas ficticias sin video
-        DB::table('recetas')->insert([
-            'titulo' => 'Receta sin Video',
-            'descripcion' => 'Esta receta no tiene video.',
-            'ingredientes' => 'Ingrediente A, Ingrediente B',
-            'instrucciones' => 'Paso A, Paso B, Paso C',
+        DB::table('recipes')->insert([
+            'name' => 'Receta sin Video',
+            'description' => 'Esta receta no tiene video.',
+            'ingredients' => 'Ingrediente A, Ingrediente B',
+            'preparation' => 'Paso A, Paso B, Paso C',
             'video_url' => null, // Puedes dejar el campo de video_url como nulo para recetas sin video
         ]);
 
