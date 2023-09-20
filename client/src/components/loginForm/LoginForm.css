@@ -1,0 +1,40 @@
+.headline-form-color{
+    color: var(--color-primary);
+}
+
+.headline-form-size{
+    font-size: 2rem;
+}
+
+.reg-form{
+    width: 80%;
+    height: 50vh;
+    padding: 1.5rem;
+    color: var(--color-text);
+}
+
+.label-text{
+    color: var(--label-color-text);
+}
+
+.text{
+    font-family: var(--text);
+}
+
+.input-none-style{
+    border: none;
+    outline: none;
+}
+
+.border-b{
+    border-bottom: 1px solid black;
+}
+
+.link-none-style{
+    text-decoration: none;
+    color: var(--color-primary);
+}
+
+.error-text{
+    color: var(--error-color);
+}

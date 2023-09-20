@@ -4,6 +4,7 @@ import './RegisterForm.css';
 import axios from 'axios';
 import swal from 'sweetalert';
 import Button from '../button/Button';
+import { AuthService } from '../../services/AuthServices';
 
 const RegisterForm = () => {
     const navigate = useNavigate();
@@ -14,12 +15,10 @@ const RegisterForm = () => {
         password: '',
         birthdate: '',
         country: '',
-        error_list: {
-            name: '',
-            email: '',
-            password: '',
-        },
+        error_list: [],
     });
+
+    const auth = AuthService();
 
     const [culinaryPreferences, setCulinaryPreferences] = useState([]);
 
@@ -43,10 +42,14 @@ const RegisterForm = () => {
 
         axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
             axios.post('http://localhost:8000/api/register', formData).then(res => {
-                localStorage.setItem('auth_token', res.data.token);
-                localStorage.setItem('auth_name', res.data.username);
-                swal("Success", res.data.message, "success");
-                navigate('/login');
+                if (res.data.status === 200) {
+                    localStorage.setItem('auth_token', res.data.token);
+                    localStorage.setItem('auth_name', res.data.username);
+                    swal("Success", res.data.message, "success");
+                    navigate('/login');
+                } else {
+                    setRegisterInput({ ...registerInput, error_list: res.data.validation_errors });
+                }
             });
         });
     }
