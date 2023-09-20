@@ -54,7 +54,7 @@ const RegisterForm = () => {
     return (
         <div className="d-flex justify-content-center">
             <form onSubmit={handleSubmit} className="reg-form rounded-0" action="/register" method="POST">
-                <h2 className="text-center mb-3">¡Te damos la bienvenida a bordo!</h2>
+                <h2 className="text-center bold mb-3">¡Te damos la bienvenida a bordo!</h2>
 
                 <div className="mb-3 text-center">
 
