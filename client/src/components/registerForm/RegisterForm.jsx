@@ -52,7 +52,7 @@ const RegisterForm = () => {
     }
 
     return (
-        <main className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
             <form onSubmit={handleSubmit} className="reg-form rounded-0" action="/register" method="POST">
                 <h2 className="text-center mb-3">¡Te damos la bienvenida a bordo!</h2>
 
@@ -163,7 +163,7 @@ const RegisterForm = () => {
 
                 <p className="text-black-50 accede bold " >¿Ya eres miembro? <Link to={`/login`} className="aqui">Inicia tu sesión</Link></p>
             </form>
-        </main>
+        </div>
     )
 }
 

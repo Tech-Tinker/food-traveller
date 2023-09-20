@@ -12,9 +12,11 @@
 body{
     font-family: 'Jaldi', sans-serif;
     margin: 0;
+
 }
 
 .reg-form{
+
     width: 30%;
     padding: 1.5rem;
     margin: 2rem;
