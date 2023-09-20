@@ -56,7 +56,7 @@ const RegisterForm = () => {
             <form onSubmit={handleSubmit} className="reg-form rounded-0" action="/register" method="POST">
                 <h2 className="text-center mb-3">¡Te damos la bienvenida a bordo!</h2>
 
-                <div className="mb-3">
+                <div className="mb-3 text-center">
 
                     <input
                         onChange={handleInput}
@@ -69,7 +69,7 @@ const RegisterForm = () => {
                     <span>{registerInput.error_list.name}</span>
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-3 text-center">
                     <input
                         onChange={handleInput}
                         value={registerInput.email}
@@ -81,7 +81,7 @@ const RegisterForm = () => {
                     <span>{registerInput.error_list.email}</span>
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-3 text-center">
                     <label htmlFor="birthdate" className="text-black bold">Fecha de Nacimiento</label>
                     <br>
                     </br>
@@ -94,7 +94,7 @@ const RegisterForm = () => {
                     />
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-3 text-center">
                     <label htmlFor="country" className="text-black bold">País de Origen</label>
                     <br></br>
                     <select
@@ -104,12 +104,13 @@ const RegisterForm = () => {
                         className="border-0 border-bottom"
                     >
                         <option value="">Selecciona un país</option>
-                        <option value="usa">Estados Unidos</option>
-                        <option value="canada">Canadá</option>
+                        <option value="europa">Europa</option>
+                        <option value="america">América del Norte</option>
+                        <option value="americas">América del Sur</option>
                     </select>
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-3 text-center">
                     <label className="text-black bold">Preferencias Culinarias</label>
                     <div className="culinary-preferences">
                         <button
@@ -141,7 +142,7 @@ const RegisterForm = () => {
                     </div>
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-3 text-center">
                     <input
                         onChange={handleInput}
                         value={registerInput.password}
