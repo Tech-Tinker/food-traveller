@@ -57,7 +57,7 @@ const RegisterForm = () => {
                 <h2 className="text-center mb-3">¡Te damos la bienvenida a bordo!</h2>
 
                 <div className="mb-3">
-                    
+
                     <input
                         onChange={handleInput}
                         value={registerInput.name}
@@ -156,7 +156,7 @@ const RegisterForm = () => {
                         Debe tener entre 8 y 20 caracteres.
                     </small>
                 </div>
-                
+
                 <div className="d-flex justify-content-evenly">
                     <Button backgroundColorClass="bttn-primary" id="aceptButton" text="Regístrate" />
                 </div>
