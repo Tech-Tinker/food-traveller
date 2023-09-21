@@ -69,7 +69,7 @@ const LoginForm = () => {
                     <label htmlFor="password" className="fw-bold fs-5 label-text text">Contraseña</label>
                     <input type="password" name="password" onChange={handleOnChange} value={login.password} className="input-none-style border-b"></input>
                 </div>
-                <Button backgroundColorClass="bttn-primary" text="Inicia sesión" />
+                <Button backgroundColorClass="bttn-primary" text="Inicia sesión" widthClass="dobleW" />
                 {/* <button type="submit">Inicia sesión</button> */}
                 <p className="text-center">No tienes cuenta? <Link to="/register" className="fw-bold  link-none-style">Regístrate</Link></p>
             </form>
