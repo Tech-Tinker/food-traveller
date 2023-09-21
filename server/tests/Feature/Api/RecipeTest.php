@@ -4,6 +4,7 @@ namespace Tests\Feature\Api;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Api\Validator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Recipe;
 use App\Models\User;
@@ -69,7 +70,6 @@ class RecipeTest extends TestCase
             'preparation' => '1. Triturar los tomates...',
         ];
 
-        // Realizar la solicitud POST a la API para crear la receta
         $response = $this->postJson('api/recipes', $data);
 
         // Asegurarse de que la receta se haya creado con éxito
@@ -108,6 +108,10 @@ class RecipeTest extends TestCase
         $response->assertJsonCount(1);
 
     }
+
+     /**
+     * Should test a user can update the recipes.
+     */
 
     public function test_user_can_update_own_recipe()
     {
