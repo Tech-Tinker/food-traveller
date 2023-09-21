@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 import Button from '../button/Button';
 import '../createRecipeForm/CreateRecipeForm.css';
 import { storeRecipe } from '../../services/ApiServices';
@@ -13,7 +14,10 @@ const CreateRecipeForm = () => {
     const [time, setTime] = useState('')
     const [difficulty, setDifficulty] = useState('')
     const [ingredients, setIngredients] = useState('')
+    const [preparation, setPreparation] = useState('')
     const [image, setImage] = useState('')
+
+    // eslint-disable-next-line
     const [errors, setErrors] = useState({
         image: null,
         title: null,
@@ -32,6 +36,7 @@ const CreateRecipeForm = () => {
                 time,
                 difficulty,
                 ingredients,
+                preparation,
                 image,
             };
 
@@ -40,17 +45,19 @@ const CreateRecipeForm = () => {
             if (response.errors) {
                 console.log('Errors:', response.errors);
             } else {
-                navigate(`/recipe/${response.id}`);
+                swal("Success", response.message, "success");
+                // navigate(`/recipe/${response.id}`);
+                navigate('/');
             }
         } catch (error) {
-            console.error('Error creating destination:', error);
+            console.error('Error creating recipe:', error);
             // const errors = error.response.data.errors
             // setErrors({ image: errors.image && errors.image[0], title: errors.title && errors.title[0], location: errors.location && errors.location[0], description: errors.description && errors.description[0], });
         }
     };
 
     return (
-        <div className="d-flex flex-column justify-content-center align-items-center">
+        <div className="d-flex flex-column justify-content-around align-items-center display-h">
             <h2 className="p-5 fw-bold text-center headline-form-color headline-form-size">Nueva receta</h2>
             <form className="d-flex flex-column justify-content-around reg-form" onSubmit={handleSubmit}>
 
@@ -153,6 +160,23 @@ const CreateRecipeForm = () => {
                 {
                     errors.ingredients && <div className="alerts">
                         <p>{errors.ingredients}</p>
+                    </div>
+                }
+
+                <div className="d-flex flex-column">
+                    <label htmlFor="preparation" className="fw-bold fs-5 label-text text">Preparación</label>
+                    <input
+                        value={preparation}
+                        onChange={(e) => setPreparation(e.target.value)}
+                        type="text"
+                        name="preparation"
+                        className="input-none-style border-b"
+                    />
+                </div>
+
+                {
+                    errors.preparation && <div className="alerts">
+                        <p>{errors.preparation}</p>
                     </div>
                 }
 

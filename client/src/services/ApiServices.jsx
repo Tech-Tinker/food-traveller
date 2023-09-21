@@ -4,7 +4,7 @@ const endpoint = 'http://localhost:8000/api';
 
 export async function storeRecipe(data) {
     try {
-        const response = await axios.post(`${endpoint}/create`, data);
+        const response = await axios.post(`${endpoint}/recipe`, data);
         return response.data;
     } catch (error) {
         throw error;

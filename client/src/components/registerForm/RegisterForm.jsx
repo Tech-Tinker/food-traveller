@@ -4,6 +4,7 @@ import './RegisterForm.css';
 import axios from 'axios';
 import swal from 'sweetalert';
 import Button from '../button/Button';
+// eslint-disable-next-line
 import { AuthService } from '../../services/AuthServices';
 
 const RegisterForm = () => {
