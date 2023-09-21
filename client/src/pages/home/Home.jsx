@@ -7,12 +7,8 @@ import Nav from '../../components/nav/Nav';
 const Home = () => {
     return (
         <>
-        <main>
             <Header />
-
-            
-        </main>
-        <Nav />
+            <Nav />
         </>
     )
 };

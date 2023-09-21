@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Validator;
 
 class RecipeController extends Controller
 {
@@ -23,53 +23,12 @@ class RecipeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-    //         'description' => 'required',
-    //         'author' => 'required',
-    //         'time' => 'required',
-    //         'difficulty' => 'required',
-    //         'ingredients' => 'required',
-    //         'preparation' => 'required',
-    //     ]);
-
-    //     $imagePath = null;
-
-    //         if ($request->hasFile('image')) {
-    //             $image = $request->file('image');
-    //             $imageName = time() . '.' . $image->getClientOriginalExtension();
-    //             $image->move(public_path('images'), $imageName);
-    //             $imagePath = 'images/' . $imageName;
-    //         }
-
-    //     $user = Auth::user();
-
-    //     $recipe = Recipe::create([
-    //         'name' => $request->name,
-    //         'image' => $imagePath,
-    //         'description' => $request->description,
-    //         'author' => $request->author,
-    //         'difficulty' => $request->difficulty,
-    //         'ingredients' => $request->ingredients,
-    //         'preparation' => $request->preparation,
-    //         'user_id' => $user->id
-    //     ]);
-
-    //     return response()->json_decode([
-    //         'msg' => 'subiste tu receta con existo!',
-    //         'recipe' => $recipe
-    //     ], 201);
-    // }
-
     public function store(Request $request)
     {
         // Valida la solicitud
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // podemos ajustar la reglas
+            'title' => 'required|string|max:255',
+            'image' => 'required', // podemos ajustar la reglas
             'description' => 'required|string',
             'author' => 'required|string',
             'time' => 'required|string',
@@ -83,27 +42,30 @@ class RecipeController extends Controller
         }
 
         // Obtiene el usuario autenticado
-        $user = $request->user();
+        // $user = $request->user();
 
         // Obtiene la imagen subida y la almacena en el directorio RecipeImages
-        $imagePath = $request->file('image')->store('RecipeImages', 'public');
+        // $imagePath = $request->file('image')->store('RecipeImages', 'public');
 
         // Crea una nueva receta con los datos proporcionados
-        $recipe = new Recipe([
-            'name' => $request->input('name'),
-            'image' => $imagePath,
-            'description' => $request->input('description'),
-            'author' => $request->input('author'),
-            'time' => $request->input('time'),
-            'difficulty' => $request->input('difficulty'),
-            'ingredients' => $request->input('ingredients'),
-            'preparation' => $request->input('preparation'),
-        ]);
+        $recipe = new Recipe();
+        $recipe->title = $request->title;
+        $recipe->image = $request->image;
+        $recipe->description = $request->description;
+        $recipe->author = $request->author;
+        $recipe->time = $request->time;
+        $recipe->difficulty = $request->difficulty;
+        $recipe->ingredients = $request->ingredients;
+        $recipe->preparation = $request->preparation;
 
         // Asocia la receta con el usuario autenticado
-        $user->recipes()->save($recipe);
+        // $user->recipes()->save($recipe);
 
-        return response()->json(['message' => '¡Genial! Tu receta ha sido publicada!.'], 201);
+        // $recipe->save();
+        $request->user()->recipe()->save($recipe);
+        return response()->json([
+            'message' => '¡Genial! Acabas de publicar tu receta.'
+        ], 201);
     }
 
     /**
@@ -128,34 +90,6 @@ class RecipeController extends Controller
         return response()->json(['recipe' => $recipe]);
     }
 
-    /**
-     * edit the specified resource in storage.
-     */
-
-     public function edit(Request $request, $id)
-    {
-    // Verifica si el usuario está autenticado
-    $user = $request->user();
-    if (!$user) {
-        return response()->json(['error' => 'Debes estar autenticado para editar una receta'], 401);
-    }
-
-    // Busca la receta por ID
-    $recipe = Recipe::find($id);
-
-    // Verifica si la receta existe
-    if (!$recipe) {
-        return response()->json(['error' => 'La receta no se encontró'], 404);
-    }
-
-    // Verifica si el usuario es el propietario de la receta
-    if ($recipe->user_id !== $user->id) {
-        return response()->json(['error' => 'No tienes permiso para editar esta receta'], 403);
-    }
-
-    // Devuelve la información de la receta en una respuesta JSON
-    return response()->json(['recipe' => $recipe]);
-   }
 
     /**
      * Update the specified resource in storage.
@@ -183,8 +117,8 @@ class RecipeController extends Controller
 
         // Define reglas de validación
         $rules = [
-            'name' => 'string|max:255',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'title' => 'string|max:255',
+            'image' => 'string',
             'description' => 'string',
             'author' => 'string',
             'time' => 'string',
@@ -204,22 +138,23 @@ class RecipeController extends Controller
         $recipe->fill($request->all());
 
         // Maneja la actualización de la imagen si se proporciona
-        if ($request->hasFile('image')) {
-            // Elimina la imagen anterior si existe
-            if ($recipe->image) {
-                Storage::disk('public')->delete($recipe->image);
-            }
+        // if ($request->hasFile('image')) {
+        // Elimina la imagen anterior si existe
+        // if ($recipe->image) {
+        //     Storage::disk('public')->delete($recipe->image);
+        // }
 
-            // Almacena la nueva imagen
-            $imagePath = $request->file('image')->store('RecipeImages', 'public');
-            $recipe->image = $imagePath;
-        }
+        // Almacena la nueva imagen
+        //     $imagePath = $request->file('image')->store('RecipeImages', 'public');
+        //     $recipe->image = $imagePath;
+        // }
 
         // Guarda los cambios en la receta
         $recipe->save();
 
         // Redirige a una página de detalle de receta o devuelve una respuesta JSON de éxito
-        return view('recipes.show', compact('recipe'));
+        // return view('recipes.show', compact('recipe'));
+        return response()->json(['recipe' => $recipe]);
     }
 
     /**
@@ -247,9 +182,9 @@ class RecipeController extends Controller
         }
 
         // Elimina la imagen asociada a la receta si existe
-        if ($recipe->image) {
-            Storage::disk('public')->delete($recipe->image);
-        }
+        // if ($recipe->image) {
+        //     Storage::disk('public')->delete($recipe->image);
+        // }
 
         // Elimina la receta de la base de datos
         $recipe->delete();
