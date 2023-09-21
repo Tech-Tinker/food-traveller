@@ -23,15 +23,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::post('/recipe', [RecipeController::class, 'show']);
 
-Route::get('/recipe', [RecipeController::class, 'index']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
-    // Route::get('/recipe', [RecipeController::class, 'index']);
+    Route::get('/recipe', [RecipeController::class, 'index']);
     Route::post('/recipe', [RecipeController::class, 'store']);
-    Route::post('/recipe', [RecipeController::class, 'show']);
+    //Route::post('/recipe', [RecipeController::class, 'show']);
     Route::post('/recipe/{id}', [RecipeController::class, 'edit']);
     Route::post('/recipe/{id}', [RecipeController::class, 'update']);
     Route::post('/recipe', [RecipeController::class, 'destroy']);

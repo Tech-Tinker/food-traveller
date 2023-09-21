@@ -23,6 +23,8 @@ const router = createBrowserRouter([
     {
         path: "/recipe",
         element: <RecipeView />,
+        
+
     },
 
 
