@@ -20,6 +20,7 @@ const router = createBrowserRouter([
         path: "/register",
         element: <RegisterView />,
     },
+
     {
         path: "/create-recipe",
         element: <CreateRecipe />,
@@ -28,20 +29,7 @@ const router = createBrowserRouter([
     {
         path: "/recipe",
         element: <RecipeView />,
-
-
-    },
-
-
-    {
-        path: "/recipe",
-        element: <RecipeView />,
-
-
-    },
-
-
-
+    }
 ]);
 
 export default router;
