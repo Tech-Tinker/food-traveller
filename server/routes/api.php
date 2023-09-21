@@ -34,4 +34,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/recipe/{id}', [RecipeController::class, 'show']);
     Route::put('/recipe/{id}', [RecipeController::class, 'update']);
     Route::delete('/recipe/{id}', [RecipeController::class, 'destroy']);
+    // Ruta para obtener el perfil del usuario
+Route::middleware(['auth:sanctum'])->get('/user-profile', [UserController::class, 'getUserProfile']);
 });
