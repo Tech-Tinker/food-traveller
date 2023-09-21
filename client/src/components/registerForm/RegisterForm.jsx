@@ -18,7 +18,7 @@ const RegisterForm = () => {
         error_list: [],
     });
 
-    const auth = AuthService();
+    /*const auth = AuthService();*/
 
     const [culinaryPreferences, setCulinaryPreferences] = useState([]);
 

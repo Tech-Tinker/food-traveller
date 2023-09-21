@@ -103,7 +103,7 @@ class RecipeController extends Controller
         // Asocia la receta con el usuario autenticado
         $user->recipes()->save($recipe);
 
-        return response()->json(['message' => '¡Gebial! Acabas de publicar tu receta.'], 201);
+        return response()->json(['message' => '¡Genial! Tu receta ha sido publicada!.'], 201);
     }
 
     /**
