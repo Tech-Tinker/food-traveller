@@ -4,6 +4,8 @@ import './RegisterForm.css';
 import axios from 'axios';
 import swal from 'sweetalert';
 import Button from '../button/Button';
+// eslint-disable-next-line
+import { AuthService } from '../../services/AuthServices';
 
 const RegisterForm = () => {
     const navigate = useNavigate();
@@ -14,12 +16,10 @@ const RegisterForm = () => {
         password: '',
         birthdate: '',
         country: '',
-        error_list: {
-            name: '',
-            email: '',
-            password: '',
-        },
+        error_list: [],
     });
+
+    /*const auth = AuthService();*/
 
     const [culinaryPreferences, setCulinaryPreferences] = useState([]);
 
@@ -43,21 +43,25 @@ const RegisterForm = () => {
 
         axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
             axios.post('http://localhost:8000/api/register', formData).then(res => {
-                localStorage.setItem('auth_token', res.data.token);
-                localStorage.setItem('auth_name', res.data.username);
-                swal("Success", res.data.message, "success");
-                navigate('/login');
+                if (res.data.status === 200) {
+                    localStorage.setItem('auth_token', res.data.token);
+                    localStorage.setItem('auth_name', res.data.username);
+                    swal("Success", res.data.message, "success");
+                    navigate('/login');
+                } else {
+                    setRegisterInput({ ...registerInput, error_list: res.data.validation_errors });
+                }
             });
         });
     }
 
     return (
-        <main className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
             <form onSubmit={handleSubmit} className="reg-form rounded-0" action="/register" method="POST">
-                <h2 className="text-center mb-3">¡Te damos la bienvenida a bordo!</h2>
+                <h2 className="text-center bold mb-3">¡Te damos la bienvenida a bordo!</h2>
 
-                <div className="mb-3">
-                    
+                <div className="mb-3 text-center">
+
                     <input
                         onChange={handleInput}
                         value={registerInput.name}
@@ -69,7 +73,7 @@ const RegisterForm = () => {
                     <span>{registerInput.error_list.name}</span>
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-3 text-center">
                     <input
                         onChange={handleInput}
                         value={registerInput.email}
@@ -81,7 +85,7 @@ const RegisterForm = () => {
                     <span>{registerInput.error_list.email}</span>
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-3 text-center">
                     <label htmlFor="birthdate" className="text-black bold">Fecha de Nacimiento</label>
                     <br>
                     </br>
@@ -94,7 +98,7 @@ const RegisterForm = () => {
                     />
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-3 text-center">
                     <label htmlFor="country" className="text-black bold">País de Origen</label>
                     <br></br>
                     <select
@@ -104,12 +108,13 @@ const RegisterForm = () => {
                         className="border-0 border-bottom"
                     >
                         <option value="">Selecciona un país</option>
-                        <option value="usa">Estados Unidos</option>
-                        <option value="canada">Canadá</option>
+                        <option value="europa">Europa</option>
+                        <option value="america">América del Norte</option>
+                        <option value="americas">América del Sur</option>
                     </select>
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-3 text-center">
                     <label className="text-black bold">Preferencias Culinarias</label>
                     <div className="culinary-preferences">
                         <button
@@ -141,7 +146,7 @@ const RegisterForm = () => {
                     </div>
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-3 text-center">
                     <input
                         onChange={handleInput}
                         value={registerInput.password}
@@ -156,14 +161,14 @@ const RegisterForm = () => {
                         Debe tener entre 8 y 20 caracteres.
                     </small>
                 </div>
-                
+
                 <div className="d-flex justify-content-evenly">
                     <Button backgroundColorClass="bttn-primary" id="aceptButton" text="Regístrate" />
                 </div>
 
                 <p className="text-black-50 accede bold " >¿Ya eres miembro? <Link to={`/login`} className="aqui">Inicia tu sesión</Link></p>
             </form>
-        </main>
+        </div>
     )
 }
 

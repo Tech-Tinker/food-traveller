@@ -1,26 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Jaldi:wght@400;700&display=swap');
-
-:root {
-    --color-primary: #F97C22;   
-    --color-background: #FBFDCE;
-    --box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
-    --border-radius: 1.25rem;
-    --color-text: #000000;
-
-} 
-
-body{
-    font-family: 'Jaldi', sans-serif;
-    margin: 0;
-}
-
 .reg-form{
-    width: 30%;
+    /* width: 30%; */
     padding: 1.5rem;
-    margin: 2rem;
-    border-radius: 20px;
-    border: 4px solid var(--yellow-light, #FBFDCE);
-    color: var(--color-primary)
+    /* margin: 2rem; */
+    /* border-radius: 20px; */
+    /* border: 4px solid var(--yellow-light, #FBFDCE); */
+    /* color: var(--color-primary) */
 }
 
 
@@ -64,8 +48,8 @@ textarea.form-control {
 } 
 
 
-@media (max-width: 400px){
+/* @media (max-width: 400px){
     .reg-form{
         width: 90%;
     }
-}
+} */

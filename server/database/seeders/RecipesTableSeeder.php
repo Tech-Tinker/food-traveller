@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class RecipesTableSeeder extends Seeder
 {
-     /**
+    /**
      * Run the database seeds.
      *
      * @return void
@@ -18,7 +18,7 @@ class RecipesTableSeeder extends Seeder
         // Ejemplo de datos para las recetas
         $recipes = [
             [
-                'name' => 'Receta 1',
+                'title' => 'Receta 1',
                 'image' => 'imagen1.jpg',
                 'description' => 'Descripción de la receta 1',
                 'author' => 'Autor 1',
@@ -32,7 +32,7 @@ class RecipesTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'name' => 'Receta 2',
+                'title' => 'Receta 2',
                 'image' => 'imagen2.jpg',
                 'description' => 'Descripción de la receta 2',
                 'author' => 'Autor 2',

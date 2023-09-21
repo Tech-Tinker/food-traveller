@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
             $table->string('image');
             $table->string('description');
             $table->string('author');
@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('preparation');
             $table->timestamps();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('privacy', ['public', 'private'])->default('public');
         });
     }
