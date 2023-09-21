@@ -23,47 +23,6 @@ class RecipeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-    //         'description' => 'required',
-    //         'author' => 'required',
-    //         'time' => 'required',
-    //         'difficulty' => 'required',
-    //         'ingredients' => 'required',
-    //         'preparation' => 'required',
-    //     ]);
-
-    //     $imagePath = null;
-
-    //         if ($request->hasFile('image')) {
-    //             $image = $request->file('image');
-    //             $imageName = time() . '.' . $image->getClientOriginalExtension();
-    //             $image->move(public_path('images'), $imageName);
-    //             $imagePath = 'images/' . $imageName;
-    //         }
-
-    //     $user = Auth::user();
-
-    //     $recipe = Recipe::create([
-    //         'name' => $request->name,
-    //         'image' => $imagePath,
-    //         'description' => $request->description,
-    //         'author' => $request->author,
-    //         'difficulty' => $request->difficulty,
-    //         'ingredients' => $request->ingredients,
-    //         'preparation' => $request->preparation,
-    //         'user_id' => $user->id
-    //     ]);
-
-    //     return response()->json_decode([
-    //         'msg' => 'subiste tu receta con existo!',
-    //         'recipe' => $recipe
-    //     ], 201);
-    // }
-
     public function store(Request $request)
     {
         // Valida la solicitud
@@ -131,34 +90,6 @@ class RecipeController extends Controller
         return response()->json(['recipe' => $recipe]);
     }
 
-    /**
-     * edit the specified resource in storage.
-     */
-
-    // public function edit(Request $request, $id)
-    // {
-    //     // Verifica si el usuario está autenticado
-    //     $user = $request->user();
-    //     if (!$user) {
-    //         return response()->json(['error' => 'Debes estar autenticado para editar una receta'], 401);
-    //     }
-
-    //     // Busca la receta por ID
-    //     $recipe = Recipe::find($id);
-
-    //     // Verifica si la receta existe
-    //     if (!$recipe) {
-    //         return response()->json(['error' => 'La receta no se encontró'], 404);
-    //     }
-
-    //     // Verifica si el usuario es el propietario de la receta
-    //     if ($recipe->user_id !== $user->id) {
-    //         return response()->json(['error' => 'No tienes permiso para editar esta receta'], 403);
-    //     }
-
-    //     // Devuelve la información de la receta en una respuesta JSON
-    //     return response()->json(['recipe' => $recipe]);
-    // }
 
     /**
      * Update the specified resource in storage.
