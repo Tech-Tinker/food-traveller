@@ -64,6 +64,7 @@ class RecipeController extends Controller
         // $recipe->save();
         $request->user()->recipe()->save($recipe);
         return response()->json([
+            'id' => $recipe->id,
             'message' => '¡Genial! Acabas de publicar tu receta.'
         ], 201);
     }

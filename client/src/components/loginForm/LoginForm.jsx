@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import swal from 'sweetalert';
-import { AuthService } from '../../services/AuthServices';
+// import { AuthService } from '../../services/AuthServices';
 import './LoginForm.css';
 import Button from '../button/Button';
 
@@ -16,7 +16,7 @@ const LoginForm = () => {
         error_list: [],
     });
 
-    const auth = AuthService();
+    // const auth = AuthService();
 
     const handleOnChange = (e) => {
         e.persist();

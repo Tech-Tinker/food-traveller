@@ -7,7 +7,7 @@ const RecipeView = () => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    Axios.get('http://127.0.0.1:8000/api/recipe/')
+    Axios.get('http://127.0.0.1:8000/api/recipes/')
       .then((response) => {
         setRecipes(response.data);
       })
