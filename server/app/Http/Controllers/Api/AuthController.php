@@ -83,4 +83,9 @@ class AuthController extends Controller
             'message' => 'Se ha cerrado la sesión!',
         ], 200);
     }
+
+
+    
 }
+
+

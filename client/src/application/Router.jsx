@@ -5,6 +5,7 @@ import RegisterView from "../pages/registerView/RegisterView";
 import RecipeView from "../pages/recipeView/RecipeView";
 import CreateRecipe from "../pages/createRecipe/CreateRecipe";
 import EditRecipe from "../pages/editRecipe/EditRecipe";
+import Perfil from "../pages/perfil/Perfil";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
     {
         path: "/edit-recipe/:id",
         element: <EditRecipe />,
+    },
+    
+    {
+        path: '/perfil',
+        element: <Perfil />
     }
 ]);
 
