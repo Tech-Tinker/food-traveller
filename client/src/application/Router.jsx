@@ -4,6 +4,7 @@ import Login from "../pages/login/Login";
 import RegisterView from "../pages/registerView/RegisterView";
 import RecipeView from "../pages/recipeView/RecipeView";
 import CreateRecipe from "../pages/createRecipe/CreateRecipe";
+import Perfil from "../pages/perfil/Perfil";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
     {
         path: "/recipe",
         element: <RecipeView />,
+    },
+    {
+        path: '/perfil',
+        element: <Perfil />
     }
 ]);
 

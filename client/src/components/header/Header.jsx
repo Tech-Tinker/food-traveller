@@ -7,6 +7,7 @@ const Header = () => {
   return (
     <div className='d-flex justify-content-between align-items-center header-margin'>
       <Link to={'/'}>Logo</Link>
+      <Link to={'/perfil'}>Perfil</Link>
 
       <Link to={'/login'}>
         <img src={login} alt="Avatar login" />
