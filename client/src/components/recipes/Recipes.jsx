@@ -1,7 +1,7 @@
 import React from 'react';
-import './Recipe.css';
+import './Recipes.css';
 
-const Recipe = ({ title, ingredients, instructions }) => {
+const Recipes = ({ title, ingredients, instructions }) => {
   return (
     <div className='recipe'>
       <h1>{title}</h1>
@@ -21,6 +21,6 @@ const Recipe = ({ title, ingredients, instructions }) => {
   );
 };
 
-export default Recipe;
+export default Recipes;
 
 

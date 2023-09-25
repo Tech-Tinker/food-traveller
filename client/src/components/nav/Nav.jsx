@@ -1,37 +1,32 @@
 import React from 'react';
 import './Nav.css';
 import { Link } from 'react-router-dom';
-import landing from '../../assets/landing.svg';
-import search from '../../assets/search.svg';
-import create from '../../assets/create.svg';
-import favorites from '../../assets/favorites.svg';
-import login from '../../assets/login.svg';
+import Home from '../../assets/Home.svg';
+import Search from '../../assets/Search.svg';
+import Create from '../../assets/Create.svg';
+import Avatar from '../../assets/Avatar.svg';
 
 const Nav = () => {
 
   return (
-    <footer className='nav-footer'>
+    <div className='nav-footer'>
       <Link to={'/'}>
-        <img src={landing} alt="Landing page Icon" />
+        <img src={Home} alt="Home Icon" />
       </Link>
 
       <Link to={'/search'}>
-        <img src={search} alt="Search Icon" />
+        <img src={Search} alt="Search Icon" />
       </Link>
 
       <Link to={'/create-recipe'}>
-        <img src={create} alt="Create Icon" />
-      </Link>
-
-      <Link to={'/favorites'}>
-        <img src={favorites} alt="Favorites Icon" />
+        <img src={Create} alt="Create Icon" />
       </Link>
 
       <Link to={'/login'}>
-        <img src={login} alt="Login Icon" />
+        <img src={Avatar} alt="Login Icon" />
       </Link>
 
-    </footer>
+    </div>
   );
 }
 
