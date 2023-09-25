@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('image');
-            $table->string('description');
+            $table->longText('description');
             $table->string('author');
             $table->string('time');
             $table->string('difficulty');
-            $table->string('ingredients');
-            $table->string('preparation');
+            $table->longText('ingredients');
+            $table->longText('preparation');
             $table->timestamps();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
