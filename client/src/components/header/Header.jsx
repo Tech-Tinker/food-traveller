@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import login from '../../assets/login.svg';
+import Avatar from '../../assets/Avatar.svg';
 import './Header.css'
 
 const Header = () => {
@@ -10,7 +10,7 @@ const Header = () => {
       <Link to={'/perfil'}>Perfil</Link>
 
       <Link to={'/login'}>
-        <img src={login} alt="Avatar login" />
+        <img src={Avatar} alt="Avatar login" />
       </Link>
 
     </div>
