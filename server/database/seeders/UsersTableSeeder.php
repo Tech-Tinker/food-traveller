@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {// Ejemplo de datos para usuarios
+    { // Ejemplo de datos para usuarios
         $users = [
             [
                 'name' => 'Usuario 1',
@@ -32,6 +32,15 @@ class UsersTableSeeder extends Seeder
                 'email' => 'usuario2@example.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('contraseña2'),
+                'remember_token' => Str::random(10),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Lucia',
+                'email' => 'l@mail.com',
+                'email_verified_at' => now(),
+                'password' => Hash::make('123456789'),
                 'remember_token' => Str::random(10),
                 'created_at' => now(),
                 'updated_at' => now(),

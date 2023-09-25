@@ -30,7 +30,7 @@ const RecipeDetails = () => {
   const { title, image, author, difficulty, time, description, ingredients, preparation } = show.recipe || {}
 
   return (
-    <div className="p-3">
+    <div className="padding">
       <div className="pb-3">
         <Link to={`/`}><img src={Back} alt="Go back icon" /></Link>
       </div>
