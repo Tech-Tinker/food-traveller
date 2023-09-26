@@ -49,21 +49,16 @@ const LoginForm = () => {
       });
     };
   
-    // Función para obtener el nombre de usuario almacenado en localStorage
     const getUserName = () => {
       return localStorage.getItem('auth_name');
     };
   
-    // Cerrar sesión
     const handleLogout = () => {
-      // Eliminar los datos de usuario almacenados en localStorage
       localStorage.removeItem('auth_token');
       localStorage.removeItem('auth_name');
       localStorage.removeItem('auth_user_id');
-      
-      // Redirigir a la página de inicio de sesión u otra página de tu elección
       navigate('/login');
-    //  window.location.reload();
+      window.location.reload();
     };
   
     return (
