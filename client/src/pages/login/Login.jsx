@@ -5,7 +5,7 @@ import LoginForm from '../../components/loginForm/LoginForm'
 const Login = () => {
     return (
         <div>
-            <Header showAvatar={false} />
+            <Header  />
             <LoginForm />
         </div>
     )
