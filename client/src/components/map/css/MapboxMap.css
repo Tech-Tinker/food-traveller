@@ -1,0 +1,13 @@
+.container-banner-map{
+    height: 15vh;
+    text-align: center;
+}
+
+.banner-map{
+    margin: center;
+    color:#CDB7AE ;  
+    justify-content: center;
+    text-align: center;
+    margin: 50px 2px;
+    text-shadow: 0px 3px #BB9B8E;
+}
