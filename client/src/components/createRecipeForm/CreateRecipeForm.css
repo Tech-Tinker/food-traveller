@@ -1,3 +1,22 @@
 .display-h{
     height: 75vh;
 }
+.b-r{
+    border-radius: 5px;
+}
+
+.input-style-1{
+    border: 1px solid #676565;
+}
+
+.input-height-1{
+    height: 1.75rem;
+}
+
+.input-height-2{
+    height: 3.18rem;
+}
+
+.input-height-3{
+    height: 6.375rem;
+}

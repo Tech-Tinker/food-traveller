@@ -46,8 +46,8 @@ const CreateRecipeForm = () => {
                 console.log('Errors:', response.errors);
             } else {
                 swal("Success", response.message, "success");
-                // navigate(`/recipe/${response.id}`);
-                navigate('/');
+                navigate(`/recipe/${response.id}`);
+                // navigate('/');
             }
         } catch (error) {
             console.error('Error creating recipe:', error);
@@ -62,13 +62,13 @@ const CreateRecipeForm = () => {
             <form className="d-flex flex-column justify-content-around reg-form" onSubmit={handleSubmit}>
 
                 <div className="d-flex flex-column">
-                    <label htmlFor="name" className="fw-bold fs-5 label-text text">Título</label>
+                    <label htmlFor="name" className="fw-bold label-text text">Título</label>
                     <input
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         type="text"
                         name="title"
-                        className="input-none-style border-b"
+                        className="input-style-1 input-height-1 b-r"
                     />
                 </div>
 
@@ -79,30 +79,13 @@ const CreateRecipeForm = () => {
                 }
 
                 <div className="d-flex flex-column">
-                    <label htmlFor="author" className="fw-bold fs-5 label-text text">Autor</label>
-                    <input
-                        value={author}
-                        onChange={(e) => setAuthor(e.target.value)}
-                        type="text"
-                        name="author"
-                        className="input-none-style border-b"
-                    />
-                </div>
-
-                {
-                    errors.author && <div className="alerts">
-                        <p>{errors.author}</p>
-                    </div>
-                }
-
-                <div className="d-flex flex-column">
-                    <label htmlFor="description" className="fw-bold fs-5 label-text text">Descripción</label>
+                    <label htmlFor="description" className="fw-bold label-text text">Descripción general</label>
                     <input
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         type="text"
                         name="description"
-                        className="input-none-style border-b"
+                        className="input-style-1 input-height-2 b-r"
                     />
                 </div>
 
@@ -113,13 +96,13 @@ const CreateRecipeForm = () => {
                 }
 
                 <div className="d-flex flex-column">
-                    <label htmlFor="time" className="fw-bold fs-5 label-text text">Tiempo de preparación</label>
+                    <label htmlFor="time" className="fw-bold label-text text">Tiempo de preparación</label>
                     <input
                         value={time}
                         onChange={(e) => setTime(e.target.value)}
                         type="text"
                         name="time"
-                        className="input-none-style border-b"
+                        className="input-style-1 input-height-1 b-r"
                     />
                 </div>
 
@@ -130,7 +113,7 @@ const CreateRecipeForm = () => {
                 }
 
                 <div className="d-flex flex-column">
-                    <label htmlFor="difficulty" className="fw-bold fs-5 label-text text">Dificultad</label>
+                    <label htmlFor="difficulty" className="fw-bold label-text text">Dificultad</label>
                     <input
                         value={difficulty}
                         onChange={(e) => setDifficulty(e.target.value)}
@@ -147,7 +130,7 @@ const CreateRecipeForm = () => {
                 }
 
                 <div className="d-flex flex-column">
-                    <label htmlFor="ingredients" className="fw-bold fs-5 label-text text">Ingredientes</label>
+                    <label htmlFor="ingredients" className="fw-bold label-text text">Ingredientes</label>
                     <input
                         value={ingredients}
                         onChange={(e) => setIngredients(e.target.value)}
@@ -164,13 +147,13 @@ const CreateRecipeForm = () => {
                 }
 
                 <div className="d-flex flex-column">
-                    <label htmlFor="preparation" className="fw-bold fs-5 label-text text">Preparación</label>
+                    <label htmlFor="preparation" className="fw-bold label-text text">Preparación</label>
                     <input
                         value={preparation}
                         onChange={(e) => setPreparation(e.target.value)}
                         type="text"
                         name="preparation"
-                        className="input-none-style border-b"
+                        className="input-style-1 input-height-3 b-r"
                     />
                 </div>
 
@@ -181,7 +164,7 @@ const CreateRecipeForm = () => {
                 }
 
                 <div className="d-flex flex-column">
-                    <label htmlFor="image" className="fw-bold fs-5 label-text text">Imagen</label>
+                    <label htmlFor="image" className="fw-bold label-text text">Imagen</label>
                     <input
                         value={image}
                         onChange={(e) => setImage(e.target.value)}
@@ -198,8 +181,8 @@ const CreateRecipeForm = () => {
                 }
 
                 <div className="d-flex justify-content-between">
-                    <Button backgroundColorClass="bttn-primary" text="Añadir" widthClass="simpleW" />
-                    <Link to={`/`}><Button backgroundColorClass="bttn-secondary" text="Cancelar" /></Link>
+                    <Link to={`/`}><Button backgroundColorClass="bttn-primary" text="Cancelar" widthClass="simpleW" /></Link>
+                    <Button backgroundColorClass="bttn-secondary" text="Añadir" />
                 </div>
 
             </form>
