@@ -1,9 +1,0 @@
-main {
-    width: auto;
-    height: 15vh;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: rgb(154, 230, 110);   
-    
-}

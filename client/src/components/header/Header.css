@@ -1,5 +1,10 @@
 .header-margin{
-    padding: 1rem 1.5rem;
+    padding: 1rem 1rem;
     border-bottom: 1px solid #EAEAEA;
     background: #FFF;
+}
+
+.logo {
+    width: 85%;
+    height: 85px;
 }
