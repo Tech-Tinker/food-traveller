@@ -12,9 +12,11 @@ const CreateRecipeForm = () => {
     const [author, setAuthor] = useState('')
     const [description, setDescription] = useState('')
     const [time, setTime] = useState('')
+    const [category, setCategory] = useState('')
     const [difficulty, setDifficulty] = useState('')
     const [ingredients, setIngredients] = useState('')
     const [preparation, setPreparation] = useState('')
+    const [country, setCountry] = useState('')
     const [image, setImage] = useState('')
 
     // eslint-disable-next-line
@@ -34,9 +36,11 @@ const CreateRecipeForm = () => {
                 author,
                 description,
                 time,
+                category,
                 difficulty,
                 ingredients,
                 preparation,
+                country,
                 image,
             };
 
@@ -58,11 +62,11 @@ const CreateRecipeForm = () => {
 
     return (
         <div className="d-flex flex-column justify-content-around align-items-center display-h">
-            <h2 className="p-5 fw-bold text-center headline-form-color headline-form-size">Nueva receta</h2>
+            <h2 className="p-3 m-0 fw-bold text-center headline-form-color headline-form-size">Nueva receta</h2>
             <form className="d-flex flex-column justify-content-around reg-form" onSubmit={handleSubmit}>
 
                 <div className="d-flex flex-column">
-                    <label htmlFor="name" className="fw-bold label-text text">Título</label>
+                    <label htmlFor="title" className="fw-bold label-text text">Título</label>
                     <input
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
@@ -80,7 +84,7 @@ const CreateRecipeForm = () => {
 
                 <div className="d-flex flex-column">
                     <label htmlFor="description" className="fw-bold label-text text">Descripción general</label>
-                    <input
+                    <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         type="text"
@@ -112,15 +116,43 @@ const CreateRecipeForm = () => {
                     </div>
                 }
 
-                <div className="d-flex flex-column">
+                <div className="d-flex justify-content-between align-items-center">
+                    <label htmlFor="category" className="fw-bold label-text text">Categoría</label>
+                    <select
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        type="text"
+                        name="category"
+                        className="select"
+                    >
+                        <option value="Selecciona">Selecciona</option>
+                        <option value="Entrante">Entrante</option>
+                        <option value="Primer Plato">Primer Plato</option>
+                        <option value="Segundo Plato">Segundo Plato</option>
+                        <option value="Postre">Postre</option>
+                    </select>
+                </div>
+
+                {
+                    errors.category && <div className="alerts">
+                        <p>{errors.category}</p>
+                    </div>
+                }
+
+                <div className="d-flex justify-content-between align-items-center">
                     <label htmlFor="difficulty" className="fw-bold label-text text">Dificultad</label>
-                    <input
+                    <select
                         value={difficulty}
                         onChange={(e) => setDifficulty(e.target.value)}
                         type="text"
                         name="difficulty"
-                        className="input-none-style border-b"
-                    />
+                        className="select"
+                    >
+                        <option value="Selecciona">Selecciona</option>
+                        <option value="Fácil">Fácil</option>
+                        <option value="Intermedia">Intermedia</option>
+                        <option value="Difícil">Difícil</option>
+                    </select>
                 </div>
 
                 {
@@ -129,15 +161,29 @@ const CreateRecipeForm = () => {
                     </div>
                 }
 
-                <div className="d-flex flex-column">
+                <div className="d-flex justify-content-between align-items-center">
                     <label htmlFor="ingredients" className="fw-bold label-text text">Ingredientes</label>
-                    <input
+                    <select
                         value={ingredients}
                         onChange={(e) => setIngredients(e.target.value)}
                         type="text"
                         name="ingredients"
-                        className="input-none-style border-b"
-                    />
+                        className="select"
+                    >
+                        <option value="Selecciona">Selecciona</option>
+                        <option value="Huevo">Huevo</option>
+                        <option value="Harina">Harina</option>
+                        <option value="Arroz">Arroz</option>
+                        <option value="Legumbres">Legumbres</option>
+                        <option value="Ajo">Ajo</option>
+                        <option value="Frutos secos">Frutos secos</option>
+                        <option value="Miel">Miel</option>
+                        <option value="Aceitunas">Aceitunas</option>
+                        <option value="Patata">Patata</option>
+                        <option value="Sal">Sal</option>
+                        <option value="Pimienta">Pimienta</option>
+                        <option value="Otro">Otro</option>
+                    </select>
                 </div>
 
                 {
@@ -148,7 +194,7 @@ const CreateRecipeForm = () => {
 
                 <div className="d-flex flex-column">
                     <label htmlFor="preparation" className="fw-bold label-text text">Preparación</label>
-                    <input
+                    <textarea
                         value={preparation}
                         onChange={(e) => setPreparation(e.target.value)}
                         type="text"
@@ -164,13 +210,30 @@ const CreateRecipeForm = () => {
                 }
 
                 <div className="d-flex flex-column">
+                    <label htmlFor="country" className="fw-bold label-text text">País</label>
+                    <input
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                        type="text"
+                        name="image"
+                        className="input-style-1 input-height-1 b-r"
+                    />
+                </div>
+
+                {
+                    errors.country && <div className="alerts">
+                        <p>{errors.country}</p>
+                    </div>
+                }
+
+                <div className="d-flex flex-column">
                     <label htmlFor="image" className="fw-bold label-text text">Imagen</label>
                     <input
                         value={image}
                         onChange={(e) => setImage(e.target.value)}
                         type="text"
                         name="image"
-                        className="input-none-style border-b"
+                        className="input-style-1 input-height-1 b-r"
                     />
                 </div>
 

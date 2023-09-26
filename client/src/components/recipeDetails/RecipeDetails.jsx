@@ -25,9 +25,11 @@ const RecipeDetails = () => {
 
     fetchData();
   }, [id]);
-  // console.log(show.recipe);
+  // console.log(show.username);
 
-  const { title, image, author, difficulty, time, description, ingredients, preparation } = show.recipe || {}
+  const { title, image, country, difficulty, time, description, ingredients, preparation } = show.recipe || {}
+
+  const username = show.username || ''
 
   return (
     <div className="padding">
@@ -36,8 +38,8 @@ const RecipeDetails = () => {
       </div>
       <h1 className="fw-bold">{title}</h1>
       <img src={image} alt="" className="pt-2 pb-2 w-image" />
-      <h2>{author}</h2>
-      <p className="country">Pais</p>
+      <h2>{username}</h2>
+      <p className="country">{country}</p>
       <div className="d-flex justify-content-between buttons mt-2 mb-2">
         <button className={selectedSection === 'description' ? 'recipe-btn active' : 'recipe-btn'} onClick={() => setSelectedSection('description')}>General</button>
         <button className={selectedSection === 'ingredients' ? 'recipe-btn active' : 'recipe-btn'} onClick={() => setSelectedSection('ingredients')}>Ingredientes</button>
