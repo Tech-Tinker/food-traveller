@@ -2,7 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Login from "../pages/login/Login";
 import RegisterView from "../pages/registerView/RegisterView";
-import RecipeView from "../pages/recipeView/RecipeView";
+import RecipesView from "../pages/recipesView/RecipesView";
+import Recipe from "../pages/recipe/Recipe";
 import CreateRecipe from "../pages/createRecipe/CreateRecipe";
 import EditRecipe from "../pages/editRecipe/EditRecipe";
 import Perfil from "../pages/perfil/Perfil";
@@ -30,14 +31,19 @@ const router = createBrowserRouter([
 
     {
         path: "/recipes",
-        element: <RecipeView />,
+        element: <RecipesView />,
+    },
+
+    {
+        path: "/recipe/:id",
+        element: <Recipe />,
     },
 
     {
         path: "/edit-recipe/:id",
         element: <EditRecipe />,
     },
-    
+
     {
         path: '/perfil',
         element: <Perfil />

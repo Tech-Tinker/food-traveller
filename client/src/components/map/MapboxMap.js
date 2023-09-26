@@ -37,7 +37,7 @@ function MapboxMap() {
       <h1 className='banner-map'>Where Food Meets Culture</h1>
       <MapToggle isFlatMode={isFlatMode} toggleMode={toggleMode} />
       <MapDisplay map={map} marker={marker} />
-      <SearchBar map={map} setMarker={setMarker} marker={marker} /> {/* Pasa marker como prop */}
+      <SearchBar map={map} setMarker={setMarker} marker={marker} /> 
 
     </div>
   );

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
-import Recipe from '../../components/recipe/Recipe';
-import './RecipeView.css';
+import Recipes from '../../components/recipes/Recipes';
+import './RecipesView.css';
 
-const RecipeView = () => {
+const RecipesView = () => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const RecipeView = () => {
       {recipes.map((recipe) => (
         <div key={recipe.id}>
           <h1>Receta de {recipe.name}</h1>
-          <Recipe
+          <Recipes
             title={recipe.name}
             ingredients={recipe.ingredients.split(', ')}
             instructions={recipe.preparation.split('. ')}
@@ -44,4 +44,4 @@ const RecipeView = () => {
   );
 };
 
-export default RecipeView;
+export default RecipesView;

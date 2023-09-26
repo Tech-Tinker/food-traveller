@@ -2,21 +2,16 @@ import React, { useState } from 'react';
 import './css/ViewOptions.css'
 
 const ViewOptions = ({ viewOption, onViewOptionChange }) => {
-  // Estado para rastrear el botón activo y su color
   const [activeButton, setActiveButton] = useState({
     option: viewOption,
-    color: 'transparent', // Inicialmente transparente
+    color: 'transparent', 
   });
 
-  // Función para manejar el clic en un botón
   const handleOptionClick = (option, color) => {
-    // Desactivar el botón anterior
     setActiveButton({ ...activeButton, color: 'transparent' });
 
-    // Activar el botón actual con el color especificado
     setActiveButton({ option, color });
 
-    // Llama a la función de cambio de vista
     onViewOptionChange(option);
   };
 
