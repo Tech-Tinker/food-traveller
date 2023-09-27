@@ -4,6 +4,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import SearchBar from './SearchBar';
 import MapDisplay from './MapDisplay';
 import MapToggle from './MapToogle';
+import './css/MapboxMap.css'
 
 function MapboxMap() {
   const [map, setMap] = useState(null);
@@ -33,9 +34,11 @@ function MapboxMap() {
 
   return (
     <div style={{ position: 'relative' }}>
-      <SearchBar map={map} setMarker={setMarker} marker={marker} /> {/* Pasa marker como prop */}
-      <MapDisplay map={map} marker={marker} />
+      <h1 className='banner-map'>Where Food Meets Culture</h1>
       <MapToggle isFlatMode={isFlatMode} toggleMode={toggleMode} />
+      <MapDisplay map={map} marker={marker} />
+      <SearchBar map={map} setMarker={setMarker} marker={marker} /> 
+
     </div>
   );
 }
