@@ -163,29 +163,15 @@ const CreateRecipeForm = () => {
                     </div>
                 }
 
-                <div className="d-flex justify-content-between align-items-center">
+                <div className="d-flex flex-column">
                     <label htmlFor="ingredients" className="fw-bold label-text text">Ingredientes</label>
-                    <select
+                    <textarea
                         value={ingredients}
                         onChange={(e) => setIngredients(e.target.value)}
                         type="text"
                         name="ingredients"
-                        className="select"
-                    >
-                        <option value="Selecciona">Selecciona</option>
-                        <option value="Huevo">Huevo</option>
-                        <option value="Harina">Harina</option>
-                        <option value="Arroz">Arroz</option>
-                        <option value="Legumbres">Legumbres</option>
-                        <option value="Ajo">Ajo</option>
-                        <option value="Frutos secos">Frutos secos</option>
-                        <option value="Miel">Miel</option>
-                        <option value="Aceitunas">Aceitunas</option>
-                        <option value="Patata">Patata</option>
-                        <option value="Sal">Sal</option>
-                        <option value="Pimienta">Pimienta</option>
-                        <option value="Otro">Otro</option>
-                    </select>
+                        className="input-style-1 input-height-2 b-r"
+                    />
                 </div>
 
                 {
