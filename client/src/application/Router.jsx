@@ -7,6 +7,7 @@ import Recipe from "../pages/recipe/Recipe";
 import CreateRecipe from "../pages/createRecipe/CreateRecipe";
 import EditRecipe from "../pages/editRecipe/EditRecipe";
 import Perfil from "../pages/perfil/Perfil";
+import EditProfile from "../pages/editProfile/EditProfile";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,11 @@ const router = createBrowserRouter([
     {
         path: '/perfil',
         element: <Perfil />
+    }, 
+
+    {
+        path: '/edit-profile/:id',
+        element: <EditProfile />
     }
 ]);
 

@@ -29,7 +29,7 @@ Route::post('/recipe', [RecipeController::class, 'show']);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/users', UserController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
-
+    Route::get('/user/{id}', [RecipeController::class, 'update']);
     Route::get('/recipes', [RecipeController::class, 'index']);
     Route::post('/recipe', [RecipeController::class, 'store']);
     Route::get('/recipe/{id}', [RecipeController::class, 'show']);
