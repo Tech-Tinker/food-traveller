@@ -4,6 +4,7 @@ import swal from 'sweetalert';
 import './LoginForm.css';
 import axios from 'axios';
 import Button from '../button/Button';
+// eslint-disable-next-line
 import { login } from '../../services/AuthServices';
 
 const LoginForm = () => {

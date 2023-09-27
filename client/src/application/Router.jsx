@@ -6,6 +6,7 @@ import RecipesView from "../pages/recipesView/RecipesView";
 import Recipe from "../pages/recipe/Recipe";
 import CreateRecipe from "../pages/createRecipe/CreateRecipe";
 import EditRecipe from "../pages/editRecipe/EditRecipe";
+import { PrivateRoutes } from "../utils/PrivateRoutes";
 // import Perfil from "../pages/perfil/Perfil";
 // import Dropdown from "../components/dropdown/Dropdown";
 
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
 
     {
         path: "/create-recipe",
-        element: <CreateRecipe />,
+        element: <PrivateRoutes><CreateRecipe /></PrivateRoutes>,
     },
 
     {
@@ -37,12 +38,12 @@ const router = createBrowserRouter([
 
     {
         path: "/recipe/:id",
-        element: <Recipe />,
+        element: <PrivateRoutes><Recipe /></PrivateRoutes>,
     },
 
     {
         path: "/edit-recipe/:id",
-        element: <EditRecipe />,
+        element: <PrivateRoutes><EditRecipe /></PrivateRoutes>,
     },
 
     // {
