@@ -24,19 +24,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-
+Route::get('/recipes', [RecipeController::class, 'index']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/users', UserController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/recipe', [RecipeController::class, 'show']);
-    Route::get('/recipes', [RecipeController::class, 'index']);
+    // Route::get('/recipes', [RecipeController::class, 'index']);
     Route::post('/recipe', [RecipeController::class, 'store']);
     Route::get('/recipe/{id}', [RecipeController::class, 'show']);
     Route::put('/recipe/{id}', [RecipeController::class, 'update']);
     Route::delete('/recipe/{id}', [RecipeController::class, 'destroy']);
-    
-    // Ruta para obtener el perfil del usuario
-Route::middleware(['auth:sanctum'])->get('/user-profile', [UserController::class, 'getUserProfile']);
-});
 
+    // Ruta para obtener el perfil del usuario
+    Route::middleware(['auth:sanctum'])->get('/user-profile', [UserController::class, 'getUserProfile']);
+});
