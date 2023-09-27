@@ -1,0 +1,17 @@
+.view-options{
+    margin-top: 7%;
+    justify-content: space-around;
+    display: flex;
+}
+
+
+.view-option-btn{
+    border: none;
+    background: white;
+    border-radius: 10px;
+}
+
+
+.view-option-btn:focus{
+    color: white;
+}

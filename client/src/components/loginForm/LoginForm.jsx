@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
-// import { AuthService } from '../../services/AuthServices';
 import './LoginForm.css';
+import axios from 'axios';
 import Button from '../button/Button';
-
+import { login } from '../../services/AuthServices';
 
 const LoginForm = () => {
   const navigate = useNavigate();

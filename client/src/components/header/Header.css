@@ -1,6 +1,19 @@
-.header-margin{
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid #EAEAEA;
-    background: #FFF;
-    height: 10vh;
+.header-container{
+    border-bottom: 1px solid #F5F5F5;
+}
+
+.header-margin {
+    margin: 0rem;
+    padding: 8px 15px;
+    width: 100%;
+}
+
+.logo-header{
+    width: 53px;
+    height: 60.54px;
+}
+
+.login-header{
+    width: 45px;
+    height: 55px;
 }

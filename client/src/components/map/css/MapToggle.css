@@ -1,0 +1,22 @@
+.container-toggle{
+        color: white;
+        align-items: center;
+}
+
+.container-toggle p{
+    margin-top:15px;
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.map-toggle{
+    margin-top: 5px;
+    margin-right: -9px;
+    border: 2px solid grey;
+    background: transparent;
+}
+
+.mode-map{
+    width: 50px;
+    background: transparent;
+}
