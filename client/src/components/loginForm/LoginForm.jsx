@@ -68,21 +68,22 @@ const LoginForm = () => {
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
       <h2 className="p-5 fw-bold text-center headline-form-color headline-form-size">A dónde quieres viajar hoy?</h2>
-      <form onSubmit={handleOnSubmit} className="d-flex flex-column justify-content-around reg-form">
+      <form onSubmit={handleOnSubmit} className="d-flex flex-column justify-content-around reg-form gap1">
         <div className="d-flex flex-column">
           <label htmlFor="email" className="fw-bold fs-5 label-text text">Email</label>
           <input type="email" name="email" onChange={handleOnChange} value={login.email} className="input-none-style border-b"></input>
         </div>
+        <span className="error-text text-center">{login.error_list.email}</span>
+
         <div className="d-flex flex-column">
           <label htmlFor="password" className="fw-bold fs-5 label-text text">Contraseña</label>
           <input type="password" name="password" onChange={handleOnChange} value={login.password} className="input-none-style border-b"></input>
         </div>
-        <Button backgroundColorClass="bttn-primary" text="Inicia sesión" widthClass="dobleW" />
+        <span className="error-text text-center">{login.error_list.password}</span>
+
+        <Button backgroundColorClass="bttn-secondary" text="Iniciar sesión" widthClass="dobleW" />
         <p className="text-center">No tienes cuenta? <Link to="/register" className="fw-bold  link-none-style">Regístrate</Link></p>
       </form>
-
-      <span className="error-text">{login.error_list.email}</span>
-      <span className="error-text">{login.error_list.password}</span>
     </div>
   )
 }
