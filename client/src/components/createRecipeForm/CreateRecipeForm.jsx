@@ -9,7 +9,6 @@ import { storeRecipe } from '../../services/ApiServices';
 const CreateRecipeForm = () => {
 
     const [title, setTitle] = useState('')
-    const [author, setAuthor] = useState('')
     const [description, setDescription] = useState('')
     const [time, setTime] = useState('')
     const [category, setCategory] = useState('')
@@ -33,7 +32,6 @@ const CreateRecipeForm = () => {
         try {
             const data = {
                 title,
-                author,
                 description,
                 time,
                 category,

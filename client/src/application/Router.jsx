@@ -6,8 +6,8 @@ import RecipesView from "../pages/recipesView/RecipesView";
 import Recipe from "../pages/recipe/Recipe";
 import CreateRecipe from "../pages/createRecipe/CreateRecipe";
 import EditRecipe from "../pages/editRecipe/EditRecipe";
-import Perfil from "../pages/perfil/Perfil";
-import Dropdown from "../components/dropdown/Dropdown";
+// import Perfil from "../pages/perfil/Perfil";
+// import Dropdown from "../components/dropdown/Dropdown";
 
 const router = createBrowserRouter([
     {
@@ -45,15 +45,15 @@ const router = createBrowserRouter([
         element: <EditRecipe />,
     },
 
-    {
-        path: '/perfil',
-        element: <Perfil />
-    },
+    // {
+    //     path: '/perfil',
+    //     element: <Perfil />
+    // },
 
-    {
-        path: '/dropdown',
-        element: <Dropdown />
-    },
+    // {
+    //     path: '/dropdown',
+    //     element: <Dropdown />
+    // },
 ]);
 
 export default router;
