@@ -39,7 +39,7 @@ class RecipeController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => 'Algo inesperado ha sucedido. Por favor, verifique los datos e intente nuevamente.'], 400);
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
         // Obtiene el usuario autenticado
