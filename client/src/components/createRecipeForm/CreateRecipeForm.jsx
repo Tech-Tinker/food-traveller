@@ -59,7 +59,7 @@ const CreateRecipeForm = () => {
             const errors = error.response.data.errors
             setErrors({ title: errors.title && errors.title[0], description: errors.description && errors.description[0], time: errors.time && errors.time[0], category: errors.category && errors.category[0], difficulty: errors.difficulty && errors.difficulty[0], ingredients: errors.ingredients && errors.ingredients[0], preparation: errors.preparation && errors.preparation[0], country: errors.country && errors.country[0], image: errors.image && errors.image[0], });
         }
-        console.log(errors);
+        // console.log(errors);
     };
 
     return (
