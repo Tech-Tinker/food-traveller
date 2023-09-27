@@ -5,21 +5,24 @@ import Nav from '../../components/nav/Nav';
 import MapboxMap from '../../components/map/MapboxMap';
 
 const Home = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // Supongamos que isLoggedIn es un estado que indica si el usuario ha iniciado sesión o no.
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    // Función para iniciar sesión (simulada).
     const handleLogin = () => {
-        // Lógica de inicio de sesión (por ejemplo, autenticación del usuario).
-        // Cambia el valor de isLoggedIn a true cuando el usuario inicie sesión.
+        // Lógica de inicio de sesión
         setIsLoggedIn(true);
+    };
+
+    const handleLogout = () => {
+        // Lógica de cierre de sesión
+        setIsLoggedIn(false);
     };
 
     return (
         <div>
-            <Header isLoggedIn={isLoggedIn} /> {/* Pasa el estado isLoggedIn como prop */}
+            <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} />
             <MapboxMap />
-
             {isLoggedIn && <Nav />}
+            {/* Muestra Nav solo si isLoggedIn es true */}
         </div>
     );
 };

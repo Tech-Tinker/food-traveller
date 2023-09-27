@@ -1,51 +1,37 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// import './Header.css';
-// import Logo from '../../assets/logo.svg'
-// import Login from '../../assets/icon-login.svg'
-
-// const Header = () => {
-//   return (
-//     <div className='header-container d-flex justify-content-between align-items-center header-margin'>
-//       <Link to={'/'}>
-//         <img className='logo-header' src={Logo}/>
-//       </Link>
-//       <Link to={'/perfil'}>Perfil</Link>
-
-//       <Link to={'/login'}>
-//         <img className='login-header' src={Login} alt="Avatar login" />
-//       </Link>
-
-//     </div>
-//   );
-// }
-
-// export default Header;
-
-
-
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
-import Logo from '../../assets/logo.svg'
-import Login from '../../assets/icon-login.svg'
+import Logo from '../../assets/Logo.svg';
+import Login from '../../assets/icon-login.svg';
 
-const Header = ({ isLoggedIn }) => { // Recibe el estado isLoggedIn como prop
-  return (
-    <div className='header-container d-flex justify-content-between align-items-center header-margin'>
-      <Link to={'/'}>
-        <img className='logo-header' src={Logo} alt="Logo" />
-      </Link>
-      {isLoggedIn && ( // Renderiza el enlace de Perfil solo si isLoggedIn es true
-        <Link to={'/perfil'}>Perfil</Link>
-      )}
+const Header = ({ isLoggedIn, onLogout, isPerfilPage }) => {
+    const handleLogout = () => {
+        if (typeof onLogout === 'function') {
+            onLogout();
+        }
+    };
 
-      <Link to={'/login'}>
-        <img className='login-header' src={Login} alt="Avatar login" />
-      </Link>
-    </div>
-  );
+    return (
+        <div className='d-flex justify-content-between align-items-center header-margin'>
+            <Link to={'/'}>
+                <img src={Logo} alt="" />
+            </Link>
+
+            <Link to={'/login'}>
+                <img src={Login} alt="" />
+            </Link>
+
+            {isLoggedIn ? (
+                <>
+                    <Link to={'/perfil'}>Perfil</Link>
+                    {isPerfilPage && <Link to={'/editar-perfil'}>Editar Perfil</Link>}
+                    <Link to={'/create-recipe'}>Crear Receta</Link>
+                    <Link to={'/recipes'}>Recetas</Link>
+                    <button onClick={handleLogout}>Cerrar Sesión</button>
+                </>
+            ) : null}
+        </div>
+    );
 }
 
 export default Header;

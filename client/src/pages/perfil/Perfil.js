@@ -4,7 +4,7 @@ import User from '../../components/User/User'
 function Perfil() {
   return (
     <div>
-    <Header />
+    <Header isPerfilPage={true} />
     <User/>
 
     
