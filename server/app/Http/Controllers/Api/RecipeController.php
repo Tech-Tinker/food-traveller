@@ -135,13 +135,14 @@ class RecipeController extends Controller
         // Define reglas de validación
         $rules = [
             'title' => 'string|max:255',
-            'image' => 'string',
             'description' => 'string',
-            'author' => 'string',
             'time' => 'string',
+            'category' => 'string',
             'difficulty' => 'string',
             'ingredients' => 'string',
             'preparation' => 'string',
+            'country' => 'string',
+            'image' => 'string',
         ];
 
         // Valida la solicitud
@@ -171,7 +172,10 @@ class RecipeController extends Controller
 
         // Redirige a una página de detalle de receta o devuelve una respuesta JSON de éxito
         // return view('recipes.show', compact('recipe'));
-        return response()->json(['recipe' => $recipe]);
+        return response()->json([
+            'recipe' => $recipe,
+            'message' => '¡Genial! Acabas de editar tu receta.'
+        ], 201);
     }
 
     /**
