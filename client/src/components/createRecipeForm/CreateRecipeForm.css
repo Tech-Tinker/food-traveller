@@ -1,6 +1,7 @@
 .display-h{
-    height: 75vh;
+    height: 90vh;
 }
+
 .b-r{
     border-radius: 5px;
 }
@@ -19,4 +20,16 @@
 
 .input-height-3{
     height: 6.375rem;
+}
+
+.select{
+    width: 8rem;
+    height: 1.31rem;
+    border-radius: 10px;
+    border: 1px solid #BB9B8E;
+    background: #BB9B8E;  
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;  
+    text-align: center;
 }

@@ -28,13 +28,14 @@ class RecipeController extends Controller
         // Valida la solicitud
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
-            'image' => 'required', // podemos ajustar la reglas
             'description' => 'required|string',
-            'author' => 'required|string',
             'time' => 'required|string',
+            'category' => 'required|string',
             'difficulty' => 'required|string',
             'ingredients' => 'required|string',
             'preparation' => 'required|string',
+            'country' => 'required|string',
+            // 'image' => 'required', // podemos ajustar la reglas
         ]);
 
         if ($validator->fails()) {
@@ -50,21 +51,27 @@ class RecipeController extends Controller
         // Crea una nueva receta con los datos proporcionados
         $recipe = new Recipe();
         $recipe->title = $request->title;
-        $recipe->image = $request->image;
         $recipe->description = $request->description;
-        $recipe->author = $request->author;
         $recipe->time = $request->time;
+        $recipe->category = $request->category;
         $recipe->difficulty = $request->difficulty;
         $recipe->ingredients = $request->ingredients;
         $recipe->preparation = $request->preparation;
-
+        $recipe->country = $request->country;
+        $recipe->image = $request->image;
         // Asocia la receta con el usuario autenticado
         // $user->recipes()->save($recipe);
 
         // $recipe->save();
         $request->user()->recipe()->save($recipe);
+
+        // Obtiene el nombre de usuario del propietario de la receta
+        $username = $recipe->user->name;
+
         return response()->json([
             'id' => $recipe->id,
+            'user_id' => $recipe->user_id,
+            'username' => $username,
             'message' => '¡Genial! Acabas de publicar tu receta.'
         ], 201);
     }
@@ -79,16 +86,25 @@ class RecipeController extends Controller
             return response()->json(['error' => 'Debes estar autenticado para ver esta receta'], 401);
         }
 
-        // Busca la receta por ID
-        $recipe = Recipe::find($id);
+        // Busca la receta por ID con el usuario asociado
+        $recipe = Recipe::with('user')->find($id);
 
         // Verifica si la receta existe
         if (!$recipe) {
             return response()->json(['error' => 'La receta no se encontró'], 404);
         }
 
-        // Devuelve los detalles de la receta
-        return response()->json(['recipe' => $recipe]);
+        // Obtiene solo el nombre de usuario
+        $username = $recipe->user->name;
+
+        // Remover el objeto 'user' de la respuesta
+        unset($recipe->user);
+
+        // Devuelve los detalles de la receta junto con el nombre de usuario
+        return response()->json([
+            'recipe' => $recipe,
+            'username' => $username
+        ]);
     }
 
 
