@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <div className='d-flex justify-content-between align-items-center header-margin'>
       <Link to={'/'}>
-        <img className='logo' src={Logo} alt='Logo Foodtraveller' />
+        <img className='logo-header' src={Logo} alt='Logo Foodtraveller' />
       </Link>
 
       {!isLoginPage && !isRegisterPage && !isLoggedIn && !isCreateRecipe && (
