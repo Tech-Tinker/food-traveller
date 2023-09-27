@@ -17,14 +17,15 @@ class RecipeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'image' => fake()->imageUrl($width = 640, $height = 480),
+            'title' => fake()->title(),
             'description' => fake()->paragraph(),
-            'author' => fake()->name(),
             'time' => fake()->numberBetween(1, 10),
+            'category' => fake()->word(),
             'difficulty' => fake()->word(),
             'ingredients' => fake()->text(),
             'preparation' => fake()->text(),
+            'country' => fake()->text(),
+            'image' => fake()->imageUrl($width = 640, $height = 480),
         ];
     }
 }
