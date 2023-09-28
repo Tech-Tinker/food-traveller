@@ -32,7 +32,7 @@ class AuthController extends Controller
 
             // Crear un perfil asociado
             $profile = new UserProfile();
-            $profile->name = $request->name; // Puedes establecer otros campos del perfil aquí
+            $profile->user_name = $request->name; // Puedes establecer otros campos del perfil aquí
             $profile->profile_image = $request->profile_image;
             $profile->description = $request->description;
             $profile->birthdate = $request->birthdate;

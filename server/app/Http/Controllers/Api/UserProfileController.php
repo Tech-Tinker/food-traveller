@@ -34,7 +34,7 @@ class UserProfileController extends Controller
 
         if ($user) {
             $request->validate([
-                'name' => 'string|max:255',
+                'user_name' => 'string|max:255',
                 'description' => 'string',
                 'profile_image' => 'string',
                 'birthdate' => 'string',
@@ -44,7 +44,7 @@ class UserProfileController extends Controller
             ]);
 
             $profileData = [
-                'name' => $request->input('name'),
+                'user_name' => $request->input('user_name'),
                 'description' => $request->input('description'),
                 'profile_image' => $request->input('profile_image'),
                 'birthdate' => $request->input('birthdate'),
@@ -65,8 +65,8 @@ class UserProfileController extends Controller
             }
 
             // Actualizar también el nombre en el modelo User
-            if ($request->input('name')) {
-                $user->update(['name' => $request->input('name')]);
+            if ($request->input('user_name')) {
+                $user->update(['name' => $request->input('user_name')]);
             }
 
             return response()->json(['message' => 'Perfil actualizado con éxito']);

@@ -10,7 +10,7 @@ class UserProfile extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
+        'user_name',
         'profile_image',
         'description',
         'birthdate',
