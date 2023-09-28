@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RecipeController;
+use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +30,8 @@ Route::post('/recipe', [RecipeController::class, 'show']);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/users', UserController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/user/{id}', [profileController::class, 'update']);
+    Route::get('/profile', [UserProfileController::class, 'show']);
+    Route::put('/edit-profile', [UserProfileController::class, 'update']);
     Route::get('/recipes', [RecipeController::class, 'index']);
     Route::post('/recipe', [RecipeController::class, 'store']);
     Route::get('/recipe/{id}', [RecipeController::class, 'show']);

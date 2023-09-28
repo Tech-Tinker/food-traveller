@@ -12,7 +12,9 @@ const EditProfileForm = ({ user }) => {
         description: user.description,
         birthdate: user.birthdate,
         country: user.country,
+        interests: user.interests,
         culinaryExperience: user.culinaryExperience,
+        avatar: null, // Nuevo campo para la imagen de avatar
     });
 
     const handleInput = (e) => {
@@ -20,27 +22,37 @@ const EditProfileForm = ({ user }) => {
         setProfileInput({ ...profileInput, [e.target.name]: e.target.value });
     }
 
+    // Manejar la selección de una nueva imagen de avatar
+    const handleAvatarChange = (e) => {
+        const selectedAvatar = e.target.files[0];
+        setProfileInput({ ...profileInput, avatar: selectedAvatar });
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const formData = {
-            name: profileInput.name,
-            description: profileInput.description,
-            birthdate: profileInput.birthdate,
-            country: profileInput.country,
-            culinaryExperience: profileInput.culinaryExperience,
-        };
+        const formData = new FormData();
+        formData.append("name", profileInput.name);
+        formData.append("description", profileInput.description);
+        formData.append("birthdate", profileInput.birthdate);
+        formData.append("country", profileInput.country);
+        formData.append("interests", profileInput.interests);
+        formData.append("culinaryExperience", profileInput.culinaryExperience);
+        
+        // Agregar la nueva imagen de avatar al formData si se selecciona
+        if (profileInput.avatar) {
+            formData.append("avatar", profileInput.avatar);
+        }
 
-        // Make an API request to update the user profile with formData
-        // You need to implement this API endpoint on your server.
-        axios.post('http://localhost:8000/api/update-profile', formData)
+        // Realizar una solicitud POST para actualizar el perfil del usuario
+        axios.post('http://localhost:8000/api/edit-profile', formData)
             .then(res => {
                 if (res.data.status === 200) {
-                    swal("Success", res.data.message, "success");
-                    // Redirect to the user's profile page after successful update.
+                    swal("Éxito", res.data.message, "success");
+                    // Redirigir al usuario a su página de perfil después de una actualización exitosa.
                     navigate(`/profile/${user.id}`);
                 } else {
-                    // Handle validation errors here if any.
+                    
                 }
             });
     }
@@ -58,6 +70,18 @@ const EditProfileForm = ({ user }) => {
                         name="name"
                         className="text-left border-0 border-bottom border border-dark"
                         placeholder="Nombre"
+                    />
+                </div>
+
+                {/* Agregar campo para seleccionar una nueva imagen de avatar */}
+                <div className="mb-3 text-center">
+                    <label htmlFor="avatar" className="text-black bold">Cambiar Avatar</label>
+                    <input
+                        onChange={handleAvatarChange}
+                        type="file"
+                        name="avatar"
+                        accept="image/*"
+                        className="border-0 border-bottom text-left"
                     />
                 </div>
 
