@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 import Logo from '../../assets/Logo.svg';
 import Avatar from '../../assets/Avatar.svg';
+import Menu from '../../assets/Menu.svg';
 
 const Header = () => {
   const location = useLocation();
@@ -27,6 +28,12 @@ const Header = () => {
       {!isLoginPage && !isRegisterPage && !isLoggedIn && !isCreateRecipe && (
         <Link to={'/login'}>
           <img src={Avatar} alt='Icono de Login' />
+        </Link>
+      )}
+
+      {!isLoginPage && !isRegisterPage && !isLoggedIn && !isCreateRecipe && (
+        <Link to={'/POP-UP'}>
+          <img src={Menu} alt='Menu desplegable' />
         </Link>
       )}
       
