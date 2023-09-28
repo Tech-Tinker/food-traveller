@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -28,6 +29,18 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
+
+            // Crear un perfil asociado
+            $profile = new UserProfile();
+            $profile->user_name = $request->name; // Puedes establecer otros campos del perfil aquí
+            $profile->profile_image = $request->profile_image;
+            $profile->description = $request->description;
+            $profile->birthdate = $request->birthdate;
+            $profile->country = $request->country;
+            $profile->interests = $request->interests;
+            $profile->culinary_experience = $request->culinary_experience;
+            $profile->user_id = $user->id; // Asociar el perfil con el usuario
+            $profile->save();
 
             $token = $user->createToken($user->email . '_Token')->plainTextToken;
 
@@ -83,9 +96,4 @@ class AuthController extends Controller
             'message' => 'Se ha cerrado la sesión!',
         ], 200);
     }
-
-
-    
 }
-
-

@@ -21,12 +21,17 @@ const EditRecipeForm = () => {
     const [country, setCountry] = useState('')
     const [image, setImage] = useState('')
 
-    // eslint-disable-next-line
+
     const [errors, setErrors] = useState({
-        image: null,
         title: null,
-        location: null,
-        description: null
+        description: null,
+        time: null,
+        category: null,
+        difficulty: null,
+        ingredients: null,
+        preparation: null,
+        country: null,
+        image: null
     })
     const navigate = useNavigate()
     const { id } = useParams()
@@ -53,13 +58,13 @@ const EditRecipeForm = () => {
             } else {
                 swal("Success", response.message, "success");
                 navigate(`/recipe/${response.recipe.id}`);
-                // navigate('/');
             }
         } catch (error) {
             console.error('Error updating recipe:', error);
-            // const errors = error.response.data.errors
-            // setErrors({ image: errors.image && errors.image[0], title: errors.title && errors.title[0], location: errors.location && errors.location[0], description: errors.description && errors.description[0], });
+            const errors = error.response.data.errors
+            setErrors({ title: errors.title && errors.title[0], description: errors.description && errors.description[0], time: errors.time && errors.time[0], category: errors.category && errors.category[0], difficulty: errors.difficulty && errors.difficulty[0], ingredients: errors.ingredients && errors.ingredients[0], preparation: errors.preparation && errors.preparation[0], country: errors.country && errors.country[0], image: errors.image && errors.image[0], });
         }
+        // console.log(errors);
     };
 
     useEffect(() => {
@@ -67,7 +72,7 @@ const EditRecipeForm = () => {
             try {
                 const data = await getRecipeById(id);
                 // console.log(data.recipe);
-                console.log(data.recipe.user_id, userId, data.recipe.user_id !== userId)
+                // console.log(data.recipe.user_id, userId, data.recipe.user_id !== userId)
                 if (data.recipe.user_id !== userId) {
                     navigate('/')
                     return
@@ -106,7 +111,7 @@ const EditRecipeForm = () => {
                 </div>
 
                 {
-                    errors.title && <div className="alerts">
+                    errors.title && <div className="error-text text-center">
                         <p>{errors.title}</p>
                     </div>
                 }
@@ -123,7 +128,7 @@ const EditRecipeForm = () => {
                 </div>
 
                 {
-                    errors.description && <div className="alerts">
+                    errors.description && <div className="error-text text-center">
                         <p>{errors.description}</p>
                     </div>
                 }
@@ -140,7 +145,7 @@ const EditRecipeForm = () => {
                 </div>
 
                 {
-                    errors.time && <div className="alerts">
+                    errors.time && <div className="error-text text-center">
                         <p>{errors.time}</p>
                     </div>
                 }
@@ -163,7 +168,7 @@ const EditRecipeForm = () => {
                 </div>
 
                 {
-                    errors.category && <div className="alerts">
+                    errors.category && <div className="error-text text-center">
                         <p>{errors.category}</p>
                     </div>
                 }
@@ -185,45 +190,31 @@ const EditRecipeForm = () => {
                 </div>
 
                 {
-                    errors.difficulty && <div className="alerts">
+                    errors.difficulty && <div className="error-text text-center">
                         <p>{errors.difficulty}</p>
                     </div>
                 }
 
-                <div className="d-flex justify-content-between align-items-center">
+                <div className="d-flex flex-column">
                     <label htmlFor="ingredients" className="fw-bold label-text text">Ingredientes</label>
-                    <select
+                    <textarea
                         value={ingredients}
                         onChange={(e) => setIngredients(e.target.value)}
                         type="text"
                         name="ingredients"
-                        className="select"
-                    >
-                        <option value="Selecciona">Selecciona</option>
-                        <option value="Huevo">Huevo</option>
-                        <option value="Harina">Harina</option>
-                        <option value="Arroz">Arroz</option>
-                        <option value="Legumbres">Legumbres</option>
-                        <option value="Ajo">Ajo</option>
-                        <option value="Frutos secos">Frutos secos</option>
-                        <option value="Miel">Miel</option>
-                        <option value="Aceitunas">Aceitunas</option>
-                        <option value="Patata">Patata</option>
-                        <option value="Sal">Sal</option>
-                        <option value="Pimienta">Pimienta</option>
-                        <option value="Otro">Otro</option>
-                    </select>
+                        className="input-style-1 input-height-2 b-r"
+                    />
                 </div>
 
                 {
-                    errors.ingredients && <div className="alerts">
+                    errors.ingredients && <div className="error-text text-center">
                         <p>{errors.ingredients}</p>
                     </div>
                 }
 
                 <div className="d-flex flex-column">
                     <label htmlFor="preparation" className="fw-bold label-text text">Preparación</label>
-                    <input
+                    <textarea
                         value={preparation}
                         onChange={(e) => setPreparation(e.target.value)}
                         type="text"
@@ -233,7 +224,7 @@ const EditRecipeForm = () => {
                 </div>
 
                 {
-                    errors.preparation && <div className="alerts">
+                    errors.preparation && <div className="error-text text-center">
                         <p>{errors.preparation}</p>
                     </div>
                 }
@@ -250,7 +241,7 @@ const EditRecipeForm = () => {
                 </div>
 
                 {
-                    errors.country && <div className="alerts">
+                    errors.country && <div className="error-text text-center">
                         <p>{errors.country}</p>
                     </div>
                 }
@@ -267,7 +258,7 @@ const EditRecipeForm = () => {
                 </div>
 
                 {
-                    errors.image && <div className="alerts">
+                    errors.image && <div className="error-text text-center">
                         <p>{errors.image}</p>
                     </div>
                 }

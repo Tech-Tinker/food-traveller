@@ -3,12 +3,13 @@
 }
 
 .header-margin {
+    /* height: 10%; */
     margin: 0rem;
     padding: 8px 15px;
     width: 100%;
 }
 
-.logo-header{
+.logo-header {
     width: 53px;
     height: 60.54px;
 }

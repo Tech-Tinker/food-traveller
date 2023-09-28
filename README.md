@@ -1,5 +1,3 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
 <div align="center">
 <img src="./client/src/assets/techTinker.svg" alt="Logo Tech Tinker" width="150" height="150"/>
 </div> 
@@ -20,7 +18,7 @@
 
 
 ### Food Traveller
-Como proyecto pedagógico de fin de curso en el bootcamp de desarrollo fullstack de FemCoders, se nos ha encomendado la creación de una página web con un enfoque estilo red social. En esta plataforma, los usuarios tendrán la oportunidad de compartir sus experiencias de viaje a través de la gastronomía de los lugares que han visitado
+Como proyecto pedagógico de fin de curso en el bootcamp de desarrollo fullstack de FemCoders, se nos ha encomendado la creación de una página web con un enfoque estilo red social. En esta plataforma, los usuarios tendrán la oportunidad de compartir sus experiencias de viaje a través de la gastronomía de los lugares que han visitado.
 
 ### Sobre el proyecto
 La idea surgió después de ver la serie "Street Food" en Netflix, donde se elaboran recetas especiales que marcan la diferencia en la comida callejera y ponen el foco en las historias humanas detrás de ella. Antia y Alexandra, nuestras clientes, decidieron buscar recetas típicas de distintos lugares. Sin embargo, se encontraron con la falta de una página que combinara la receta con la historia y la cultura contada por las personas locales.
@@ -87,21 +85,60 @@ La idea surgió después de ver la serie "Street Food" en Netflix, donde se elab
 - Crea un archivo .env a partir del archivo .env.example.
 - Crea tú base de datos en mysql y onfigura la base de datos en el archivo .env.
 - Ejecuta las migraciones para crear las tablas de la base de datos `php artisan migrate` seguido de
-`php artisan db:seed`.
-- Inicia el servidor: `php artisan serve`. 
-`php artisan serve`
+`php artisan db:seed`
+- Inicia el servidor: `php artisan serve`
 
 **Instalación del Cliente**
 
-- En la terminal ingresa al directorio `./client`.
-- Instala las dependencias mediante el comando `npm i`.
-- Inicia el servidor: `npm start`.
+- En la terminal ingresa al directorio `./client`
+- Instala las dependencias mediante el comando `npm i`
+- Inicia el servidor: `npm start`
 
 ## Desarrolladoras
 
-- [Milena Halas](https://www.linkedin.com/in/milena-halas-justiniano-292921211/)
-- [Leandra Bujhamer](https://www.linkedin.com/in/leandra-bujhamer/)
-- [Genesis Núñez](https://www.linkedin.com/in/genesis-núñez-bb466b199/)
-- [Valentina Ríos](https://www.linkedin.com/in/valentina-rios-0a9a7a273/)
-- [Rosemary Medina](https://www.linkedin.com/in/rousmedina/)
-- [Rafaela Silveira Prieto](https://www.linkedin.com/in/rafaelaprieto/)
+## Desarrolladoras
+
+<div style="display: flex; flex-wrap: wrap;">
+  <div style="flex: 1; text-align: center; margin: 10px;">
+    <a href="https://www.linkedin.com/in/milena-halas-justiniano-292921211/">
+      <img src="https://media.licdn.com/dms/image/C4E03AQFPHnggchf2MA/profile-displayphoto-shrink_200_200/0/1658503997829?e=1701302400&v=beta&t=GSZpboLORHlyKhVRYT7nPg_NLKaxbhlP-RREjHSI0RA" alt="Foto de perfil" width="100">
+      <br>
+      Milena Halas
+    </a>
+  </div>
+  <div style="flex: 1; text-align: center; margin: 10px;">
+    <a href="https://www.linkedin.com/in/leandra-bujhamer/">
+      <img src="https://media.licdn.com/dms/image/D4D03AQHlrb1Uiu9F5A/profile-displayphoto-shrink_200_200/0/1694700343841?e=1701302400&v=beta&t=SM0AjgJLSP87FAY9BEpoP1clf1ckVUva_tOkiyvRFxo" alt="Foto de perfil" width="100">
+      <br>
+      Leandra Bujhamer
+    </a>
+  </div>
+  <div style="flex: 1; text-align: center; margin: 10px;">
+    <a href="https://www.linkedin.com/in/genesis-núñez-bb466b199/">
+      <img src="https://media.licdn.com/dms/image/D4D03AQEhizO-l20wsg/profile-displayphoto-shrink_200_200/0/1692393192591?e=1701302400&v=beta&t=QgfBpEUxBTNYGeq2C789e4PmzlYIn60I7faUU7aRQFo" alt="Foto de perfil" width="100">
+      <br>
+      Genesis Núñez
+    </a>
+  </div>
+  <div style="flex: 1; text-align: center; margin: 10px;">
+    <a href="https://www.linkedin.com/in/valentina-rios-0a9a7a273/">
+      <img src="https://media.licdn.com/dms/image/D4D03AQG9uDDZak9tnA/profile-displayphoto-shrink_200_200/0/1695808649326?e=1701302400&v=beta&t=j0beeOgdyJTADFRVi-6BqnmDCtwHfEJ8snHqFSLY-3E" alt="Foto de perfil" width="100">
+      <br>
+      Valentina Ríos
+    </a>
+  </div>
+  <div style="flex: 1; text-align: center; margin: 10px;">
+    <a href="https://www.linkedin.com/in/rousmedina/">
+      <img src="https://media.licdn.com/dms/image/D4E35AQHD4eMaP3p7lQ/profile-framedphoto-shrink_200_200/0/1674229921215?e=1696428000&v=beta&t=bWUWvb5NI6z8E_Al4b5MeAfZ2QXfEoaGogR7aVI3qs8" alt="Foto de perfil" width="100">
+      <br>
+      Rosemary Medina
+    </a>
+  </div>
+  <div style="flex: 1; text-align: center; margin: 10px;">
+    <a href="https://www.linkedin.com/in/rafaelaprieto/">
+      <img src="https://media.licdn.com/dms/image/D4D03AQEd-Uck_3mL6w/profile-displayphoto-shrink_200_200/0/1694167340456?e=1701302400&v=beta&t=MQ1DMF2ndtiMZYbyXIF9WqZosP8shUg85RzTmSd1NUo" alt="Foto de perfil" width="100">
+      <br>
+      Rafaela Silveira Prieto
+    </a>
+  </div>
+</div>

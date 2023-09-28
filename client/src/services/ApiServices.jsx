@@ -41,3 +41,21 @@ export async function deleteRecipe(id) {
         throw error;
     }
 }
+
+export async function getUserById() {
+    try {
+        const response = await axios.get(`${endpoint}/profile`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function updateProfile(data) {
+    try {
+        const response = await axios.put(`${endpoint}/edit-profile`, data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}
