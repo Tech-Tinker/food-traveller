@@ -10,7 +10,7 @@ import EditRecipe from "../pages/editRecipe/EditRecipe";
 import EditProfile from "../pages/editProfile/EditProfile";
 import Profile from "../pages/profile/Profile";
 import { PrivateRoutes } from "../utils/PrivateRoutes";
-import User from './components/User/User.jsx'
+import User from '../components/User/User.jsx';
 // import Perfil from "../pages/perfil/Perfil";
 // import Dropdown from "../components/dropdown/Dropdown";
 
