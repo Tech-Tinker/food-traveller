@@ -52,7 +52,6 @@ const router = createBrowserRouter([
     // {
     //     path: '/perfil',
     //     element: <Perfil />
-<<<<<<< HEAD
     // }, 
 
     {
@@ -64,14 +63,12 @@ const router = createBrowserRouter([
         path: '/edit-profile',
         element: <EditProfile />
     }
-=======
     // },
 
     // {
     //     path: '/dropdown',
     //     element: <Dropdown />
     // },
->>>>>>> dev2
 ]);
 
 export default router;
