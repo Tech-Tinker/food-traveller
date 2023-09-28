@@ -1,10 +1,14 @@
 import React from 'react'
-import ProfileComponent from '../../components/profileComponent/ProfileComponent'
+import User from '../../components/User/User'
+import Profilerecipes from '../../components/Profile-Recipes/Profilerecipes'
+import Header from '../../components/header/Header'
 
 const Profile = () => {
     return (
         <div>
-            <ProfileComponent />
+            <Header />
+            <User />
+            <Profilerecipes />
         </div>
     )
 }

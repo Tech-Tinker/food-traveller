@@ -16,7 +16,13 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        $recipes = Recipe::all();
+        $userId = request()->query('user_id');
+
+        if ($userId) {
+            $recipes = Recipe::where('user_id', $userId)->get();
+        } else {
+            $recipes = Recipe::all();
+        }
         return response()->json($recipes);
     }
 

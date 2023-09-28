@@ -22,7 +22,7 @@ const Nav = () => {
         <img src={Create} alt="Create Icon" />
       </Link>
 
-      <Link to={'/login'}>
+      <Link to={'/profile'}>
         <img src={Avatar} alt="Login Icon" />
       </Link>
 
