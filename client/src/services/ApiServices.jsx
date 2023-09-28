@@ -42,10 +42,10 @@ export async function deleteRecipe(id) {
     }
 }
 
-export async function getUserById(id) {
+export async function getUserProfile() {
     try {
-        const response = await axios.get(`${endpoint}/User/${id}`);
-        return response.data;
+        const response = await axios.get(`${endpoint}/profile`, data);
+        return response.data.user;
     } catch (error) {
         throw error;
     }
@@ -53,7 +53,7 @@ export async function getUserById(id) {
 
 export async function updateProfile(id, data) {
     try {
-        const response = await axios.put(`${endpoint}/user/${id}`, data);
+        const response = await axios.put(`${endpoint}/edit-profile`, data);
         return response.data;
     } catch (error) {
         throw error;

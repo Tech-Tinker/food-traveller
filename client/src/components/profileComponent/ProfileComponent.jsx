@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './ProfileComponent.css';
-import axios from 'axios';
 import Avatar from '../../assets/Avatar.svg';
+import { getUserProfile } from '../../services/ApiServices'; // Importa tu función getUserProfile desde el servicio correspondiente
 
 const ProfileComponent = () => {
     const [userData, setUserData] = useState({});
-
+    
     useEffect(() => {
-        axios.get('/api/profile') 
+        // Llama a tu función para obtener los datos del usuario desde el servicio
+        getUserProfile()
             .then((response) => {
                 setUserData(response.data.user);
             })
@@ -17,7 +18,6 @@ const ProfileComponent = () => {
             });
     }, []);
 
-    
     const avatarIcon = Avatar;
 
     return (
