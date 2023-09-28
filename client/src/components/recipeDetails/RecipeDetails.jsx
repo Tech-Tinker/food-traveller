@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './RecipeDetails.css';
 import { Link, useParams } from 'react-router-dom';
 import { getRecipeById } from '../../services/ApiServices';
-import Back from '../../assets/back.svg';
+import Back from '../../assets/Back.svg';
 import Cookware from '../../assets/Cookware.svg';
 import Watch from '../../assets/Watch.svg';
 
