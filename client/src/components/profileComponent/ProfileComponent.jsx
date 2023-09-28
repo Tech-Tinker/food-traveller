@@ -8,12 +8,7 @@ const ProfileComponent = () => {
     const [userData, setUserData] = useState({});
     
     useEffect(() => {
-<<<<<<< HEAD
-        // Llama a tu función para obtener los datos del usuario desde el servicio
-        getUserProfile()
-=======
         axios.get('/api/profile')
->>>>>>> e621834266c85943c9c49847e74eb57542b92c60
             .then((response) => {
                 setUserData(response.data.user);
             })
@@ -22,10 +17,6 @@ const ProfileComponent = () => {
             });
     }, []);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> e621834266c85943c9c49847e74eb57542b92c60
     const avatarIcon = Avatar;
 
     return (
