@@ -85,7 +85,7 @@
 import React, { useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import './css/SearchBar.css';
-import Searchmap from '../../assets/Search.svg';
+import Searchmap from '../../assets/search.svg';
 import ViewOptions from './ViewOptions'; 
 
 function SearchBar({ map, setMarker }) {

@@ -1,12 +1,13 @@
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Foto from '../../assets/Ellipse 35.png';
 
 const token = localStorage.getItem('auth_token');
 const id_user = localStorage.getItem('auth_user_id');
 
 const User = () => {
   const [profileData, setProfileData] = useState(null);
-  
 
   useEffect(() => {
     const obtenerPerfilUsuario = async () => {
@@ -29,14 +30,17 @@ const User = () => {
     obtenerPerfilUsuario();
   }, []);
 
-  console.log(profileData)
   return (
     <div>
       {profileData ? (
         <div>
-          <h2>Perfil de usuario:</h2>
-          <p>Nombre: {profileData.data.name}</p>
-          <p>Email: {profileData.data.email}</p>
+          <img src={Foto} alt="Foto de perfil" className="rounded-circle bg-secondary mx-4" />
+          <p className="mx-4 font-weight-bold">Nombre: {profileData.data.name}</p>
+          <p className="mx-4 font-weight-bold">Descripción {profileData.data.email}</p>
+          <p className="mx-4 font-weight-bold">Fecha de Nacimiento {profileData.data.email}</p>
+          <p className="mx-4 font-weight-bold">País {profileData.data.email}</p>
+          <p className="mx-4 font-weight-bold">Me interesa la comida {profileData.data.email}</p>
+          <p className="mx-4 font-weight-bold">En la cocina me considero {profileData.data.email}</p>
         </div>
       ) : (
         <div>Cargando perfil de usuario...</div>
@@ -46,3 +50,8 @@ const User = () => {
 };
 
 export default User;
+
+
+
+
+
