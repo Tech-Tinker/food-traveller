@@ -9,20 +9,25 @@ import { storeRecipe } from '../../services/ApiServices';
 const CreateRecipeForm = () => {
 
     const [title, setTitle] = useState('')
-    const [author, setAuthor] = useState('')
     const [description, setDescription] = useState('')
     const [time, setTime] = useState('')
+    const [category, setCategory] = useState('')
     const [difficulty, setDifficulty] = useState('')
     const [ingredients, setIngredients] = useState('')
     const [preparation, setPreparation] = useState('')
+    const [country, setCountry] = useState('')
     const [image, setImage] = useState('')
 
-    // eslint-disable-next-line
     const [errors, setErrors] = useState({
-        image: null,
         title: null,
-        location: null,
-        description: null
+        description: null,
+        time: null,
+        category: null,
+        difficulty: null,
+        ingredients: null,
+        preparation: null,
+        country: null,
+        image: null
     })
     const navigate = useNavigate()
 
@@ -31,12 +36,13 @@ const CreateRecipeForm = () => {
         try {
             const data = {
                 title,
-                author,
                 description,
                 time,
+                category,
                 difficulty,
                 ingredients,
                 preparation,
+                country,
                 image,
             };
 
@@ -47,22 +53,22 @@ const CreateRecipeForm = () => {
             } else {
                 swal("Success", response.message, "success");
                 navigate(`/recipe/${response.id}`);
-                // navigate('/');
             }
         } catch (error) {
             console.error('Error creating recipe:', error);
-            // const errors = error.response.data.errors
-            // setErrors({ image: errors.image && errors.image[0], title: errors.title && errors.title[0], location: errors.location && errors.location[0], description: errors.description && errors.description[0], });
+            const errors = error.response.data.errors
+            setErrors({ title: errors.title && errors.title[0], description: errors.description && errors.description[0], time: errors.time && errors.time[0], category: errors.category && errors.category[0], difficulty: errors.difficulty && errors.difficulty[0], ingredients: errors.ingredients && errors.ingredients[0], preparation: errors.preparation && errors.preparation[0], country: errors.country && errors.country[0], image: errors.image && errors.image[0], });
         }
+        // console.log(errors);
     };
 
     return (
         <div className="d-flex flex-column justify-content-around align-items-center display-h">
-            <h2 className="p-5 fw-bold text-center headline-form-color headline-form-size">Nueva receta</h2>
+            <h2 className="p-3 m-0 fw-bold text-center headline-form-color headline-form-size">Nueva receta</h2>
             <form className="d-flex flex-column justify-content-around reg-form" onSubmit={handleSubmit}>
 
                 <div className="d-flex flex-column">
-                    <label htmlFor="name" className="fw-bold label-text text">Título</label>
+                    <label htmlFor="title" className="fw-bold label-text text">Título</label>
                     <input
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
@@ -73,14 +79,14 @@ const CreateRecipeForm = () => {
                 </div>
 
                 {
-                    errors.title && <div className="alerts">
+                    errors.title && <div className="error-text text-center">
                         <p>{errors.title}</p>
                     </div>
                 }
 
                 <div className="d-flex flex-column">
                     <label htmlFor="description" className="fw-bold label-text text">Descripción general</label>
-                    <input
+                    <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         type="text"
@@ -90,7 +96,7 @@ const CreateRecipeForm = () => {
                 </div>
 
                 {
-                    errors.description && <div className="alerts">
+                    errors.description && <div className="error-text text-center">
                         <p>{errors.description}</p>
                     </div>
                 }
@@ -107,48 +113,76 @@ const CreateRecipeForm = () => {
                 </div>
 
                 {
-                    errors.time && <div className="alerts">
+                    errors.time && <div className="error-text text-center">
                         <p>{errors.time}</p>
                     </div>
                 }
 
-                <div className="d-flex flex-column">
+                <div className="d-flex justify-content-between align-items-center">
+                    <label htmlFor="category" className="fw-bold label-text text">Categoría</label>
+                    <select
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        type="text"
+                        name="category"
+                        className="select"
+                    >
+                        <option value="Selecciona">Selecciona</option>
+                        <option value="Entrante">Entrante</option>
+                        <option value="Primer Plato">Primer Plato</option>
+                        <option value="Segundo Plato">Segundo Plato</option>
+                        <option value="Postre">Postre</option>
+                    </select>
+                </div>
+
+                {
+                    errors.category && <div className="error-text text-center">
+                        <p>{errors.category}</p>
+                    </div>
+                }
+
+                <div className="d-flex justify-content-between align-items-center">
                     <label htmlFor="difficulty" className="fw-bold label-text text">Dificultad</label>
-                    <input
+                    <select
                         value={difficulty}
                         onChange={(e) => setDifficulty(e.target.value)}
                         type="text"
                         name="difficulty"
-                        className="input-none-style border-b"
-                    />
+                        className="select"
+                    >
+                        <option value="Selecciona">Selecciona</option>
+                        <option value="Fácil">Fácil</option>
+                        <option value="Intermedia">Intermedia</option>
+                        <option value="Difícil">Difícil</option>
+                    </select>
                 </div>
 
                 {
-                    errors.difficulty && <div className="alerts">
+                    errors.difficulty && <div className="error-text text-center">
                         <p>{errors.difficulty}</p>
                     </div>
                 }
 
                 <div className="d-flex flex-column">
                     <label htmlFor="ingredients" className="fw-bold label-text text">Ingredientes</label>
-                    <input
+                    <textarea
                         value={ingredients}
                         onChange={(e) => setIngredients(e.target.value)}
                         type="text"
                         name="ingredients"
-                        className="input-none-style border-b"
+                        className="input-style-1 input-height-2 b-r"
                     />
                 </div>
 
                 {
-                    errors.ingredients && <div className="alerts">
+                    errors.ingredients && <div className="error-text text-center">
                         <p>{errors.ingredients}</p>
                     </div>
                 }
 
                 <div className="d-flex flex-column">
                     <label htmlFor="preparation" className="fw-bold label-text text">Preparación</label>
-                    <input
+                    <textarea
                         value={preparation}
                         onChange={(e) => setPreparation(e.target.value)}
                         type="text"
@@ -158,8 +192,25 @@ const CreateRecipeForm = () => {
                 </div>
 
                 {
-                    errors.preparation && <div className="alerts">
+                    errors.preparation && <div className="error-text text-center">
                         <p>{errors.preparation}</p>
+                    </div>
+                }
+
+                <div className="d-flex flex-column">
+                    <label htmlFor="country" className="fw-bold label-text text">País</label>
+                    <input
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                        type="text"
+                        name="image"
+                        className="input-style-1 input-height-1 b-r"
+                    />
+                </div>
+
+                {
+                    errors.country && <div className="error-text text-center">
+                        <p>{errors.country}</p>
                     </div>
                 }
 
@@ -170,12 +221,12 @@ const CreateRecipeForm = () => {
                         onChange={(e) => setImage(e.target.value)}
                         type="text"
                         name="image"
-                        className="input-none-style border-b"
+                        className="input-style-1 input-height-1 b-r"
                     />
                 </div>
 
                 {
-                    errors.image && <div className="alerts">
+                    errors.image && <div className="error-text text-center">
                         <p>{errors.image}</p>
                     </div>
                 }

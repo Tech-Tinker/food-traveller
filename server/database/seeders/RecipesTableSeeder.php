@@ -19,13 +19,14 @@ class RecipesTableSeeder extends Seeder
         $recipes = [
             [
                 'title' => 'Receta 1',
-                'image' => 'imagen1.jpg',
                 'description' => 'Descripción de la receta 1',
-                'author' => 'Autor 1',
                 'time' => '30 minutos',
+                'category' => 'entrante',
                 'difficulty' => 'Fácil',
                 'ingredients' => 'Ingrediente 1, Ingrediente 2, Ingrediente 3',
                 'preparation' => 'Instrucciones para la preparación de la receta 1',
+                'country' => 'Brasil',
+                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEbFwjop0VWsyCW2pF1woTYYkz9X_XCzJ-Zw&usqp=CAU',
                 'user_id' => 1,
                 'privacy' => 'public',
                 'created_at' => now(),
@@ -33,13 +34,14 @@ class RecipesTableSeeder extends Seeder
             ],
             [
                 'title' => 'Receta 2',
-                'image' => 'imagen2.jpg',
                 'description' => 'Descripción de la receta 2',
-                'author' => 'Autor 2',
                 'time' => '45 minutos',
+                'category' => 'primero',
                 'difficulty' => 'Moderado',
                 'ingredients' => 'Ingrediente A, Ingrediente B, Ingrediente C',
                 'preparation' => 'Instrucciones para la preparación de la receta 2',
+                'country' => 'Sardegna',
+                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCP9gvbkCtl0b1FEr_yWPsRJUDoACpWQOnCg&usqp=CAU',
                 'user_id' => 2,
                 'privacy' => 'private',
                 'created_at' => now(),
@@ -47,11 +49,10 @@ class RecipesTableSeeder extends Seeder
             ],
             [
                 'title' => 'Tarta de Santiago',
-                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_uHEvWiDBWlV8qE8ptk4QuLEQxKpFsRo8JQ&usqp=CAU',
                 'description' => 'La tarta de Santiago es una tarta tradicional de la cocina gallega con indicación geográfica protegida.
                 Actualmente se pueden comprar en casi todas las pastelerías de las poblaciones y zonas por las que pasa el Camino de Santiago, desde Roncesvalles o Jaca hasta Santiago de Compostela; y en toda la Comunidad Autónoma de Galicia, especialmente durante el mes de julio y la primera semana de agosto (debido a que el 25 de julio es Santiago Apóstol). Sus principales ingredientes son almendras, azúcar, huevos y naranja.',
-                'author' => 'Lea',
                 'time' => '1.30 h',
+                'category' => 'postre',
                 'difficulty' => 'Moderado',
                 'ingredients' => '-250 g de almendra molida cruda variedad Marcona o 250 g de almendra sin piel (si vais a hacer vosotros la harina),
                 -5 huevos grandes L,
@@ -66,6 +67,8 @@ class RecipesTableSeeder extends Seeder
                 3. Mientras la almendra se está tostando añadimos en un bol el azúcar y los huevos. Batimos todo bien hasta que blanqueen un poco. Reservamos.
                 4. Lavamos el limón, secamos y rallamos la mitad del mismo. Añadimos la ralladura, medio chupito (25 ml) del licor que más os guste. Yo le he añadido licor de hierbas de mi padre. También media cuchara de canela molida a la mezcla del huevo.
                 5. Dejamos que se enfríe la almendra tostada y cuando esté tibia añadimos la crema de huevo aromatizada. Mezclamos bien con una espátula, sin llegar a batir. Sólo remover los ingredientes para que la almendra se junte bien con la crema de huevo.',
+                'country' => 'Sardegna',
+                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_uHEvWiDBWlV8qE8ptk4QuLEQxKpFsRo8JQ&usqp=CAU',
                 'user_id' => 3,
                 'privacy' => 'private',
                 'created_at' => now(),

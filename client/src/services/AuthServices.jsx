@@ -12,22 +12,28 @@ axios.interceptors.request.use(function (config) {
     return config;
 });
 
-export const AuthService = () => {
-    const urnRegister = 'api/register';
-    const urnLogin = 'api/login';
+const urnRegister = 'api/register';
+const urnLogin = 'api/login';
 
-    const register = ($data) => {
-        const res = axios.post(urnRegister, $data);
-        return res;
-    };
-
-    const login = ($data) => {
-        const res = axios.post(urnLogin, $data);
-        return res;
+export async function register($data) {
+    try {
+        const outcome = await axios.post(urnRegister, $data) // Añade axios.post
+        return outcome.data; 
+    } catch (error) {
+        throw error;
     }
+};
 
-    return {
-        register,
-        login
+export async function login($data) {
+    try {
+        const res = await axios.post(urnLogin, $data);
+        return res.data; 
+    } catch (error) {
+        throw error;
     }
 }
+
+const AuthServices = { register, login };
+
+export default AuthServices;
+

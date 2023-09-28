@@ -9,6 +9,9 @@ import EditRecipe from "../pages/editRecipe/EditRecipe";
 import Perfil from "../pages/perfil/Perfil";
 import EditProfile from "../pages/editProfile/EditProfile";
 import Profile from "../pages/profile/Profile";
+import { PrivateRoutes } from "../utils/PrivateRoutes";
+// import Perfil from "../pages/perfil/Perfil";
+// import Dropdown from "../components/dropdown/Dropdown";
 
 const router = createBrowserRouter([
     {
@@ -28,7 +31,7 @@ const router = createBrowserRouter([
 
     {
         path: "/create-recipe",
-        element: <CreateRecipe />,
+        element: <PrivateRoutes><CreateRecipe /></PrivateRoutes>,
     },
 
     {
@@ -38,17 +41,18 @@ const router = createBrowserRouter([
 
     {
         path: "/recipe/:id",
-        element: <Recipe />,
+        element: <PrivateRoutes><Recipe /></PrivateRoutes>,
     },
 
     {
         path: "/edit-recipe/:id",
-        element: <EditRecipe />,
+        element: <PrivateRoutes><EditRecipe /></PrivateRoutes>,
     },
 
     // {
     //     path: '/perfil',
     //     element: <Perfil />
+<<<<<<< HEAD
     // }, 
 
     {
@@ -60,6 +64,14 @@ const router = createBrowserRouter([
         path: '/edit-profile',
         element: <EditProfile />
     }
+=======
+    // },
+
+    // {
+    //     path: '/dropdown',
+    //     element: <Dropdown />
+    // },
+>>>>>>> dev2
 ]);
 
 export default router;
