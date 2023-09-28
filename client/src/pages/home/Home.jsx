@@ -6,6 +6,7 @@ import Nav from '../../components/nav/Nav';
 import MapboxMap from '../../components/map/MapboxMap';
 import RecipePost from '../../components/recipepost/RecipePost';
 
+
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
 

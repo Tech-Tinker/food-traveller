@@ -4,6 +4,8 @@ import './Header.css';
 import Logo from '../../assets/Logo.svg';
 import Avatar from '../../assets/Avatar.svg';
 import Menu from '../../assets/Menu.svg';
+import MenuBurguer from '../menu-burguer/MenuBurguer';
+
 
 const Header = () => {
   const location = useLocation();
@@ -20,23 +22,19 @@ const Header = () => {
   };
 
   return (
+    
     <div className='d-flex justify-content-between align-items-center header-margin'>
       <Link to={'/'}>
         <img className='logo-header' src={Logo} alt='Logo Foodtraveller' />
       </Link>
-
+    <MenuBurguer/>
       {!isLoginPage && !isRegisterPage && !isLoggedIn && !isCreateRecipe && (
         <Link to={'/login'}>
           <img src={Avatar} alt='Icono de Login' />
         </Link>
       )}
 
-      {!isLoginPage && !isRegisterPage && !isLoggedIn && !isCreateRecipe && (
-        <Link to={'/POP-UP'}>
-          <img src={Menu} alt='Menu desplegable' />
-        </Link>
-      )}
-      
+     
     </div>
   );
 };
