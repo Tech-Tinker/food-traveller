@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('profile_image')->nullable();
             $table->text('description')->nullable();
-            $table->date('birthdate')->nullable();
+            $table->string('birthdate')->nullable();
             $table->string('country')->nullable();
             $table->text('interests')->nullable();
-            $table->string('culinary-experience')->nullable();
+            $table->string('culinary_experience')->nullable();
             $table->timestamps();
-    
+
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

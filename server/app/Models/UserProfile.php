@@ -4,19 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+// use App\Models\User;
 
-class Profile extends Model
+class UserProfile extends Model
 {
     use HasFactory;
     protected $fillable = [
         'name',
-        'profile-image',
+        'profile_image',
         'description',
         'birthdate',
         'country',
         'interests',
-        'culinary-experience'
+        'culinary_experience'
     ];
 
     protected $hidden = [
