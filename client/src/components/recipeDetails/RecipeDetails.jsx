@@ -5,6 +5,8 @@ import { getRecipeById } from '../../services/ApiServices';
 import Back from '../../assets/Back.svg';
 import Cookware from '../../assets/Cookware.svg';
 import Watch from '../../assets/Watch.svg';
+import Rating from '../rating/Rating';
+
 
 
 const RecipeDetails = () => {
@@ -36,8 +38,11 @@ const RecipeDetails = () => {
       <div className="pb-3">
         <Link to={`/`}><img src={Back} alt="Go back icon" /></Link>
       </div>
+      <Rating />
+
       <h1 className="fw-bold">{title}</h1>
       <img src={image} alt="" className="pt-2 pb-2 w-image" />
+      <div className='recipe-foto'> FOTO de la comida!</div>
       <h2>{username}</h2>
       <p className="country">{country}</p>
       <div className="d-flex justify-content-between buttons mt-2 mb-2">
