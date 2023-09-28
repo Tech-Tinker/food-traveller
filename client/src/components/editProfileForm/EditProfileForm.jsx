@@ -1,61 +1,75 @@
-import React, { useState } from "react";
-import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+// import axios from 'axios';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 import Button from '../button/Button';
+import { updateProfile, getUserById } from '../../services/ApiServices';
 
-const EditProfileForm = ({ user }) => {
+
+const EditProfileForm = () => {
     const navigate = useNavigate();
 
-    const [profileInput, setProfileInput] = useState({
-        name: user.name,
-        description: user.description,
-        birthdate: user.birthdate,
-        country: user.country,
-        interests: user.interests,
-        culinaryExperience: user.culinaryExperience,
-        avatar: null, // Nuevo campo para la imagen de avatar
-    });
+    const [user_name, setUser_name] = useState('')
+    const [profile_image, setProfile_image] = useState('')
+    const [description, setDescription] = useState('')
+    const [birthdate, setBirthdate] = useState('')
+    const [country, setCountry] = useState('')
+    const [interests, setInterests] = useState('')
+    const [culinary_experience, setCulinary_experience] = useState('')
 
-    const handleInput = (e) => {
-        e.persist();
-        setProfileInput({ ...profileInput, [e.target.name]: e.target.value });
-    }
-
-    // Manejar la selección de una nueva imagen de avatar
-    const handleAvatarChange = (e) => {
-        const selectedAvatar = e.target.files[0];
-        setProfileInput({ ...profileInput, avatar: selectedAvatar });
-    }
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+            const data = {
+                user_name,
+                profile_image,
+                description,
+                birthdate,
+                country,
+                interests,
+                culinary_experience,
+            };
 
-        const formData = new FormData();
-        formData.append("name", profileInput.name);
-        formData.append("description", profileInput.description);
-        formData.append("birthdate", profileInput.birthdate);
-        formData.append("country", profileInput.country);
-        formData.append("interests", profileInput.interests);
-        formData.append("culinaryExperience", profileInput.culinaryExperience);
-        
-        // Agregar la nueva imagen de avatar al formData si se selecciona
-        if (profileInput.avatar) {
-            formData.append("avatar", profileInput.avatar);
+            const response = await updateProfile(data);
+            // console.log(response);
+            if (response.errors) {
+                console.log('Errors:', response.errors);
+            } else {
+                swal("Success", response.message, "success");
+                navigate(`/`);
+            }
+        } catch (error) {
+            console.error('Error updating recipe:', error);
+            // const errors = error.response.data.errors
+            // setErrors({ title: errors.title && errors.title[0], description: errors.description && errors.description[0], time: errors.time && errors.time[0], category: errors.category && errors.category[0], difficulty: errors.difficulty && errors.difficulty[0], ingredients: errors.ingredients && errors.ingredients[0], preparation: errors.preparation && errors.preparation[0], country: errors.country && errors.country[0], image: errors.image && errors.image[0], });
         }
 
-        // Realizar una solicitud POST para actualizar el perfil del usuario
-        axios.post('http://localhost:8000/api/edit-profile', formData)
-            .then(res => {
-                if (res.data.status === 200) {
-                    swal("Éxito", res.data.message, "success");
-                    // Redirigir al usuario a su página de perfil después de una actualización exitosa.
-                    navigate(`/profile/${user.id}`);
-                } else {
-                    
-                }
-            });
-    }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getUserById();
+                console.log(data.profile);
+                // console.log(data.recipe.user_id, userId, data.recipe.user_id !== userId)
+                // if (data.profile.user_id !== userId) {
+                //     navigate('/')
+                //     return
+                // }
+                setUser_name(data.profile.user_name)
+                setProfile_image(data.profile.profile_image)
+                setDescription(data.profile.description)
+                setBirthdate(data.profile.birthdate)
+                setCountry(data.profile.country)
+                setInterests(data.profile.interests)
+                setCulinary_experience(data.profile.culinary_experience)
+            } catch (error) {
+                console.error('Error fetching profile :', error);
+            }
+        };
+        fetchData();
+    }, []);
+
 
     return (
         <div className="d-flex justify-content-center">
@@ -64,10 +78,10 @@ const EditProfileForm = ({ user }) => {
 
                 <div className="mb-3 text-center">
                     <input
-                        onChange={handleInput}
-                        value={profileInput.name}
+                        onChange={(e) => setUser_name(e.target.value)}
+                        value={user_name}
                         type="text"
-                        name="name"
+                        name="user_name"
                         className="text-left border-0 border-bottom border border-dark"
                         placeholder="Nombre"
                     />
@@ -77,18 +91,19 @@ const EditProfileForm = ({ user }) => {
                 <div className="mb-3 text-center">
                     <label htmlFor="avatar" className="text-black bold">Cambiar Avatar</label>
                     <input
-                        onChange={handleAvatarChange}
-                        type="file"
-                        name="avatar"
-                        accept="image/*"
+                        onChange={(e) => setProfile_image(e.target.value)}
+                        value={profile_image}
+                        type="text"
+                        name="profile_image"
+                        // accept="image/*"
                         className="border-0 border-bottom text-left"
                     />
                 </div>
 
                 <div className="mb-3 text-center">
                     <textarea
-                        onChange={handleInput}
-                        value={profileInput.description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        value={description}
                         name="description"
                         className="text-left border-0 border-bottom border border-dark"
                         placeholder="Descripción"
@@ -99,9 +114,9 @@ const EditProfileForm = ({ user }) => {
                     <label htmlFor="birthdate" className="text-black bold">Fecha de Nacimiento</label>
                     <br />
                     <input
-                        onChange={handleInput}
-                        value={profileInput.birthdate}
-                        type="date"
+                        onChange={(e) => setBirthdate(e.target.value)}
+                        value={birthdate}
+                        type="text"
                         name="birthdate"
                         className="border-0 border-bottom text-left"
                     />
@@ -111,8 +126,8 @@ const EditProfileForm = ({ user }) => {
                     <label htmlFor="country" className="text-black bold">País de Origen</label>
                     <br />
                     <select
-                        onChange={handleInput}
-                        value={profileInput.country}
+                        onChange={(e) => setCountry(e.target.value)}
+                        value={country}
                         name="country"
                         className="border-0 border-bottom"
                     >
@@ -124,12 +139,24 @@ const EditProfileForm = ({ user }) => {
                 </div>
 
                 <div className="mb-3 text-center">
-                    <label className="text-black bold"> En la cocina me considero...</label>
+                    <label htmlFor="interests" className="text-black bold">Intereses</label>
+                    <br />
+                    <input
+                        onChange={(e) => setInterests(e.target.value)}
+                        value={interests}
+                        type="text"
+                        name="interests"
+                        className="border-0 border-bottom text-left"
+                    />
+                </div>
+
+                <div className="mb-3 text-center">
+                    <label htmlFor="culinary_experience" className="text-black bold"> En la cocina me considero...</label>
                     <br />
                     <select
-                        onChange={handleInput}
-                        value={profileInput.culinaryExperience}
-                        name="culinaryExperience"
+                        onChange={(e) => setCulinary_experience(e.target.value)}
+                        value={culinary_experience}
+                        name="culinary_experience"
                         className="border-0 border-bottom"
                     >
                         <option value="1">Experto sibarita</option>

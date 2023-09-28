@@ -8,7 +8,7 @@ const ProfileComponent = () => {
     const [userData, setUserData] = useState({});
 
     useEffect(() => {
-        axios.get('/api/profile') 
+        axios.get('/api/profile')
             .then((response) => {
                 setUserData(response.data.user);
             })
@@ -17,7 +17,7 @@ const ProfileComponent = () => {
             });
     }, []);
 
-    
+
     const avatarIcon = Avatar;
 
     return (
