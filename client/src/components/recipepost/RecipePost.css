@@ -39,3 +39,7 @@
     text-align: center;
   }
   
+  .link-style-none{
+    color: inherit;
+    text-decoration: none;
+  }

@@ -264,7 +264,7 @@ const EditRecipeForm = () => {
                 }
 
                 <div className="d-flex justify-content-between">
-                    <Link to={`/`}><Button backgroundColorClass="bttn-primary" text="Cancelar" widthClass="simpleW" /></Link>
+                    <Link to={`/profile`}><Button backgroundColorClass="bttn-primary" text="Cancelar" widthClass="simpleW" /></Link>
                     <Button backgroundColorClass="bttn-secondary" text="Añadir" />
                 </div>
 
