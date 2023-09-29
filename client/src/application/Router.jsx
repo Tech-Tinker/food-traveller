@@ -6,11 +6,10 @@ import RecipesView from "../pages/recipesView/RecipesView";
 import Recipe from "../pages/recipe/Recipe";
 import CreateRecipe from "../pages/createRecipe/CreateRecipe";
 import EditRecipe from "../pages/editRecipe/EditRecipe";
-// import Perfil from "../pages/perfil/Perfil";
 import EditProfile from "../pages/editProfile/EditProfile";
 import Profile from "../pages/profile/Profile";
 import { PrivateRoutes } from "../utils/PrivateRoutes";
-import User from './components/User/User.jsx'
+import User from "../components/User/User.jsx";
 // import Perfil from "../pages/perfil/Perfil";
 // import Dropdown from "../components/dropdown/Dropdown";
 
@@ -52,7 +51,7 @@ const router = createBrowserRouter([
 
     {
         path: '/profile',
-        element: <User />
+        element: <User/>
     }, 
 
     {
