@@ -32,7 +32,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [UserProfileController::class, 'show']);
     Route::put('/edit-profile', [UserProfileController::class, 'update']);
-    Route::get('/recipes', [RecipeController::class, 'index']);
+    // Route::get('/recipes', [RecipeController::class, 'index']);
     Route::post('/recipe', [RecipeController::class, 'show']);
     // Route::get('/recipes', [RecipeController::class, 'index']);
     Route::post('/recipe', [RecipeController::class, 'store']);
