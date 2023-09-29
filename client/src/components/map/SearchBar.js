@@ -85,7 +85,7 @@
 import React, { useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import './css/SearchBar.css';
-import Searchmap from '../../assets/search.svg';
+import Search from '../../assets/search.svg';
 import ViewOptions from './ViewOptions'; 
 
 function SearchBar({ map, setMarker }) {
@@ -170,7 +170,7 @@ function SearchBar({ map, setMarker }) {
       />
 
       <button className='btn-search' onClick={() => handleSearch(searchQuery)}>
-        <img src={Searchmap} alt="Search" />
+        <img src={Search} alt="Search" />
       </button>
 
       <div>

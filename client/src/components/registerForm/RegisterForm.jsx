@@ -19,7 +19,7 @@ const RegisterForm = () => {
 
     /*const auth = AuthService();*/
     const [aceptado, setAceptado] = useState(false);
-    
+
 
 
     const handleInput = (e) => {
@@ -42,7 +42,7 @@ const RegisterForm = () => {
             name: registerInput.name,
             email: registerInput.email,
             password: registerInput.password,
-            
+
         };
 
         axios.get('http://localhost:8000/sanctum/csrf-cookie').then(response => {
@@ -58,55 +58,55 @@ const RegisterForm = () => {
             });
         });
     }
-  
+
     return (
         <div className="container">
             <form onSubmit={handleSubmit} className="reg-form rounded-0" action="/register" method="POST">
                 <h2 className="title-register text-center bold mb-3">¡Te damos la bienvenida <br></br>a bordo!</h2>
                 <div className="container-input">
-                <div className="mb-3 text-center">
+                    <div className="mb-3 text-center">
 
-                    <input 
-                        onChange={handleInput}
-                        value={registerInput.name}
-                        type="text"
-                        name="name"
-                        className="input-register text-left border-0 border-bottom border-2 border-dark"
-                        placeholder="Nombre"
-                    />
-                    
-                    <span className="error-required">{registerInput.error_list.name}</span>
-                </div>
+                        <input
+                            onChange={handleInput}
+                            value={registerInput.name}
+                            type="text"
+                            name="name"
+                            className="input-register text-left border-0 border-bottom border-2 border-dark"
+                            placeholder="Nombre"
+                        />
 
-                <div className="mb-3 text-center input-login">
-                    <input
-                        onChange={handleInput}
-                        value={registerInput.email}
-                        type="text"
-                        name="email"
-                        className="input-register text-left border-0 border-bottom border-2 border-dark"
-                        placeholder="Email"
-                    />
-                    <span className="error-required">{registerInput.error_list.email}</span>
-                </div>
+                        <span className="error-required">{registerInput.error_list.name}</span>
+                    </div>
+
+                    <div className="mb-3 text-center input-login">
+                        <input
+                            onChange={handleInput}
+                            value={registerInput.email}
+                            type="text"
+                            name="email"
+                            className="input-register text-left border-0 border-bottom border-2 border-dark"
+                            placeholder="Email"
+                        />
+                        <span className="error-required">{registerInput.error_list.email}</span>
+                    </div>
 
 
 
-                <div className="mb-3 text-center">
-                    <input
-                        onChange={handleInput}
-                        value={registerInput.password}
-                        type="password"
-                        name="password"
-                        className="input-register text-left border-0 border-bottom border-2 border-dark"
-                        placeholder="Contraseña"
-                    />
-                    <span className="error-required">{registerInput.error_list.password}</span>
-                    <br></br>
-                    {/* <small id="passwordHelpInline" className="text-muted">
+                    <div className="mb-3 text-center">
+                        <input
+                            onChange={handleInput}
+                            value={registerInput.password}
+                            type="password"
+                            name="password"
+                            className="input-register text-left border-0 border-bottom border-2 border-dark"
+                            placeholder="Contraseña"
+                        />
+                        <span className="error-required">{registerInput.error_list.password}</span>
+                        <br></br>
+                        {/* <small id="passwordHelpInline" className="text-muted">
                         Debe tener entre 8 y 20 caracteres.
                     </small> */}
-                </div>
+                    </div>
                 </div>
                 <div className="terminos-y-condiciones-container">
                     <label>
@@ -115,13 +115,13 @@ const RegisterForm = () => {
                             checked={aceptado}
                             onChange={handleAceptoCambio}
                         />
-                        </label>
-                        <span className="terminos-y-condiciones-text">
-                        Acepto los <a href="#">términos y condiciones </a> de la política de protección de datos.<br></br> Recibirás confirmación del registro por correo electrónico.
-                        </span>
+                    </label>
+                    <span className="terminos-y-condiciones-text">
+                        Acepto los <Link to="">términos y condiciones </Link> de la política de protección de datos.<br></br> Recibirás confirmación del registro por correo electrónico.
+                    </span>
                 </div>
-              
-                 
+
+
 
                 <div className="d-flex justify-content-evenly">
                     <Button backgroundColorClass="button-register bttn-secondary" id="aceptButton" text="Regístrate" />

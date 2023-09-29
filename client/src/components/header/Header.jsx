@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 import Logo from '../../assets/logo.svg';
@@ -8,32 +8,35 @@ import MenuBurguer from '../menu-burguer/MenuBurguer';
 
 const Header = () => {
   const location = useLocation();
-  const isLoginPage = location.pathname === '/login';
-  const isRegisterPage = location.pathname === '/register';
-  // const isPerfilPage = location.pathname === '/perfil';
-  const isCreateRecipe = location.pathname === '/create-recipe';
-  // const isEditPage = location.pathname === '/edit';
+  const currentPage = location.pathname;
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLogin = () => {
-    setIsLoggedIn(false);
-  };
+  useEffect(() => {
+    const token = localStorage.getItem('auth_token');
+    console.log(token);
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
 
   return (
-    
+
     <div className='d-flex justify-content-between align-items-center header-margin'>
       <Link to={'/'}>
         <img className='logo-header' src={Logo} alt='Logo Foodtraveller' />
       </Link>
-    <MenuBurguer/>
-      {!isLoginPage && !isRegisterPage && !isLoggedIn && !isCreateRecipe && (
+
+      {isLoggedIn && (currentPage === '/' || currentPage === '/profile' || currentPage === '/create-recipe' || currentPage.match(/^\/edit-recipe\/\d+$/)) && (
+        <MenuBurguer currentPage={currentPage} />
+      )}
+
+      {!isLoggedIn && currentPage === '/' && (
         <Link to={'/login'}>
           <img src={Avatar} alt='Icono de Login' />
         </Link>
       )}
-
-     
     </div>
   );
 };
