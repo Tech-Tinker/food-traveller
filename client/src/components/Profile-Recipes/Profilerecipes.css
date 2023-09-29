@@ -1,3 +1,7 @@
 .width-11{
     width: 11rem;
 }
+
+.f-wrap{
+    flex-wrap: wrap;
+}

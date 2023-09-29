@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Menu from '../menu/Menu';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import './Profilerecipes.css';
 
 
 
@@ -27,14 +28,17 @@ const Profilerecipes = () => {
 
     return (
         <div>
-            <div style={{ display: 'flex' }}>
+            <div className="d-flex f-wrap">
                 {recipes.map((recipe, index) => (
+
                     <div className="col-md-6 mx-2 width-11" key={index}>
                         <div className="card mb-4">
                             <div className="row no-gutters">
-                                <div className="col-md-4">
-                                    <img src={recipe.image} alt={recipe.title} className="card-img" style={{ width: '11rem', height: '11rem' }} />
-                                </div>
+                                <Link to={`/recipe/${recipe.id}`} className="link-style-none">
+                                    <div className="col-md-4">
+                                        <img src={recipe.image} alt={recipe.title} className="card-img" style={{ width: '11rem', height: '11rem' }} />
+                                    </div>
+                                </Link>
                                 <div className="col-md-8">
                                     <div className="card-body d-flex justify-content-between align-items-center">
                                         <h5 className="card-title">{recipe.title}</h5>
@@ -44,6 +48,7 @@ const Profilerecipes = () => {
                             </div>
                         </div>
                     </div>
+
                 ))}
             </div>
         </div>
