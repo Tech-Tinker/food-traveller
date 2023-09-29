@@ -38,3 +38,7 @@
 .error-text{
     color: var(--error-color);
 }
+
+.gap1{
+    gap: 1rem;
+}

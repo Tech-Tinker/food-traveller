@@ -2,12 +2,12 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Login from "../pages/login/Login";
 import RegisterView from "../pages/registerView/RegisterView";
-import RecipesView from "../pages/recipesView/RecipesView";
 import Recipe from "../pages/recipe/Recipe";
 import CreateRecipe from "../pages/createRecipe/CreateRecipe";
 import EditRecipe from "../pages/editRecipe/EditRecipe";
-// import Perfil from "../pages/perfil/Perfil";
-// import Dropdown from "../components/dropdown/Dropdown";
+import EditProfile from "../pages/editProfile/EditProfile";
+import Profile from "../pages/profile/Profile";
+import { PrivateRoutes } from "../utils/PrivateRoutes";
 
 const router = createBrowserRouter([
     {
@@ -27,33 +27,29 @@ const router = createBrowserRouter([
 
     {
         path: "/create-recipe",
-        element: <CreateRecipe />,
-    },
-
-    {
-        path: "/recipes",
-        element: <RecipesView />,
+        element: <PrivateRoutes><CreateRecipe /></PrivateRoutes>,
     },
 
     {
         path: "/recipe/:id",
-        element: <Recipe />,
+        element: <PrivateRoutes><Recipe /></PrivateRoutes>,
     },
 
     {
         path: "/edit-recipe/:id",
-        element: <EditRecipe />,
+        element: <PrivateRoutes><EditRecipe /></PrivateRoutes>,
     },
 
-    // {
-    //     path: '/perfil',
-    //     element: <Perfil />
-    // },
+    {
+        path: '/profile',
+        element: <PrivateRoutes><Profile /></PrivateRoutes>
+    },
 
-    // {
-    //     path: '/dropdown',
-    //     element: <Dropdown />
-    // },
+    {
+        path: '/edit-profile',
+        element: <PrivateRoutes><EditProfile /></PrivateRoutes>
+    }
+
 ]);
 
 export default router;

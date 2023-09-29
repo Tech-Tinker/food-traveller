@@ -16,7 +16,13 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        $recipes = Recipe::all();
+        $userId = request()->query('user_id');
+
+        if ($userId) {
+            $recipes = Recipe::where('user_id', $userId)->get();
+        } else {
+            $recipes = Recipe::all();
+        }
         return response()->json($recipes);
     }
 
@@ -39,7 +45,7 @@ class RecipeController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error' => 'Algo inesperado ha sucedido. Por favor, verifique los datos e intente nuevamente.'], 400);
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
         // Obtiene el usuario autenticado
@@ -134,22 +140,22 @@ class RecipeController extends Controller
 
         // Define reglas de validación
         $rules = [
-            'title' => 'string|max:255',
-            'description' => 'string',
-            'time' => 'string',
-            'category' => 'string',
-            'difficulty' => 'string',
-            'ingredients' => 'string',
-            'preparation' => 'string',
-            'country' => 'string',
-            'image' => 'string',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'time' => 'required|string',
+            'category' => 'required|string',
+            'difficulty' => 'required|string',
+            'ingredients' => 'required|string',
+            'preparation' => 'required|string',
+            'country' => 'required|string',
+            'image' => 'required|string',
         ];
 
         // Valida la solicitud
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 400);
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
         // Actualiza los campos de la receta
