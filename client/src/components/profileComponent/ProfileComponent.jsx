@@ -7,15 +7,15 @@ import Avatar from '../../assets/Avatar.svg';
 const ProfileComponent = () => {
     const [userData, setUserData] = useState({});
 
-    useEffect(() => {
-        axios.get('/api/profile')
-            .then((response) => {
-                setUserData(response.data.user);
-            })
-            .catch((error) => {
-                console.error('Error al obtener los datos del usuario:', error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     axios.get('/api/profile')
+    //         .then((response) => {
+    //             setUserData(response.data.user);
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error al obtener los datos del usuario:', error);
+    //         });
+    // }, []);
 
 
     const avatarIcon = Avatar;
