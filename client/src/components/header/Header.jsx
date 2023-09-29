@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
-import Logo from '../../assets/Logo.svg';
+import Logo from '../../assets/logo.svg';
 import Avatar from '../../assets/Avatar.svg';
-import Menu from '../../assets/Menu.svg';
 import MenuBurguer from '../menu-burguer/MenuBurguer';
 
 
