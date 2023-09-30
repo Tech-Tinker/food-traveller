@@ -11,7 +11,8 @@ const EditProfileForm = () => {
     const navigate = useNavigate();
 
     const [user_name, setUser_name] = useState('');
-    const [profile_image, setProfile_image] = useState('');
+    const [profile_image, setProfile_image] = useState(null);
+    const [newProfileImage, setNewProfileImage] = useState(null);
     const [description, setDescription] = useState('');
     const [birthdate, setBirthdate] = useState('');
     const [country, setCountry] = useState('');
@@ -20,7 +21,11 @@ const EditProfileForm = () => {
 
     const handleAvatarChange = (e) => {
         const selectedAvatar = e.target.files[0];
-        setProfile_image(selectedAvatar);
+        setNewProfileImage(selectedAvatar);
+    };
+
+    const handleClearImage = () => {
+        setNewProfileImage(null); // No eliminamos la nueva imagen seleccionada al hacer clic en la cámara
     };
 
     const handleSubmit = async (e) => {
@@ -28,7 +33,7 @@ const EditProfileForm = () => {
         try {
             const data = {
                 user_name,
-                profile_image,
+                profile_image: newProfileImage || profile_image,
                 description,
                 birthdate,
                 country,
@@ -44,7 +49,7 @@ const EditProfileForm = () => {
                 navigate(`/`);
             }
         } catch (error) {
-            console.error('Error updating recipe:', error);
+            console.error('Error updating profile:', error);
         }
     };
 
@@ -101,7 +106,53 @@ const EditProfileForm = () => {
                                 position: 'absolute',
                             }}
                         />
-                        {profile_image ? (
+                        {newProfileImage ? (
+                            <div
+                                className="selected-image-container"
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <img
+                                    src={URL.createObjectURL(newProfileImage)}
+                                    alt="Avatar"
+                                    className="selected-image"
+                                    style={{
+                                        maxWidth: '100%',
+                                        maxHeight: '100%',
+                                        borderRadius: '50%',
+                                    }}
+                                />
+                                <button
+                                    className="clear-image-button"
+                                    onClick={handleClearImage}
+                                    style={{
+                                        position: 'absolute',
+                                        top: '5px',
+                                        right: '5px',
+                                        background: 'none',
+                                        border: 'none',
+                                        color: '#BB9B8E',
+                                        cursor: 'pointer',
+                                    }}
+                                >
+                                    <FontAwesomeIcon
+                                        icon={faCamera}
+                                        style={{
+                                            fontSize: '20px',
+                                            backgroundColor: 'white',
+                                            borderRadius: '50%',
+                                            padding: '3px',
+                                            border: '3px solid white',
+                                        }}
+                                    />
+                                </button>
+                            </div>
+                        ) : profile_image ? (
                             <div
                                 className="selected-image-container"
                                 style={{
@@ -122,24 +173,6 @@ const EditProfileForm = () => {
                                         borderRadius: '50%',
                                     }}
                                 />
-                                <button
-                                    className="clear-image-button"
-                                    onClick={() => setProfile_image(null)}
-                                    style={{
-                                        position: 'absolute',
-                                        top: '5px',
-                                        right: '5px',
-                                        background: 'none',
-                                        border: 'none',
-                                        color: '#FFF',
-                                        cursor: 'pointer',
-                                    }}
-                                >
-                                    <FontAwesomeIcon
-                                        icon={faCamera}
-                                        style={{ fontSize: '20px' }}
-                                    />
-                                </button>
                             </div>
                         ) : (
                             <label
@@ -157,6 +190,20 @@ const EditProfileForm = () => {
                             </label>
                         )}
                     </div>
+                </div>
+
+                <div className="mb-3">
+                    <label htmlFor="user_name" className="text-black bold">
+                        Nombre
+                    </label>
+                    <input
+                        onChange={(e) => setUser_name(e.target.value)}
+                        value={user_name}
+                        type="text"
+                        name="user_name"
+                        className="border-1px-solid-gray text-left w-100 p-2 rounded-2"
+                        placeholder="Nombre"
+                    />
                 </div>
 
                 <div className="mb-3">
@@ -235,6 +282,8 @@ const EditProfileForm = () => {
 };
 
 export default EditProfileForm;
+
+
 
 
 
