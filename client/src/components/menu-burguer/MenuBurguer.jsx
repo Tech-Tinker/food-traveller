@@ -31,11 +31,13 @@ const MenuBurguer = ({ currentPage }) => {
         <ul className="menu-list">
           {currentPage === '/profile' && (
             <>
-              <li className="list-style-none"><Link to={'/edit-profile'} className="link-style-none">
-                <img src={Edit} alt="Mi Perfil" />
-                <span>Editar Perfil</span></Link>
+              <li className="list-item">
+                <Link to={'/edit-profile'} className="link-style-none">
+                  <img src={Edit} alt="Mi Perfil" />
+                  <span>Editar Perfil</span>
+                </Link>
               </li>
-              <li className="list-style-none" onClick={handleLogout}>
+              <li className="list-item" onClick={handleLogout}>
                 <img src={Logout} alt="Cerrar Sesión" />
                 <span>Cerrar Sesión</span>
               </li>
@@ -44,17 +46,18 @@ const MenuBurguer = ({ currentPage }) => {
 
           {['/', '/create-recipe', `/edit-recipe/${id}`].includes(currentPage) && (
             <>
-              <li className="list-style-none"><Link to={'/profile'} className="link-style-none">
-                <img src={AvatarGray} alt="Mi Perfil" />
-                <span>Mi Perfil</span></Link>
+              <li className="list-item">
+                <Link to={'/profile'} className="link-style-none">
+                  <img src={AvatarGray} alt="Mi Perfil" />
+                  <span className="mx-2">Mi Perfil</span>
+                </Link>
               </li>
-              <li className="list-style-none" onClick={handleLogout}>
-                <img src={Logout} alt="Cerrar Sesión" />
-                <span>Cerrar Sesión</span>
+              <li className="list-item" onClick={handleLogout}>
+                <img  src={Logout} alt="Cerrar Sesión" />
+                <span className="mx-2">Cerrar Sesión</span>
               </li>
             </>
           )}
-
         </ul>
       )}
     </div>
