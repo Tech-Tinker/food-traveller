@@ -1,11 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
 import Foto from '../../assets/Ellipse 35.png';
 import { getUserById } from '../../services/ApiServices';
 
-// const token = localStorage.getItem('auth_token');
-// const id_user = localStorage.getItem('auth_user_id');
 
 const User = () => {
 
@@ -14,21 +11,14 @@ const User = () => {
   useEffect(() => {
     const getUserProfile = async () => {
       try {
-        // const config = {
-        //   headers: {
-        //     Authorization: `Bearer ${token}`
-        //   }
-        // };
         const response = await getUserById();
 
-        // console.log(response);
         setProfileData(response);
       } catch (error) {
         console.error(error);
         throw new Error('No se pudo obtener el perfil de usuario');
       }
     };
-    // console.log(setProfileData);
     getUserProfile();
   }, []);
 

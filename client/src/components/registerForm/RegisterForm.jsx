@@ -17,7 +17,6 @@ const RegisterForm = () => {
         error_list: [],
     });
 
-    /*const auth = AuthService();*/
     const [aceptado, setAceptado] = useState(false);
 
 
@@ -34,7 +33,6 @@ const RegisterForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!aceptado) {
-            // Muestra una alerta o realiza alguna acción para manejar el caso en que los términos y condiciones no se acepten.
             return;
         }
 
@@ -103,9 +101,6 @@ const RegisterForm = () => {
                         />
                         <span className="error-required">{registerInput.error_list.password}</span>
                         <br></br>
-                        {/* <small id="passwordHelpInline" className="text-muted">
-                        Debe tener entre 8 y 20 caracteres.
-                    </small> */}
                     </div>
                 </div>
                 <div className="terminos-y-condiciones-container">
