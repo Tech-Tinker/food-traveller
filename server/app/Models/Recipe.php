@@ -10,13 +10,15 @@ class Recipe extends Model
     use HasFactory;
     protected $fillable = [
         'title',
-        'image',
         'description',
-        'author',
         'time',
+        'çategory_id',
         'difficulty',
         'ingredients',
-        'preparation'
+        'preparation',
+        'country',
+        'image',
+        'user_id'
     ];
 
     protected $hidden = [
@@ -27,5 +29,10 @@ class Recipe extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

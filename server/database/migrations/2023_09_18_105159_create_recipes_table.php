@@ -16,14 +16,16 @@ return new class extends Migration
             $table->string('title');
             $table->longText('description');
             $table->string('time');
-            $table->string('category');
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->index('category_id');
             $table->string('difficulty');
             $table->longText('ingredients');
             $table->longText('preparation');
             $table->string('country');
             $table->string('image')->nullable();
             $table->timestamps();
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('privacy', ['public', 'private'])->default('public');
         });

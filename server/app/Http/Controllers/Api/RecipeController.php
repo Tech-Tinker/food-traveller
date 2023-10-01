@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Recipe;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ class RecipeController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'time' => 'required|string',
-            'category' => 'required|string',
+            'category_id' => 'required',
             'difficulty' => 'required|string',
             'ingredients' => 'required|string',
             'preparation' => 'required|string',
@@ -59,7 +60,7 @@ class RecipeController extends Controller
         $recipe->title = $request->title;
         $recipe->description = $request->description;
         $recipe->time = $request->time;
-        $recipe->category = $request->category;
+        $recipe->category_id = $request->category_id;
         $recipe->difficulty = $request->difficulty;
         $recipe->ingredients = $request->ingredients;
         $recipe->preparation = $request->preparation;
@@ -143,7 +144,7 @@ class RecipeController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'time' => 'required|string',
-            'category' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
             'difficulty' => 'required|string',
             'ingredients' => 'required|string',
             'preparation' => 'required|string',
@@ -158,9 +159,15 @@ class RecipeController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
+        $category = Category::find($request->input('category_id'));
+
+        if (!$category) {
+            return response()->json(['error' => 'La categoría no se encontró'], 404);
+        }
         // Actualiza los campos de la receta
         $recipe->fill($request->all());
 
+        $recipe->category_id = $request->input('category_id');
         // Maneja la actualización de la imagen si se proporciona
         // if ($request->hasFile('image')) {
         // Elimina la imagen anterior si existe
