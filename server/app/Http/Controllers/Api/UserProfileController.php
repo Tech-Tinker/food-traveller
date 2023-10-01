@@ -27,21 +27,29 @@ class UserProfileController extends Controller
         }
     }
 
-    // Método para actualizar el perfil de usuario
     public function update(Request $request)
     {
         $user = $request->user();
 
         if ($user) {
+            if ($request->user_id) {
+                return response()->json(['error' => 'Solicitud inválida'], 400);
+            }
             $request->validate([
-                'user_name' => 'string|max:255',
-                'description' => 'string',
-                'profile_image' => 'string',
-                'birthdate' => 'string',
-                'country' => 'string',
-                'interests' => 'string',
-                'culinary_experience' => 'string',
+                'user_name' => 'nullable|string|max:255',
+                'description' => 'nullable|string',
+                'profile_image' => 'nullable|string',
+                'birthdate' => 'nullable|string',
+                'country' => 'nullable|string',
+                'interests' => 'nullable|string',
+                'culinary_experience' => 'nullable|string',
             ]);
+
+            $profile = $user->profile;
+
+            if (!$profile) {
+                return response()->json(['error' => 'Perfil no encontrado'], 404);
+            }
 
             $profileData = [
                 'user_name' => $request->input('user_name'),
@@ -58,20 +66,50 @@ class UserProfileController extends Controller
             //     $profileData['profile_image'] = $imagePath;
             // }
 
-            if ($user->profile) {
-                $user->profile->update($profileData);
-            } else {
-                $user->profile()->create($profileData);
-            }
+            $profile->update($profileData);
 
-            // Actualizar también el nombre en el modelo User
             if ($request->input('user_name')) {
                 $user->update(['name' => $request->input('user_name')]);
             }
 
-            return response()->json(['message' => 'Perfil actualizado con éxito']);
+            return response()->json([
+                'message' => 'Perfil actualizado con éxito'
+            ], 200);
         } else {
-            return response()->json(['message' => 'Usuario no autenticado'], 401);
+            return response()->json([
+                'message' => 'Usuario no autenticado'
+            ], 401);
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        $user = $request->user();
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Usuario no autenticado'
+            ], 401);
+        }
+
+        if ($user) {
+            if ($request->user_id) {
+                return response()->json(['error' => 'Solicitud inválida'], 400);
+            }
+
+            $profile = $user->profile;
+
+            if (!$profile) {
+                return response()->json(['error' => 'El perfil no se encontró'], 404);
+            }
+
+            $profile->delete();
+
+            $user->delete();
+
+            return response()->json([
+                'message' => 'Perfil y usuario eliminado con éxito'
+            ], 200);
         }
     }
 }

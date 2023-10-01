@@ -16,10 +16,6 @@ class RecipeTest extends TestCase
 
     use RefreshDatabase;
 
-    /**
-     * Should test guest get all recipes
-     */
-
     public function test_user_no_auth_can_see_all_recipes(): void
     {
         $this->withExceptionHandling();
@@ -27,8 +23,6 @@ class RecipeTest extends TestCase
         Recipe::factory()->create();
 
         $response = $this->getJson('/api/recipes');
-
-        // dd($response->getContent());
 
         $response->assertJsonStructure([
             '*' => [
@@ -49,10 +43,6 @@ class RecipeTest extends TestCase
         $response->assertJsonCount(1);
     }
 
-    /**
-     * Should test user get all recipes
-     */
-
     public function test_user_can_see_all_recipes(): void
     {
         $this->withExceptionHandling();
@@ -69,10 +59,6 @@ class RecipeTest extends TestCase
 
         $response->assertJsonCount(1);
     }
-
-    /**
-     * Should test a user can post a recipe.
-     */
 
     public function test_user_can_create_a_recipe()
     {
@@ -95,10 +81,6 @@ class RecipeTest extends TestCase
 
         $response->assertStatus(201);
     }
-
-    /**
-     * Should test a user can not post a recipe with missing fields.
-     */
 
     public function test_user_cannot_post_recipe_with_missing_fields(): void
     {
@@ -125,10 +107,6 @@ class RecipeTest extends TestCase
             ]]);
     }
 
-    /**
-     * Should test a user no auth can not post a recipe.
-     */
-
     public function test_user_no_auth_cannot_post_recipe(): void
     {
         $data = [
@@ -148,10 +126,6 @@ class RecipeTest extends TestCase
         $response->assertStatus(401);
     }
 
-    /**
-     * Should test a user can see the recipes.
-     */
-
     public function test_user_can_see_their_recipes(): void
     {
         $this->withExceptionHandling();
@@ -166,10 +140,6 @@ class RecipeTest extends TestCase
 
         $response->assertJsonCount(1);
     }
-
-    /**
-     * Should test a user can see the recipe details.
-     */
 
     public function test_user_can_see_recipe_details(): void
     {
@@ -200,10 +170,6 @@ class RecipeTest extends TestCase
             ]);
     }
 
-    /**
-     * Should test a user can not see the recipe details of a non existent recipe.
-     */
-
     public function test_user_can_not_see_a_nonexistent_recipe(): void
     {
         $this->withExceptionHandling();
@@ -217,10 +183,6 @@ class RecipeTest extends TestCase
         $response->assertStatus(404);
     }
 
-    /**
-     * Should test a user no auth can not see the recipes details.
-     */
-
     public function test_user_no_auth_cannot_see_recipe_details(): void
     {
         $this->withExceptionHandling();
@@ -231,10 +193,6 @@ class RecipeTest extends TestCase
 
         $response->assertStatus(401);
     }
-
-    /**
-     * Should test a user can update the own recipes.
-     */
 
     public function test_user_can_update_own_recipe()
     {
@@ -259,10 +217,6 @@ class RecipeTest extends TestCase
 
         $response->assertStatus(201);
     }
-
-    /**
-     * Should test a user can not update a nonexistent recipe.
-     */
 
     public function test_user_cannot_update_nonexistent_recipe(): void
     {
@@ -297,10 +251,6 @@ class RecipeTest extends TestCase
         $response->assertStatus(401);
     }
 
-    /**
-     * Should test a user can not update recipe with missing fields.
-     */
-
     public function test_user_cannot_update_recipe_with_missing_fields(): void
     {
         $user = User::factory()->create();
@@ -328,10 +278,6 @@ class RecipeTest extends TestCase
             ]]);
     }
 
-    /**
-     * Should test a user can not update the recipe of another user.
-     */
-
     public function test_user_cannot_update_recipe_of_another_user(): void
     {
         $user = User::factory()->create();
@@ -357,10 +303,6 @@ class RecipeTest extends TestCase
         $response->assertStatus(403);
     }
 
-    /**
-     * Should test a user can remove the recipes.
-     */
-
     public function test_user_can_delete_own_recipe()
     {
         $user = User::factory()->create();
@@ -373,10 +315,6 @@ class RecipeTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /**
-     * Should test a user can not remove a nonexistent recipe.
-     */
-
     public function test_user_cannot_delete_nonexistent_recipe(): void
     {
         $user = User::factory()->create();
@@ -387,10 +325,6 @@ class RecipeTest extends TestCase
         $response->assertStatus(404);
     }
 
-    /**
-     * Should test a user no auth can not remove a recipe.
-     */
-
     public function test_user_no_auth_cannot_delete_recipe(): void
     {
         $recipe = Recipe::factory()->create();
@@ -399,10 +333,6 @@ class RecipeTest extends TestCase
 
         $response->assertStatus(401);
     }
-
-    /**
-     * Should test a user can not remove a recipe of another user.
-     */
 
     public function test_user_cannot_delete_recipe_of_another_user(): void
     {
