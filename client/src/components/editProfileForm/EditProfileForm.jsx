@@ -3,8 +3,8 @@ import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 import Button from '../button/Button';
 import { updateProfile, getUserById } from '../../services/ApiServices';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import  { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
+import  { faPlus }  from '@fortawesome/free-solid-svg-icons';
 import './EditProfileForm.css';
 
 const EditProfileForm = () => {
