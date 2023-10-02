@@ -5,6 +5,7 @@ namespace Tests\Feature\Api;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Api\Validator;
+use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Recipe;
 use App\Models\User;
@@ -20,7 +21,11 @@ class RecipeTest extends TestCase
     {
         $this->withExceptionHandling();
 
-        Recipe::factory()->create();
+        $category = Category::factory()->create();
+
+        Recipe::factory()->create([
+            'category_id' => $category->id,
+        ]);
 
         $response = $this->getJson('/api/recipes');
 
@@ -31,7 +36,7 @@ class RecipeTest extends TestCase
                 'title',
                 'description',
                 'time',
-                'category',
+                'category_id',
                 'difficulty',
                 'ingredients',
                 'preparation',
@@ -49,7 +54,11 @@ class RecipeTest extends TestCase
 
         $user = User::factory()->create();
 
-        Recipe::factory()->create();
+        $category = Category::factory()->create();
+
+        Recipe::factory()->create([
+            'category_id' => $category->id,
+        ]);
 
         Sanctum::actingAs($user, ['*']);
 
@@ -132,7 +141,11 @@ class RecipeTest extends TestCase
 
         $user = User::factory()->create();
 
-        Recipe::factory()->create();
+        $category = Category::factory()->create();
+
+        Recipe::factory()->create([
+            'category_id' => $category->id,
+        ]);
 
         Sanctum::actingAs($user, ['*']);
 
@@ -146,7 +159,13 @@ class RecipeTest extends TestCase
         $this->withExceptionHandling();
 
         $user = User::factory()->create();
-        $recipe = Recipe::factory()->create(['user_id' => $user->id]);
+
+        $category = Category::factory()->create();
+
+        $recipe = Recipe::factory()->create([
+            'user_id' => $user->id,
+            'category_id' => $category->id,
+        ]);
 
         Sanctum::actingAs($user);
 
@@ -159,7 +178,7 @@ class RecipeTest extends TestCase
                     'title' => $recipe->title,
                     'description' => $recipe->description,
                     'time' => $recipe->time,
-                    'category' => $recipe->category,
+                    'category_id' => $recipe->category_id,
                     'difficulty' => $recipe->difficulty,
                     'ingredients' => $recipe->ingredients,
                     'preparation' => $recipe->preparation,
@@ -175,7 +194,12 @@ class RecipeTest extends TestCase
         $this->withExceptionHandling();
 
         $user = User::factory()->create();
-        $recipe = Recipe::factory()->create(['user_id' => $user->id]);
+        $category = Category::factory()->create();
+
+        $recipe = Recipe::factory()->create([
+            'category_id' => $category->id,
+            'user_id' => $user->id,
+        ]);
 
         Sanctum::actingAs($user);
         $response = $this->getJson('api/recipe/999');
@@ -187,7 +211,11 @@ class RecipeTest extends TestCase
     {
         $this->withExceptionHandling();
 
-        $recipe = Recipe::factory()->create();
+        $category = Category::factory()->create();
+
+        $recipe = Recipe::factory()->create([
+            'category_id' => $category->id,
+        ]);
 
         $response = $this->getJson("api/recipe/{$recipe->id}");
 
@@ -199,18 +227,23 @@ class RecipeTest extends TestCase
         $user = User::factory()->create();
         Sanctum::actingAs($user, ['*']);
 
-        $recipe = Recipe::factory()->create(['user_id' => $user->id]);
+        $category = Category::factory()->create();
+
+        $recipe = Recipe::factory()->create([
+            'category_id' => $category->id,
+            'user_id' => $user->id,
+        ]);
 
         $newData = [
-            'title' => 'Receta actualizada',
+            'title' => 'Mafe',
             'description' => 'Un estofado de verduras...',
             'time' => '1:00',
-            'category' => 'entrante',
+            'category' => $category->name,
             'difficulty' => 'fácil',
             'ingredients' => '1 zanahoria grande...',
             'preparation' => '1. Triturar los tomates...',
             'country' => 'USA',
-            'image' => 'url',
+            'image' => 'url'
         ];
 
         $response = $this->putJson("api/recipe/{$recipe->id}", $newData);
@@ -233,13 +266,13 @@ class RecipeTest extends TestCase
         $response->assertStatus(404);
     }
 
-    /**
-     * Should test a user no auth can not update recipe.
-     */
-
     public function test_user_no_auth_cannot_update_recipe(): void
     {
-        $recipe = Recipe::factory()->create();
+        $category = Category::factory()->create();
+
+        $recipe = Recipe::factory()->create([
+            'category_id' => $category->id,
+        ]);
 
         $newData = [
             'title' => 'Receta actualizada',
@@ -256,7 +289,12 @@ class RecipeTest extends TestCase
         $user = User::factory()->create();
         Sanctum::actingAs($user, ['*']);
 
-        $recipe = Recipe::factory()->create(['user_id' => $user->id]);
+        $category = Category::factory()->create();
+
+        $recipe = Recipe::factory()->create([
+            'category_id' => $category->id,
+            'user_id' => $user->id,
+        ]);
 
         $newData = [
             'title' => 'Receta',
@@ -284,13 +322,18 @@ class RecipeTest extends TestCase
         Sanctum::actingAs($user, ['*']);
 
         $otherUser = User::factory()->create();
-        $recipe = Recipe::factory()->create(['user_id' => $otherUser->id]);
+        $category = Category::factory()->create();
+
+        $recipe = Recipe::factory()->create([
+            'category_id' => $category->id,
+            'user_id' => $otherUser->id,
+        ]);
 
         $newData = [
             'title' => 'Receta actualizada',
             'description' => 'Un estofado de verduras...',
             'time' => '1:00',
-            'category' => 'entrante',
+            'category' => $category->name,
             'difficulty' => 'fácil',
             'ingredients' => '1 zanahoria grande...',
             'preparation' => '1. Triturar los tomates...',
@@ -308,7 +351,12 @@ class RecipeTest extends TestCase
         $user = User::factory()->create();
         Sanctum::actingAs($user, ['*']);
 
-        $recipe = Recipe::factory()->create(['user_id' => $user->id]);
+        $category = Category::factory()->create();
+
+        $recipe = Recipe::factory()->create([
+            'category_id' => $category->id,
+            'user_id' => $user->id,
+        ]);
 
         $response = $this->deleteJson("api/recipe/{$recipe->id}");
 
@@ -327,7 +375,11 @@ class RecipeTest extends TestCase
 
     public function test_user_no_auth_cannot_delete_recipe(): void
     {
-        $recipe = Recipe::factory()->create();
+        $category = Category::factory()->create();
+
+        $recipe = Recipe::factory()->create([
+            'category_id' => $category->id,
+        ]);
 
         $response = $this->deleteJson("api/recipe/{$recipe->id}");
 
@@ -340,7 +392,12 @@ class RecipeTest extends TestCase
         Sanctum::actingAs($user, ['*']);
 
         $otherUser = User::factory()->create();
-        $recipe = Recipe::factory()->create(['user_id' => $otherUser->id]);
+        $category = Category::factory()->create();
+
+        $recipe = Recipe::factory()->create([
+            'category_id' => $category->id,
+            'user_id' => $otherUser->id,
+        ]);
 
         $response = $this->deleteJson("api/recipe/{$recipe->id}");
 

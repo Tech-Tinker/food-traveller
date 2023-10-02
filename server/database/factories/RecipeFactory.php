@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +21,7 @@ class RecipeFactory extends Factory
             'title' => fake()->title(),
             'description' => fake()->paragraph(),
             'time' => fake()->numberBetween(1, 10),
-            'category' => fake()->word(),
+            'category_id' => 1,
             'difficulty' => fake()->word(),
             'ingredients' => fake()->text(),
             'preparation' => fake()->text(),
