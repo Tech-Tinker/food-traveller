@@ -27,7 +27,6 @@ const RecipeDetails = () => {
 
     fetchData();
   }, [id]);
-  // console.log(show.username);
 
   const { title, image, country, difficulty, time, description, ingredients, preparation } = show.recipe || {}
 

@@ -10,7 +10,6 @@ const Profilerecipes = () => {
     const location = useLocation();
     const currentPage = location.pathname;
     const userId = Number(localStorage.getItem('auth_user_id'));
-    // console.log(userId);
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
@@ -18,7 +17,6 @@ const Profilerecipes = () => {
 
             .then((response) => {
                 setRecipes(response.data);
-                // console.log(response);
             })
             .catch((error) => {
                 console.error(error);

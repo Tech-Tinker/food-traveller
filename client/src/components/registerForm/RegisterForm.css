@@ -82,14 +82,14 @@
     
     .terminos-y-condiciones-container {
         display: flex;
-        align-items: flex-start; /* Alinea los elementos en la parte superior verticalmente */
-        justify-content: space-between; /* Distribuye los elementos de manera uniforme en el espacio disponible */
+        align-items: flex-start; 
+        justify-content: space-between; 
         margin: center;
         width: 95%;
     }
     
     .checkbox {
-        margin: 4px; /* Elimina el margen superior del input para alinear con la parte superior */
+        margin: 4px; 
         width: 22px;
         height: 22px;
         fill: var(--color-background);
