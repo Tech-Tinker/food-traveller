@@ -18,6 +18,7 @@ const RecipeDetails = () => {
       try {
         const showData = await getRecipeById(id);
         setShow(showData);
+        // console.log(show.category);
       } catch (error) {
         console.error('Error fetching show info:', error);
       }
@@ -29,6 +30,8 @@ const RecipeDetails = () => {
   const { title, image, country, difficulty, time, description, ingredients, preparation } = show.recipe || {}
 
   const username = show.username || ''
+
+  const category = show.category || ''
 
   return (
     <div className="padding">
@@ -52,6 +55,9 @@ const RecipeDetails = () => {
         <div className="d-flex justify-content-around align-items-center gap">
           <img src={Watch} alt=""></img>
           <p className="m-0">{time}</p>
+        </div>
+        <div className="d-flex justify-content-around align-items-center gap">
+          <p className="m-0">{show.category}</p>
         </div>
       </div>
       <div className="show-text">

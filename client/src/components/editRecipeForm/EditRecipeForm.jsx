@@ -52,7 +52,7 @@ const EditRecipeForm = () => {
             };
 
             const response = await updateRecipe(id, data);
-            console.log(response);
+            // console.log(response);
             if (response.errors) {
                 console.log('Errors:', response.errors);
             } else {
@@ -71,7 +71,7 @@ const EditRecipeForm = () => {
         const fetchData = async () => {
             try {
                 const data = await getRecipeById(id);
-                // console.log(data.recipe);
+                // console.log(data.category);
                 // console.log(data.recipe.user_id, userId, data.recipe.user_id !== userId)
                 if (data.recipe.user_id !== userId) {
                     navigate('/')
@@ -80,7 +80,7 @@ const EditRecipeForm = () => {
                 setTitle(data.recipe.title)
                 setDescription(data.recipe.description)
                 setTime(data.recipe.time)
-                setCategory(data.recipe.category)
+                setCategory(data.category)
                 setDifficulty(data.recipe.difficulty)
                 setIngredients(data.recipe.ingredients)
                 setPreparation(data.recipe.preparation)
@@ -161,8 +161,8 @@ const EditRecipeForm = () => {
                     >
                         <option value="Selecciona">Selecciona</option>
                         <option value="Entrante">Entrante</option>
-                        <option value="Primer Plato">Primer Plato</option>
-                        <option value="Segundo Plato">Segundo Plato</option>
+                        <option value="Primero">Primero</option>
+                        <option value="Segundo">Segundo</option>
                         <option value="Postre">Postre</option>
                     </select>
                 </div>

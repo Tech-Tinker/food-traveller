@@ -30,12 +30,12 @@ const User = () => {
       {profileData ? (
         <div>
           <img src={Foto} alt="Foto de perfil" className="rounded-circle bg-secondary mx-4" />
-          <p className="mx-4 font-weight-bold">Nombre: {user_name}</p>
-          <p className="mx-4 font-weight-bold">Dscripción: {description}</p>
-          <p className="mx-4 font-weight-bold">Fecha de Nacimiento: {birthdate}</p>
-          <p className="mx-4 font-weight-bold">País: {country}</p>
-          <p className="mx-4 font-weight-bold">Me interesa la comida: {interests}</p>
-          <p className="mx-4 font-weight-bold">En la cocina me considero: {culinary_experience}</p>
+          <p className="mx-4 font-weight-bold">{user_name}</p>
+          <p className="mx-4 font-weight-bold">{country}</p>
+          <p className="mx-4 font-weight-bold">{description}</p>
+          {/* <p className="mx-4 font-weight-bold">Fecha de Nacimiento: {birthdate}</p> */}
+          <p className="mx-4 font-weight-bold">Me interesa...{interests}</p>
+          <p className="mx-4 font-weight-bold">En la cocina me considero... {culinary_experience}</p>
         </div>
       ) : (
         <div>Cargando perfil de usuario...</div>

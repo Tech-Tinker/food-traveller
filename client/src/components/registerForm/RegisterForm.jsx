@@ -48,8 +48,11 @@ const RegisterForm = () => {
                 if (res.data.status === 200) {
                     localStorage.setItem('auth_token', res.data.token);
                     localStorage.setItem('auth_name', res.data.username);
+                    localStorage.setItem('auth_user_id', res.data.id);
                     swal("Success", res.data.message, "success");
-                    navigate('/login');
+                    // navigate('/login');
+                    navigate('/');
+
                 } else {
                     setRegisterInput({ ...registerInput, error_list: res.data.validation_errors });
                 }

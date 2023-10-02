@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import swal from 'sweetalert';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../button/Button';
 import { updateProfile, getUserById } from '../../services/ApiServices';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -167,8 +167,19 @@ const EditProfileForm = () => {
                     />
                 </div>
 
+                <div className="mb-3">
+                    <label htmlFor="culinary_experience" className="text-black bold">En la cocina me considero:</label>
+                    <input
+                        onChange={(e) => setCulinary_experience(e.target.value)}
+                        value={culinary_experience}
+                        type="text"
+                        name="culinary_experience"
+                        className="border-1px-solid-gray text-left w-100 p-2 rounded-2"
+                    />
+                </div>
+
                 <div className="d-flex justify-content-between">
-                    <Button backgroundColorClass="bttn-primary" id="cancelButton" text="Cancelar" />
+                    <Link to={`/profile`}><Button backgroundColorClass="bttn-primary" id="cancelButton" text="Cancelar" /></Link>
                     <Button backgroundColorClass="bttn-secondary" id="aceptButton" text="Añadir" />
                 </div>
             </form>
