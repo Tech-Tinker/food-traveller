@@ -41,7 +41,7 @@ const EditProfileForm = () => {
                 console.log('Errors:', response.errors);
             } else {
                 swal('Success', response.message, 'success');
-                navigate(`/`);
+                navigate(`/profile`);
             }
         } catch (error) {
             console.error('Error updating recipe:', error);
