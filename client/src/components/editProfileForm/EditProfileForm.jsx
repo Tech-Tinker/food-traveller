@@ -29,7 +29,7 @@ const EditProfileForm = () => {
         "Vegana",
         "Vegetariana",
         "Tradicional",
-        "Mediterranea",
+        "Mediterránea",
     ];
 
     const handleAvatarChange = (e) => {
@@ -49,8 +49,16 @@ const EditProfileForm = () => {
         }
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const isInterestSelected = (interest) => {
+        return selectedInterests.includes(interest);
+    };
+
+    const handleCancel = () => {
+        // Redirige al usuario a la página de perfil sin realizar ningún cambio.
+        navigate(`/perfil`);
+    };
+
+    const handleSaveChanges = async () => {
         try {
             const data = {
                 user_name,
@@ -66,8 +74,9 @@ const EditProfileForm = () => {
             if (response.errors) {
                 console.log('Errors:', response.errors);
             } else {
+                // Muestra un mensaje de éxito y redirige al usuario a la página de perfil.
                 swal('Success', response.message, 'success');
-                navigate(`/`);
+                navigate(`/profile`);
             }
         } catch (error) {
             console.error('Error updating profile:', error);
@@ -92,9 +101,9 @@ const EditProfileForm = () => {
         fetchData();
     }, []);
 
-    return (
+     return (
         <div className="d-flex flex-column align-items-center mt-5">
-            <form onSubmit={handleSubmit} className="edit-profile-form rounded-1" style={{ margin: '20px' }}>
+            <form className="edit-profile-form rounded-1" style={{ margin: '20px' }}>
                 <h2 className="text-center bold mb-3" style={{ color: '#2F93A9' }}>
                     Editar Perfil
                 </h2>
@@ -315,23 +324,26 @@ const EditProfileForm = () => {
                     </select>
                 </div>
 
-                <div className="mb-3 text-center">
+                <div className="mb-3">
                     <label htmlFor="interests" className="text-black bold">Me interesa la comida...</label>
                     <br />
                     <div className="interests-container">
                         {interests.map((interest) => (
-                            <button
+                            <button 
                                 key={interest}
                                 type="button"
-                                className="interest-button"
+                                className={`interest-button ${isInterestSelected(interest) ? 'selected' : ''
+                                    }`}
+                                onClick={() => handleInterestClick(interest)}
                                 style={{
+                                    backgroundColor: isInterestSelected(interest) ? '#3093A9' : 'white',
+                                    color: isInterestSelected(interest) ? 'white' : 'black',
+                                    border: '1px solid gray',
+                                    borderRadius: '5px',
                                     width: '108px',
                                     height: '31px',
-                                    backgroundColor: 'white',
-                                    border: '1px solid #B4B4B4',
-                                    margin: '2px',
+                                    margin: '5px',
                                 }}
-                                onClick={() => handleInterestClick(interest)}
                             >
                                 {interest}
                             </button>
@@ -339,9 +351,26 @@ const EditProfileForm = () => {
                     </div>
                 </div>
 
+                <div className="mb-3">
+                    <label htmlFor="cooking_experience" className="text-black bold">En la cocina me considero...</label>
+                    <br />
+                    <select
+                        onChange={(e) => setCulinary_experience(e.target.value)}
+                        value={culinary_experience}
+                        name="cooking_experience"
+                        className="border-1px-solid-gray w-100 p-2 rounded-2"
+                        style={{ borderColor: "#B4B4B4" }}
+                    >
+                        <option value="Experto sibarita">Experto sibarita</option>
+                        <option value="Experto tradicional">Experto tradicional</option>
+                        <option value="Intermedio">Intermedio</option>
+                        <option value="Principiante">Principiante</option>
+                    </select>
+                </div>
+
                 <div className="d-flex justify-content-between">
-                    <Button backgroundColorClass="bttn-primary" id="cancelButton" text="Cancelar" />
-                    <Button backgroundColorClass="bttn-secondary" id="aceptButton" text="Añadir" />
+                    <Button backgroundColorClass="bttn-primary" id="cancelButton" text="Cancelar" onClick={handleCancel} />
+                    <Button backgroundColorClass="bttn-secondary" id="aceptButton" text="Añadir" onClick={handleSaveChanges} />
                 </div>
             </form>
         </div>
@@ -349,9 +378,3 @@ const EditProfileForm = () => {
 };
 
 export default EditProfileForm;
-
-
-
-
-
-
