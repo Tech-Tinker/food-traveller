@@ -1,23 +1,62 @@
-.menu-hamburguesa {
-    position: relative;
+ .menu-hamburguesa {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%; /* Abarca la mitad de la página */
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+     z-index: 7000;
+
+    justify-content: center;
   }
   
   .menu-icon {
     cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 5%;
   }
   
   .menu-list {
-    position: absolute;
-    left: -120px;
-    background-color: #ffffff; 
-    width: 180px;
-    height: 200px;
+    background-color: white;
+    z-index: 7000;
+    width: 100%;
+    height: 425px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+    
+  }
+  .icon-list-menu{
+   
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+    
+  }
+  .linea-horizontal{
+    width: 50%;
+    margin: 1rem 0;
+    color: inherit;
+    border: 0;
+    border-top: var(--bs-border-width) solid;
+    opacity: .25;
+    text-align: center;
   }
   
   .list-item {
     list-style: none;
     margin: 0;
     padding: 0;
+    text-align: center;
+    display: flex;
+  align-items: center
   }
   
   .link-style-none {
@@ -25,5 +64,6 @@
     color: #333;
     display:block;
     margin-bottom: 20px; 
+    display: flex;
+    align-items: center;
   }
-  
