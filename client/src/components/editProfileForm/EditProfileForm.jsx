@@ -55,7 +55,7 @@ const EditProfileForm = () => {
 
     const handleCancel = () => {
         // Redirige al usuario a la página de perfil sin realizar ningún cambio.
-        navigate(`/perfil`);
+        navigate(`/profile`);
     };
 
     const handleSaveChanges = async () => {
