@@ -13,6 +13,16 @@
     color: var(--color-text);
 }
 
+@media (min-width: 400px) {
+
+    form.d-flex {
+    width: 40vw;
+    height: 40vh;
+
+    }
+
+}
+
 .label-text{
     color: var(--color-primary);
 }
