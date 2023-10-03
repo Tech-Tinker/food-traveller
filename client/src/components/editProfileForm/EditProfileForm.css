@@ -1,0 +1,46 @@
+.avatar-upload {
+    position: relative;
+    width: 120px; 
+    height: 120px; 
+}
+
+.avatar-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #676565; 
+    color: #fff; 
+    border-radius: 50%; 
+    width: 30px; 
+    height: 30px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.avatar-input {
+    display: none; 
+}
+
+.avatartext{
+    color: #3093A9;
+}
+
+.profil-img{
+    max-width: 120px;
+    max-height: 102px;    
+    width: 'auto';
+    height: 'auto';
+    border-Radius: 50%;
+    object-fit: 'cover';
+}
+
+.interests-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 5px;
+}
+
+
