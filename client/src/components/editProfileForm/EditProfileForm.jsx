@@ -16,8 +16,21 @@ const EditProfileForm = () => {
     const [description, setDescription] = useState('');
     const [birthdate, setBirthdate] = useState('');
     const [country, setCountry] = useState('');
-    const [interests, setInterests] = useState('');
+    const [selectedInterests, setSelectedInterests] = useState([]);
     const [culinary_experience, setCulinary_experience] = useState('');
+
+    const interests = [
+        "Saludable",
+        "Rápida",
+        "Creativa",
+        "Picante",
+        "Especiada",
+        "Asiática",
+        "Vegana",
+        "Vegetariana",
+        "Tradicional",
+        "Mediterranea",
+    ];
 
     const handleAvatarChange = (e) => {
         const selectedAvatar = e.target.files[0];
@@ -25,7 +38,15 @@ const EditProfileForm = () => {
     };
 
     const handleClearImage = () => {
-        setNewProfileImage(null); // No eliminamos la nueva imagen seleccionada al hacer clic en la cámara
+        setNewProfileImage(null);
+    };
+
+    const handleInterestClick = (interest) => {
+        if (selectedInterests.includes(interest)) {
+            setSelectedInterests(selectedInterests.filter((item) => item !== interest));
+        } else {
+            setSelectedInterests([...selectedInterests, interest]);
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -37,7 +58,7 @@ const EditProfileForm = () => {
                 description,
                 birthdate,
                 country,
-                interests,
+                interests: selectedInterests,
                 culinary_experience,
             };
 
@@ -62,7 +83,7 @@ const EditProfileForm = () => {
                 setDescription(data.profile.description);
                 setBirthdate(data.profile.birthdate);
                 setCountry(data.profile.country);
-                setInterests(data.profile.interests);
+                setSelectedInterests(data.profile.interests || []);
                 setCulinary_experience(data.profile.culinary_experience);
             } catch (error) {
                 console.error('Error fetching profile:', error);
@@ -73,7 +94,7 @@ const EditProfileForm = () => {
 
     return (
         <div className="d-flex flex-column align-items-center mt-5">
-            <form onSubmit={handleSubmit} className="edit-profile-form rounded-1">
+            <form onSubmit={handleSubmit} className="edit-profile-form rounded-1" style={{ margin: '20px' }}>
                 <h2 className="text-center bold mb-3" style={{ color: '#2F93A9' }}>
                     Editar Perfil
                 </h2>
@@ -207,20 +228,6 @@ const EditProfileForm = () => {
                 </div>
 
                 <div className="mb-3">
-                    <label htmlFor="user_name" className="text-black bold">
-                        Nombre
-                    </label>
-                    <input
-                        onChange={(e) => setUser_name(e.target.value)}
-                        value={user_name}
-                        type="text"
-                        name="user_name"
-                        className="border-1px-solid-gray text-left w-100 p-2 rounded-2"
-                        placeholder="Nombre"
-                    />
-                </div>
-
-                <div className="mb-3">
                     <label htmlFor="description" className="text-black bold">Descripción</label>
                     <textarea
                         onChange={(e) => setDescription(e.target.value)}
@@ -255,21 +262,81 @@ const EditProfileForm = () => {
                         style={{ borderColor: "#B4B4B4" }}
                     >
                         <option value="">Selecciona un país</option>
-                        <option value="europa">Europa</option>
-                        <option value="america">América del Norte</option>
-                        <option value="americas">América del Sur</option>
+                        <option value="Alemania">Alemania</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Austria">Austria</option>
+                        <option value="Bélgica">Bélgica</option>
+                        <option value="Bolivia">Bolivia</option>
+                        <option value="Brasil">Brasil</option>
+                        <option value="Canadá">Canadá</option>
+                        <option value="Chile">Chile</option>
+                        <option value="China">China</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Corea del Sur">Corea del Sur</option>
+                        <option value="Costa de Marfil">Costa de Marfil</option>
+                        <option value="Costa Rica">Costa Rica</option>
+                        <option value="Cuba">Cuba</option>
+                        <option value="Ecuador">Ecuador</option>
+                        <option value="Egipto">Egipto</option>
+                        <option value="El Salvador">El Salvador</option>
+                        <option value="aEspaña">España</option>
+                        <option value="Estados Unidos">Estados Unidos</option>
+                        <option value="Francia">Francia</option>
+                        <option value="Ghana">Ghana</option>
+                        <option value="Guatemala">Guatemala</option>
+                        <option value="Honduras">Honduras</option>
+                        <option value="Idia">India</option>
+                        <option value="Idonesia">Indonesia</option>
+                        <option value="Italia">Italia</option>
+                        <option value="Japón">Japón</option>
+                        <option value="Kenia">Kenia</option>
+                        <option value="Malasia">Malasia</option>
+                        <option value="Marruecos">Marruecos</option>
+                        <option value="México">México</option>
+                        <option value="aNicaragua">Nicaragua</option>
+                        <option value="aNigeria">Nigeria</option>
+                        <option value="Nueva Zelanda">Nueva Zelanda</option>
+                        <option value="Países Bajos">Países Bajos</option>
+                        <option value="Panamá">Panamá</option>
+                        <option value="Paraguay">Paraguay</option>
+                        <option value="Perú">Perú</option>
+                        <option value="Portugal">Portugal</option>
+                        <option value="Puerto Ricpo">Puerto Rico</option>
+                        <option value="Reino Unido">Reino Unido</option>
+                        <option value="República Dominicana">República Dominicana</option>
+                        <option value="Suiza">Suiza</option>
+                        <option value="Tailandia">Tailandia</option>
+                        <option value="Tanzania">Tanzania</option>
+                        <option value="Uruguay">Uruguay</option>
+                        <option value="Venezuela">Venezuela</option>
+                        <option value="Vietnam">Vietnam</option>
+                        <option value="Uganda">Uganda</option>
                     </select>
                 </div>
 
-                <div className="mb-3">
-                    <label htmlFor="interests" className="text-black bold">Intereses</label>
-                    <input
-                        onChange={(e) => setInterests(e.target.value)}
-                        value={interests}
-                        type="text"
-                        name="interests"
-                        className="border-1px-solid-gray text-left w-100 p-2 rounded-2"
-                    />
+                <div className="mb-3 text-center">
+                    <label htmlFor="interests" className="text-black bold">Me interesa la comida...</label>
+                    <br />
+                    <div className="interests-container">
+                        {interests.map((interest) => (
+                            <button
+                                key={interest}
+                                type="button"
+                                className="interest-button"
+                                style={{
+                                    width: '108px',
+                                    height: '31px',
+                                    backgroundColor: 'white',
+                                    border: '1px solid #B4B4B4',
+                                    margin: '2px',
+                                }}
+                                onClick={() => handleInterestClick(interest)}
+                            >
+                                {interest}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
                 <div className="d-flex justify-content-between">
@@ -282,6 +349,7 @@ const EditProfileForm = () => {
 };
 
 export default EditProfileForm;
+
 
 
 
