@@ -6,6 +6,7 @@ import swal from 'sweetalert';
 import Button from '../button/Button';
 import '../createRecipeForm/CreateRecipeForm.css';
 import { getRecipeById, updateRecipe } from '../../services/ApiServices';
+import './EditRecipeForm.css';
 
 const EditRecipeForm = () => {
 
@@ -97,7 +98,7 @@ const EditRecipeForm = () => {
     return (
         <div className="d-flex flex-column justify-content-around align-items-center display-h">
             <h2 className="p-3 m-0 fw-bold text-center headline-form-color headline-form-size">Editar receta</h2>
-            <form className="d-flex flex-column justify-content-around reg-form" onSubmit={handleSubmit}>
+            <form className="d-flex flex-column justify-content-around reg-form " onSubmit={handleSubmit}>
 
                 <div className="d-flex flex-column">
                     <label htmlFor="title" className="fw-bold label-text text">Título</label>

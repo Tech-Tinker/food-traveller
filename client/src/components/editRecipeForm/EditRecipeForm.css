@@ -1,0 +1,10 @@
+
+@media (min-width: 300px) {
+
+    #edit-form {
+        position: fixed;
+        margin-left: 35vw;
+        margin-top: 30vh;
+        
+    }
+}
