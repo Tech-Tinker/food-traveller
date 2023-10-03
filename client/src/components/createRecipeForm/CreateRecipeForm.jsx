@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 import Button from '../button/Button';
 import '../createRecipeForm/CreateRecipeForm.css';
 import { storeRecipe } from '../../services/ApiServices';
+import CountrySelector from './CountrySelector'; // Asegúrate de que la ruta sea correcta
+
 
 const CreateRecipeForm = () => {
 
@@ -207,6 +209,8 @@ const CreateRecipeForm = () => {
                         className="input-style-1 input-height-1 b-r"
                     />
                 </div>
+                <CountrySelector />
+
 
                 {
                     errors.country && <div className="error-text text-center">
