@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import swal from 'sweetalert';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../button/Button';
-import { updateProfile, getUserById } from '../../services/ApiServices';
+import { updateProfile, getProfile } from '../../services/ApiServices';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faPlus } from '@fortawesome/free-solid-svg-icons';
 import './EditProfileForm.css';
+// import Foto from '../../assets/Foto.png';
 
 const EditProfileForm = () => {
     const navigate = useNavigate();
@@ -53,28 +54,24 @@ const EditProfileForm = () => {
         return selectedInterests.includes(interest);
     };
 
-    const handleCancel = () => {
-        // Redirige al usuario a la página de perfil sin realizar ningún cambio.
-        navigate(`/profile`);
-    };
+    const handleSaveChanges = async (e) => {
+        e.preventDefault();
 
-    const handleSaveChanges = async () => {
+        const formData = new FormData();
+        formData.append('user_name', user_name);
+        formData.append('profile_image', newProfileImage);
+        formData.append('description', description);
+        formData.append('birthdate', birthdate);
+        formData.append('country', country);
+        formData.append('interests', selectedInterests);
+        formData.append('culinary_experience', culinary_experience);
+
         try {
-            const data = {
-                user_name,
-                profile_image: newProfileImage || profile_image,
-                description,
-                birthdate,
-                country,
-                interests: selectedInterests,
-                culinary_experience,
-            };
-
-            const response = await updateProfile(data);
+            const response = await updateProfile(formData);
+            console.log(response);
             if (response.errors) {
                 console.log('Errors:', response.errors);
             } else {
-                // Muestra un mensaje de éxito y redirige al usuario a la página de perfil.
                 swal('Success', response.message, 'success');
                 navigate(`/profile`);
             }
@@ -86,9 +83,9 @@ const EditProfileForm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await getUserById();
+                const data = await getProfile();
                 setUser_name(data.profile.user_name);
-                setProfile_image(data.profile.profile_image);
+                setProfile_image(data.image_url);
                 setDescription(data.profile.description);
                 setBirthdate(data.profile.birthdate);
                 setCountry(data.profile.country);
@@ -101,9 +98,9 @@ const EditProfileForm = () => {
         fetchData();
     }, []);
 
-     return (
+    return (
         <div className="d-flex flex-column align-items-center mt-5">
-            <form className="edit-profile-form rounded-1" style={{ margin: '20px' }}>
+            <form className="edit-profile-form rounded-1" style={{ margin: '20px' }} onSubmit={handleSaveChanges}>
                 <h2 className="text-center bold mb-3" style={{ color: '#2F93A9' }}>
                     Editar Perfil
                 </h2>
@@ -194,7 +191,7 @@ const EditProfileForm = () => {
                                 }}
                             >
                                 <img
-                                    src={URL.createObjectURL(profile_image)}
+                                    src={profile_image}
                                     alt="Avatar"
                                     className="selected-image"
                                     style={{
@@ -216,6 +213,7 @@ const EditProfileForm = () => {
                                     justifyContent: 'center',
                                 }}
                             >
+                                {/* <img src={Foto} alt='img'></img> */}
                                 <FontAwesomeIcon icon={faPlus} style={{ fontSize: '36px' }} />
                             </label>
                         )}
@@ -329,7 +327,7 @@ const EditProfileForm = () => {
                     <br />
                     <div className="interests-container">
                         {interests.map((interest) => (
-                            <button 
+                            <button
                                 key={interest}
                                 type="button"
                                 className={`interest-button ${isInterestSelected(interest) ? 'selected' : ''
@@ -369,8 +367,8 @@ const EditProfileForm = () => {
                 </div>
 
                 <div className="d-flex justify-content-between">
-                    <Button backgroundColorClass="bttn-primary" id="cancelButton" text="Cancelar" onClick={handleCancel} />
-                    <Button backgroundColorClass="bttn-secondary" id="aceptButton" text="Añadir" onClick={handleSaveChanges} />
+                    <Link to={`/profile`}><Button backgroundColorClass="bttn-primary" id="cancelButton" text="Cancelar" /></Link>
+                    <Button backgroundColorClass="bttn-secondary" id="aceptButton" text="Añadir" />
                 </div>
             </form>
         </div>

@@ -1,44 +1,57 @@
 
 import React, { useEffect, useState } from 'react';
-import Foto from '../../assets/Ellipse 35.png';
-import { getUserById } from '../../services/ApiServices';
+import Foto from '../../assets/Foto.png';
+import { getProfile } from '../../services/ApiServices';
 
 
 const User = () => {
 
   const [profileData, setProfileData] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true)
     const getUserProfile = async () => {
       try {
-        const response = await getUserById();
+        const response = await getProfile();
 
         setProfileData(response);
       } catch (error) {
         console.error(error);
         throw new Error('No se pudo obtener el perfil de usuario');
       }
+
+      setIsLoading(false)
     };
     getUserProfile();
   }, []);
 
-  // eslint-disable-next-line
-  const { user_name, profile_image, description, birthdate, country, interests, culinary_experience } = profileData.profile || {}
+  const { user_name, description, country, interests, culinary_experience } = profileData.profile || {}
 
   return (
     <div>
-      {profileData ? (
-        <div>
-          <img src={Foto} alt="Foto de perfil" className="rounded-circle bg-secondary mx-4" />
-          <p className="mx-4 font-weight-bold">{user_name}</p>
-          <p className="mx-4 font-weight-bold">{country}</p>
-          <p className="mx-4 font-weight-bold">{description}</p>
-          {/* <p className="mx-4 font-weight-bold">Fecha de Nacimiento: {birthdate}</p> */}
-          <p className="mx-4 font-weight-bold">Me interesa...{interests}</p>
-          <p className="mx-4 font-weight-bold">En la cocina me considero... {culinary_experience}</p>
-        </div>
-      ) : (
+      {isLoading ? (
         <div>Cargando perfil de usuario...</div>
+      ) : (
+        <div className="d-flex flex-column justify-content-start">
+          <div
+            className="avatar-upload mx-auto b-r50 of-hidden b-green">
+            <div
+              className="d-flex justify-content-center align-items-center selected-image-container">
+              <img
+                src={profileData.image_url || Foto}
+                alt="Avatar"
+                className="selected-image b-r50" />
+            </div>
+          </div>
+          <div className="d-flex flex-column justify-content-center align-items-start p-4">
+            <p className="fw-bold">{user_name}</p>
+            <p className="">{country}</p>
+            <p className="">{description}</p>
+            <p className="">Me interesa la comida...{interests}</p>
+            <p className="">En la cocina me considero... {culinary_experience}</p>
+          </div>
+        </div>
       )}
     </div>
   );
