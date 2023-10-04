@@ -18,7 +18,7 @@ const urnLogin = 'api/login';
 export async function register($data) {
     try {
         const outcome = await axios.post(urnRegister, $data) // Añade axios.post
-        return outcome.data; 
+        return outcome.data;
     } catch (error) {
         throw error;
     }
@@ -27,7 +27,7 @@ export async function register($data) {
 export async function login($data) {
     try {
         const res = await axios.post(urnLogin, $data);
-        return res.data; 
+        return res.data;
     } catch (error) {
         throw error;
     }

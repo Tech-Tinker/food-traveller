@@ -22,6 +22,11 @@ class RecipeController extends Controller
         } else {
             $recipes = Recipe::all();
         }
+
+        foreach ($recipes as $recipe) {
+            $recipe->image_url = asset('storage/' . $recipe->image);
+        }
+
         return response()->json($recipes);
     }
 
@@ -45,7 +50,10 @@ class RecipeController extends Controller
         }
 
         // Obtiene la imagen subida y la almacena en el directorio RecipeImages
-        // $imagePath = $request->file('image')->store('RecipeImages', 'public');
+        $imagePath = $request->file('image')->store('images', 'public');
+
+        // Construye la URL de la imagen
+        $imageUrl = asset('storage/' . $imagePath);
 
         // Verifica si la categoría ya existe
         $category = Category::where('name', $request->category)->first();
@@ -66,7 +74,7 @@ class RecipeController extends Controller
         $recipe->ingredients = $request->ingredients;
         $recipe->preparation = $request->preparation;
         $recipe->country = $request->country;
-        $recipe->image = $request->image;
+        $recipe->image = $imagePath;
 
         $request->user()->recipe()->save($recipe);
 
@@ -76,6 +84,7 @@ class RecipeController extends Controller
             'id' => $recipe->id,
             'user_id' => $recipe->user_id,
             'username' => $username,
+            'image_url' => $imageUrl,
             'message' => '¡Genial! Acabas de publicar tu receta.'
         ], 201);
     }
@@ -95,13 +104,17 @@ class RecipeController extends Controller
         $username = $recipe->user->name;
         $category = $recipe->category;
 
+        // Obtener la URL de la imagen
+        $imageUrl = asset('storage/' . $recipe->image);
+
         unset($recipe->user);
         unset($recipe->category);
 
         return response()->json([
             'recipe' => $recipe,
             'username' => $username,
-            'category' => $category->name
+            'category' => $category->name,
+            'image_url' => $imageUrl
         ]);
     }
 
@@ -131,8 +144,10 @@ class RecipeController extends Controller
             'ingredients' => 'required|string',
             'preparation' => 'required|string',
             'country' => 'required|string',
-            'image' => 'required|string',
+            // 'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ];
+
+        // print_r($request->all());
 
         $validator = Validator::make($request->all(), $rules);
 
@@ -151,24 +166,22 @@ class RecipeController extends Controller
         $recipe->category_id = $category->id;
 
         // Maneja la actualización de la imagen si se proporciona
-        // if ($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            // Elimina la imagen anterior si existe
+            if ($recipe->image) {
+                Storage::disk('public')->delete($recipe->image);
+            }
 
-        // Elimina la imagen anterior si existe
-        // if ($recipe->image) {
-        //     Storage::disk('public')->delete($recipe->image);
-        // }
-
-        // Almacena la nueva imagen
-        //     $imagePath = $request->file('image')->store('RecipeImages', 'public');
-        //     $recipe->image = $imagePath;
-        // }
+            $recipe->image = $imagePath;
+        }
 
         $recipe->save();
 
         return response()->json([
             'recipe' => $recipe,
             'message' => '¡Genial! Acabas de editar tu receta.'
-        ], 201);
+        ], 200);
     }
 
     public function destroy(Request $request, $id)
@@ -189,12 +202,12 @@ class RecipeController extends Controller
         }
 
         // Elimina la imagen asociada a la receta si existe
-        // if ($recipe->image) {
-        //     Storage::disk('public')->delete($recipe->image);
-        // }
+        if ($recipe->image) {
+            Storage::disk('public')->delete($recipe->image);
+        }
 
         $recipe->delete();
 
-        return response()->json(['message' => 'Receta eliminada con éxito']);
+        return response()->json(['message' => 'Receta eliminada con éxito'], 200);
     }
 }

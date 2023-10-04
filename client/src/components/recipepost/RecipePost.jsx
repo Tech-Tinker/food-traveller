@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import './RecipePost.css'
 
 const RecipePost = ({ recipe }) => {
-  const { title, category, country, image } = recipe;
+  const { title, category, country, image_url } = recipe;
 
   return (
     <div className="recipe-post">
       <Link to={`/recipe/${recipe.id}`} className="link-style-none">
         <div className='image-container'>
-          <img src={image} alt={title} />
+          <img src={image_url} alt={title} />
         </div>
         <div className='date-container'>
           <h3>{title}</h3>

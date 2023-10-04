@@ -16,6 +16,7 @@ const Home = () => {
       .then((response) => {
         // Actualiza el estado 'recipes' con los datos recibidos de la API
         setRecipes(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         console.error('Error al obtener las recetas:', error);

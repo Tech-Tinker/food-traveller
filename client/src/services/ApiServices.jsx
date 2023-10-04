@@ -18,7 +18,11 @@ export async function getRecipeById(id) {
 
 export async function storeRecipe(data) {
     try {
-        const response = await axios.post(`${endpoint}/recipe`, data);
+        const response = await axios.post(`${endpoint}/recipe`, data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
         return response.data;
     } catch (error) {
         throw error;
@@ -27,7 +31,11 @@ export async function storeRecipe(data) {
 
 export async function updateRecipe(id, data) {
     try {
-        const response = await axios.put(`${endpoint}/recipe/${id}`, data);
+        const response = await axios.post(`${endpoint}/recipe/${id}`, data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
         return response.data;
     } catch (error) {
         throw error;

@@ -33,20 +33,20 @@ const CreateRecipeForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const data = {
-                title,
-                description,
-                time,
-                category,
-                difficulty,
-                ingredients,
-                preparation,
-                country,
-                image,
-            };
 
-            const response = await storeRecipe(data);
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('time', time);
+        formData.append('category', category);
+        formData.append('difficulty', difficulty);
+        formData.append('ingredients', ingredients);
+        formData.append('preparation', preparation);
+        formData.append('country', country);
+        formData.append('image', image);
+
+        try {
+            const response = await storeRecipe(formData);
 
             if (response.errors) {
                 console.log('Errors:', response.errors);
@@ -57,15 +57,15 @@ const CreateRecipeForm = () => {
         } catch (error) {
             console.error('Error creating recipe:', error);
             const errors = error.response.data.errors
+
             setErrors({ title: errors.title && errors.title[0], description: errors.description && errors.description[0], time: errors.time && errors.time[0], category: errors.category && errors.category[0], difficulty: errors.difficulty && errors.difficulty[0], ingredients: errors.ingredients && errors.ingredients[0], preparation: errors.preparation && errors.preparation[0], country: errors.country && errors.country[0], image: errors.image && errors.image[0], });
         }
-        // console.log(errors);
     };
 
     return (
         <div className="d-flex flex-column justify-content-around align-items-center display-h">
             <h2 className="p-3 m-0 fw-bold text-center headline-form-color headline-form-size">Nueva receta</h2>
-            <form className="d-flex flex-column justify-content-around reg-form" onSubmit={handleSubmit}>
+            <form className="create-form" onSubmit={handleSubmit} encType="multipart/form-data">
 
                 <div className="d-flex flex-column">
                     <label htmlFor="title" className="fw-bold label-text text">Título</label>
@@ -217,9 +217,8 @@ const CreateRecipeForm = () => {
                 <div className="d-flex flex-column">
                     <label htmlFor="image" className="fw-bold label-text text">Imagen</label>
                     <input
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
-                        type="text"
+                        onChange={(e) => setImage(e.target.files[0])}
+                        type="file"
                         name="image"
                         className="input-style-1 input-height-1 b-r"
                     />

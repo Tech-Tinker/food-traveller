@@ -74,6 +74,9 @@ class RecipeTest extends TestCase
         $user = User::factory()->create();
         Sanctum::actingAs($user, ['*']);
 
+        Storage::fake('public');
+        $file = UploadedFile::fake()->image('recipe.jpg');
+
         $data = [
             'title' => 'Mafe',
             'description' => 'Un estofado de verduras...',
@@ -83,7 +86,7 @@ class RecipeTest extends TestCase
             'ingredients' => '1 zanahoria grande...',
             'preparation' => '1. Triturar los tomates...',
             'country' => 'USA',
-            'image' => 'url',
+            'image' => $file,
         ];
 
         $response = $this->postJson('api/recipe', $data);
@@ -248,7 +251,7 @@ class RecipeTest extends TestCase
 
         $response = $this->putJson("api/recipe/{$recipe->id}", $newData);
 
-        $response->assertStatus(201);
+        $response->assertStatus(200);
     }
 
     public function test_user_cannot_update_nonexistent_recipe(): void
