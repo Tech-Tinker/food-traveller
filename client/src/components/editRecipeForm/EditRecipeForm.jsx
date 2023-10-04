@@ -5,6 +5,7 @@ import swal from 'sweetalert';
 import Button from '../button/Button';
 import '../createRecipeForm/CreateRecipeForm.css';
 import { getRecipeById, updateRecipe } from '../../services/ApiServices';
+import './EditRecipeForm.css';
 
 const EditRecipeForm = () => {
 

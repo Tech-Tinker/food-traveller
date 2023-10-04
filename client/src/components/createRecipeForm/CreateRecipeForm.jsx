@@ -65,7 +65,7 @@ const CreateRecipeForm = () => {
     return (
         <div className="d-flex flex-column justify-content-around align-items-center display-h">
             <h2 className="p-3 m-0 fw-bold text-center headline-form-color headline-form-size">Nueva receta</h2>
-            <form className="d-flex flex-column justify-content-around reg-form" onSubmit={handleSubmit} encType="multipart/form-data">
+            <form className="create-form" onSubmit={handleSubmit} encType="multipart/form-data">
 
                 <div className="d-flex flex-column">
                     <label htmlFor="title" className="fw-bold label-text text">Título</label>

@@ -69,7 +69,7 @@ const LoginForm = () => {
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
       <h2 className="p-5 fw-bold text-center headline-form-color headline-form-size">A dónde quieres viajar hoy?</h2>
-      <form onSubmit={handleOnSubmit} className="d-flex flex-column justify-content-around reg-form gap1">
+      <form onSubmit={handleOnSubmit} className="form-login">
         <div className="d-flex flex-column">
           <label htmlFor="email" className="fw-bold fs-5 label-text text">Email</label>
           <input type="email" name="email" onChange={handleOnChange} value={login.email} className="input-none-style border-b"></input>
