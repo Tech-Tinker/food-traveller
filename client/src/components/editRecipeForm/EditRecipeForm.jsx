@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom';
-// eslint-disable-next-line
 import swal from 'sweetalert';
 import Button from '../button/Button';
 import '../createRecipeForm/CreateRecipeForm.css';
@@ -36,23 +35,32 @@ const EditRecipeForm = () => {
     const navigate = useNavigate()
     const { id } = useParams()
 
+    const handleFileInputChange = (e) => {
+        const selectedFile = e.target.files[0];
+
+        setImage(selectedFile);
+
+        // console.log('Archivo seleccionado:', selectedFile);
+
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const data = {
-                title,
-                description,
-                time,
-                category,
-                difficulty,
-                ingredients,
-                preparation,
-                country,
-                image,
-            };
 
-            const response = await updateRecipe(id, data);
-            // console.log(response);
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('time', time);
+        formData.append('category', category);
+        formData.append('difficulty', difficulty);
+        formData.append('ingredients', ingredients);
+        formData.append('preparation', preparation);
+        formData.append('country', country);
+        formData.append('image', image);
+
+        try {
+            const response = await updateRecipe(id, formData);
+            console.log(response);
             if (response.errors) {
                 console.log('Errors:', response.errors);
             } else {
@@ -64,19 +72,17 @@ const EditRecipeForm = () => {
             const errors = error.response.data.errors
             setErrors({ title: errors.title && errors.title[0], description: errors.description && errors.description[0], time: errors.time && errors.time[0], category: errors.category && errors.category[0], difficulty: errors.difficulty && errors.difficulty[0], ingredients: errors.ingredients && errors.ingredients[0], preparation: errors.preparation && errors.preparation[0], country: errors.country && errors.country[0], image: errors.image && errors.image[0], });
         }
-        // console.log(errors);
     };
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await getRecipeById(id);
-                // console.log(data.category);
-                // console.log(data.recipe.user_id, userId, data.recipe.user_id !== userId)
                 if (data.recipe.user_id !== userId) {
                     navigate('/')
                     return
                 }
+                // console.log(data);
                 setTitle(data.recipe.title)
                 setDescription(data.recipe.description)
                 setTime(data.recipe.time)
@@ -85,7 +91,8 @@ const EditRecipeForm = () => {
                 setIngredients(data.recipe.ingredients)
                 setPreparation(data.recipe.preparation)
                 setCountry(data.recipe.country)
-                setImage(data.recipe.image)
+                // setImage(data.recipe.image)
+                // console.log(data.recipe.image);
             } catch (error) {
                 console.error('Error fetching recipe by ID:', error);
             }
@@ -97,7 +104,7 @@ const EditRecipeForm = () => {
     return (
         <div className="d-flex flex-column justify-content-around align-items-center display-h">
             <h2 className="p-3 m-0 fw-bold text-center headline-form-color headline-form-size">Editar receta</h2>
-            <form className="d-flex flex-column justify-content-around reg-form" onSubmit={handleSubmit}>
+            <form className="d-flex flex-column justify-content-around reg-form" onSubmit={handleSubmit} encType="multipart/form-data">
 
                 <div className="d-flex flex-column">
                     <label htmlFor="title" className="fw-bold label-text text">Título</label>
@@ -248,11 +255,13 @@ const EditRecipeForm = () => {
 
                 <div className="d-flex flex-column">
                     <label htmlFor="image" className="fw-bold label-text text">Imagen</label>
+
                     <input
-                        value={image}
-                        onChange={(e) => setImage(e.target.value)}
-                        type="text"
+                        // value={image}
+                        onChange={handleFileInputChange}
+                        type="file"
                         name="image"
+                        accept="image/*"
                         className="input-style-1 input-height-1 b-r"
                     />
                 </div>

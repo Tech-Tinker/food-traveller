@@ -22,10 +22,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/profile', [UserProfileController::class, 'show']);
     Route::put('/edit-profile', [UserProfileController::class, 'update']);
     Route::delete('/profile', [UserProfileController::class, 'destroy']);
-    Route::post('/recipe', [RecipeController::class, 'show']);
+    // Route::get('/recipe', [RecipeController::class, 'show']);
     Route::post('/recipe', [RecipeController::class, 'store']);
     Route::get('/recipe/{id}', [RecipeController::class, 'show']);
-    Route::put('/recipe/{id}', [RecipeController::class, 'update']);
+    Route::post('/recipe/{id}', [RecipeController::class, 'update']);
     Route::delete('/recipe/{id}', [RecipeController::class, 'destroy']);
 
     // Ruta para obtener el perfil del usuario

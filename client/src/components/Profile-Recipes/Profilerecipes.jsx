@@ -17,6 +17,7 @@ const Profilerecipes = () => {
 
             .then((response) => {
                 setRecipes(response.data);
+                // console.log(response.data);
             })
             .catch((error) => {
                 console.error(error);
@@ -34,7 +35,7 @@ const Profilerecipes = () => {
                             <div className="row no-gutters">
                                 <Link to={`/recipe/${recipe.id}`} className="link-style-none">
                                     <div className="col-md-4">
-                                        <img src={recipe.image} alt={recipe.title} className="card-img" style={{ width: '11rem', height: '11rem' }} />
+                                        <img src={recipe.image_url} alt={recipe.title} className="card-img" style={{ width: '11rem', height: '11rem' }} />
                                     </div>
                                 </Link>
                                 <div className="col-md-8">

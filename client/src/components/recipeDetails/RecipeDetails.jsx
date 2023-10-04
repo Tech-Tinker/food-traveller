@@ -17,8 +17,9 @@ const RecipeDetails = () => {
     const fetchData = async () => {
       try {
         const showData = await getRecipeById(id);
+        // console.log(showData.image_url);
         setShow(showData);
-        // console.log(show.category);
+        // console.log(show);
       } catch (error) {
         console.error('Error fetching show info:', error);
       }
@@ -27,11 +28,13 @@ const RecipeDetails = () => {
     fetchData();
   }, [id]);
 
-  const { title, image, country, difficulty, time, description, ingredients, preparation } = show.recipe || {}
+  const { title, country, difficulty, time, description, ingredients, preparation } = show.recipe || {}
 
   const username = show.username || ''
 
   const category = show.category || ''
+
+  const image = show.image_url
 
   return (
     <div className="padding">
@@ -57,7 +60,7 @@ const RecipeDetails = () => {
           <p className="m-0">{time}</p>
         </div>
         <div className="d-flex justify-content-around align-items-center gap">
-          <p className="m-0">{show.category}</p>
+          <p className="m-0">{category}</p>
         </div>
       </div>
       <div className="show-text">
