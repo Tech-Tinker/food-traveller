@@ -20,7 +20,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/users', UserController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [UserProfileController::class, 'show']);
-    Route::put('/edit-profile', [UserProfileController::class, 'update']);
+    Route::post('/edit-profile', [UserProfileController::class, 'update']);
     Route::delete('/profile', [UserProfileController::class, 'destroy']);
     // Route::get('/recipe', [RecipeController::class, 'show']);
     Route::post('/recipe', [RecipeController::class, 'store']);
