@@ -53,7 +53,9 @@ const MenuBurguer = ({ currentPage }) => {
                   <span className="mx-2">Mi Perfil</span>
                 </Link>
               </div>
+
               <hr class="linea-horizontal link-style-none"></hr>
+              
               <div className="list-item" onClick={handleLogout}>
                 <img  src={Logout} alt="Cerrar Sesión" className="icon-list-menu" />
                 <span className="mx-2">Cerrar Sesión</span>
