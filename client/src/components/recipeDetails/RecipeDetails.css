@@ -43,3 +43,12 @@
     padding-bottom: 3rem;
     text-align: justify;
 }
+
+.recipe-foto {
+    width: 340px;
+    height: 200px;
+}
+
+.star-rating {
+    background-color: #53A991;
+}
