@@ -12,7 +12,7 @@ class Recipe extends Model
         'title',
         'description',
         'time',
-        'çategory_id',
+        'category_id',
         'difficulty',
         'ingredients',
         'preparation',
