@@ -8,6 +8,8 @@ import EditRecipe from "../pages/editRecipe/EditRecipe";
 import EditProfile from "../pages/editProfile/EditProfile";
 import Profile from "../pages/profile/Profile";
 import { PrivateRoutes } from "../utils/PrivateRoutes";
+import Result from "../pages/result/Result";
+
 
 const router = createBrowserRouter([
     {
@@ -48,6 +50,11 @@ const router = createBrowserRouter([
     {
         path: '/edit-profile',
         element: <PrivateRoutes><EditProfile /></PrivateRoutes>
+    },
+
+    {
+        path: '/result',
+        element: <PrivateRoutes><Result /></PrivateRoutes>
     }
 
 ]);
