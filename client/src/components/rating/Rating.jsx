@@ -24,7 +24,6 @@ function Rating() {
   };
 
   const handleSubmit = () => {
-  
     fetch("/api/rating", {
       method: "POST",
       headers: {
@@ -40,6 +39,7 @@ function Rating() {
         console.error("Error:", error);
       });
   };
+  
 
   const maxStars = 5;
 

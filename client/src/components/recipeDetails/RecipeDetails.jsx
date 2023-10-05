@@ -30,7 +30,7 @@ const RecipeDetails = () => {
     fetchData();
   }, [id]);
 
-  const { title, country, difficulty, time, description, ingredients, preparation } = show.recipe || {}
+  const { title, country, difficulty, time, description, ingredients, preparation, image_url } = show.recipe || {};
 
   const username = show.username || ''
 
@@ -46,7 +46,7 @@ const RecipeDetails = () => {
       <Rating />
 
       <h1 className="fw-bold">{title}</h1>
-      <img src={image} alt="" className="pt-2 pb-2 w-image" />
+      <img src={image_url} alt="" className="pt-2 pb-2 w-image" />
       <div className='recipe-foto'> FOTO de la comida!</div>
       <h2>{username}</h2>
       <p className="country">{country}</p>
