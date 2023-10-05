@@ -6,7 +6,6 @@ import { updateProfile, getProfile } from '../../services/ApiServices';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faPlus } from '@fortawesome/free-solid-svg-icons';
 import './EditProfileForm.css';
-// import Foto from '../../assets/Foto.png';
 
 const EditProfileForm = () => {
     const navigate = useNavigate();
@@ -213,7 +212,6 @@ const EditProfileForm = () => {
                                     justifyContent: 'center',
                                 }}
                             >
-                                {/* <img src={Foto} alt='img'></img> */}
                                 <FontAwesomeIcon icon={faPlus} style={{ fontSize: '36px' }} />
                             </label>
                         )}

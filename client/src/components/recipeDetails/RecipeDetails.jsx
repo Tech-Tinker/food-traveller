@@ -17,9 +17,7 @@ const RecipeDetails = () => {
     const fetchData = async () => {
       try {
         const showData = await getRecipeById(id);
-        // console.log(showData.image_url);
         setShow(showData);
-        // console.log(show);
       } catch (error) {
         console.error('Error fetching show info:', error);
       }
