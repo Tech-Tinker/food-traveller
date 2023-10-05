@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../../components/header/Header';
-import Nav from '../../components/nav/Nav';
 import Search from '../../components/search/Search';
+import RecipePost from '../../components/recipepost/RecipePost'; 
 
 const Result = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -14,14 +14,13 @@ const Result = () => {
     <div>
       <Header />
       <Search onSearch={handleSearch} />
-      <ul>
+      <div className="recipe-posts">
         {searchResults.map((result) => (
-          <li key={result.id}>{result.title}</li>
+          <RecipePost key={result.id} recipe={result} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
 
 export default Result;
-

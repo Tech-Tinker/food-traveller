@@ -23,9 +23,10 @@ class SearchController extends Controller
                             ->orWhere('difficulty', 'LIKE', "%$search%")
                             ->orWhere('ingredients', 'LIKE', "%$search%")
                             ->orWhere('preparation', 'LIKE', "%$search%")
-                            ->paginate(10); 
+                            ->orWhere('location', 'LIKE', "%$search%")
+                            ->paginate(5); 
         } else {
-            $result = collect(); // Usar collect() en lugar de collect() para evitar errores de referencia indefinida
+            $result = collect(); 
         }
         return view('recipes.search', compact('result', 'search'));
     }
