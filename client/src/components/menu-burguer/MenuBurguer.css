@@ -8,10 +8,15 @@
   
   .menu-list {
     position: absolute;
-    left: -120px;
-    background-color: #ffffff; 
-    width: 180px;
-    height: 200px;
+    z-index: 1;
+    left: -330px;
+    top: -30px;
+    background-color: #ffffff;
+    width: 390px;
+    height: 250px;
+    margin: 0;
+    padding: 5rem;
+    text-align: center;
   }
   
   .list-item {
@@ -27,3 +32,11 @@
     margin-bottom: 20px; 
   }
   
+  .close-icon{
+    position: absolute;
+    z-index: 2;
+    top: 0px;
+    right: 3px;
+    cursor: pointer;
+    font-size: 24px;
+  }

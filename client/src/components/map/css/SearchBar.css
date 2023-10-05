@@ -1,11 +1,16 @@
 .search-map{
-    margin-top: 6vw;
-    margin: center;
-    margin-left: 22vw;
-    border-right: none;
-    border-radius: 5px 0px 0px 5px;
-    border: 2px solid #D9D9D9;
-    box-shadow: 0px 2px #BB9B8E;
+    width: 19.25rem;
+    height: 2.68rem;
+    padding: 0 1rem;
+    border-radius: 0.68rem;
+    border: 0.5px solid #D9D9D9;
+    box-shadow: 0px 4px 4px 0px rgba(187, 155, 142, 0.50);
+}
+
+.container-search-map{
+    margin: 1.5rem;
+    position: relative;
+    text-align: center;
 }
 
 @media (min-width: 400px) {
@@ -18,17 +23,16 @@
 }
 
 .btn-search{
-    align-items: center;
-    border: 2px solid #D9D9D9;
-    border-left:none ;
-    border-radius: 0px 5px 5px 0px;
+    position: absolute;
+    right: 2rem;
+    top: 0.5rem;
+    border: none;
+    cursor: pointer;
     background-color: white;
-    box-shadow: 0px 2px #BB9B8E;
 }
 
 .btn-search img{
-    width: 15px;
-    margin-top: -3px;
+    width: 1.25rem;
 }
 
 .continent-list{

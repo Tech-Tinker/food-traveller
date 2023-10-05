@@ -76,18 +76,19 @@ function SearchBar({ map, setMarker }) {
   };
 
   return (
-    <div className='container-search-map'>
-      <input
-        className='search-map'
-        type="text"
-        placeholder="Buscar sitio, comida, ect..."
-        value={searchQuery}
-        onChange={(e) => handleSearch(e.target.value)}
-      />
-
-      <button className='btn-search' onClick={() => handleSearch(searchQuery)}>
-        <img src={Search} alt="Search" />
-      </button>
+    <>
+      <div className='container-search-map'>
+        <input
+          className='search-map'
+          type="text"
+          placeholder="Buscar por país o receta..."
+          value={searchQuery}
+          onChange={(e) => handleSearch(e.target.value)}
+        />
+        <button className='btn-search' onClick={() => handleSearch(searchQuery)}>
+          <img src={Search} alt="Search" />
+        </button>
+      </div>
 
       <div>
         <ul>
@@ -104,7 +105,8 @@ function SearchBar({ map, setMarker }) {
       </div>
 
       <ViewOptions onViewOptionChange={flyToContinent} />
-    </div>
+
+    </>
   );
 }
 

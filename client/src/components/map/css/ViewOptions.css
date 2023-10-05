@@ -1,13 +1,14 @@
 .view-options{
-    margin-top: 7%;
+    padding: 0.5rem;
     justify-content: space-around;
     display: flex;
+    background-color: #FCFAF6;
 }
 
 
 .view-option-btn{
     border: none;
-    background: white;
+    background: #FCFAF6;
     border-radius: 10px;
 }
 
