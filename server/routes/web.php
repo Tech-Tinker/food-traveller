@@ -28,6 +28,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/search', 'SearchController@search')->name('search');
 Route::post('/recipe-reviews', [RecipeReviewController::class, 'store']);
-Route::get('/api/csrf-token', function() {
-    return response()->json(['token' => csrf_token()]);
-});
+// Route::get('/api/csrf-token', function() {
+//     return response()->json(['token' => csrf_token()]);
+// });
