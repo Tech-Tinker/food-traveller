@@ -249,7 +249,7 @@ class RecipeTest extends TestCase
             'image' => 'url'
         ];
 
-        $response = $this->putJson("api/recipe/{$recipe->id}", $newData);
+        $response = $this->postJson("api/recipe/{$recipe->id}", $newData);
 
         $response->assertStatus(200);
     }
@@ -264,7 +264,7 @@ class RecipeTest extends TestCase
             'description' => 'Un estofado de verduras...',
         ];
 
-        $response = $this->putJson('api/recipe/999', $newData);
+        $response = $this->postJson('api/recipe/999', $newData);
 
         $response->assertStatus(404);
     }
@@ -282,7 +282,7 @@ class RecipeTest extends TestCase
             'description' => 'Un estofado de verduras...',
         ];
 
-        $response = $this->putJson("api/recipe/{$recipe->id}", $newData);
+        $response = $this->postJson("api/recipe/{$recipe->id}", $newData);
 
         $response->assertStatus(401);
     }
@@ -311,7 +311,7 @@ class RecipeTest extends TestCase
             'image' => 'url',
         ];
 
-        $response = $this->putJson("api/recipe/{$recipe->id}", $newData);
+        $response = $this->postJson("api/recipe/{$recipe->id}", $newData);
 
         $response->assertStatus(422)
             ->assertJson(['errors' => [
@@ -344,7 +344,7 @@ class RecipeTest extends TestCase
             'image' => 'url',
         ];
 
-        $response = $this->putJson("api/recipe/{$recipe->id}", $newData);
+        $response = $this->postJson("api/recipe/{$recipe->id}", $newData);
 
         $response->assertStatus(403);
     }

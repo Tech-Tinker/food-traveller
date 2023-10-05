@@ -70,7 +70,7 @@ class UserProfileTest extends TestCase
             "culinary_experience" => "Experto sibarita"
         ];
 
-        $response = $this->putJson("api/edit-profile", $newData);
+        $response = $this->postJson("api/edit-profile", $newData);
 
         $response->assertStatus(200);
     }
@@ -84,7 +84,7 @@ class UserProfileTest extends TestCase
             'description' => 'Soy amigo de un amigo',
         ];
 
-        $response = $this->putJson("api/edit-profile", $newData);
+        $response = $this->postJson("api/edit-profile", $newData);
 
         $response->assertStatus(401);
     }

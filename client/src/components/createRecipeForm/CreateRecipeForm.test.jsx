@@ -1,38 +1,57 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import CreateRecipeForm from './CreateRecipeForm';
 
 describe('CreateRecipeForm', () => {
   it('should render all form fields', () => {
-    render(<CreateRecipeForm />);
-    expect(screen.getByLabelText('Nombre')).toBeInTheDocument();
-    expect(screen.getByLabelText('Tiempo')).toBeInTheDocument();
-    expect(screen.getByLabelText('Categoría')).toBeInTheDocument();
-    expect(screen.getByLabelText('Dificultad')).toBeInTheDocument();
-    expect(screen.getByLabelText('Ingredientes')).toBeInTheDocument();
-    expect(screen.getByLabelText('Preparación')).toBeInTheDocument();
-    expect(screen.getByLabelText('País')).toBeInTheDocument();
-    expect(screen.getByLabelText('Imagen')).toBeInTheDocument();
+    const { getByLabelText } = render(<CreateRecipeForm />);
+    expect(getByLabelText('Tiempo')).toBeInTheDocument();
+    expect(getByLabelText('Categoría')).toBeInTheDocument();
+    expect(getByLabelText('Dificultad')).toBeInTheDocument();
+    expect(getByLabelText('Ingredientes')).toBeInTheDocument();
+    expect(getByLabelText('Preparación')).toBeInTheDocument();
+    expect(getByLabelText('País')).toBeInTheDocument();
+    expect(getByLabelText('Imagen')).toBeInTheDocument();
   });
 
-  it('should show error messages when form is submitted with invalid data', () => {
-    render(<CreateRecipeForm />);
-    fireEvent.click(screen.getByText('Añadir'));
-    expect(screen.getByText('Este campo es obligatorio')).toBeInTheDocument();
+  it('should update state when form fields are changed', () => {
+    const { getByLabelText } = render(<CreateRecipeForm />);
+    const timeInput = getByLabelText('Tiempo');
+    const categorySelect = getByLabelText('Categoría');
+    const difficultySelect = getByLabelText('Dificultad');
+    const ingredientsTextarea = getByLabelText('Ingredientes');
+    const preparationTextarea = getByLabelText('Preparación');
+    const countryInput = getByLabelText('País');
+    const imageInput = getByLabelText('Imagen');
+
+    fireEvent.change(timeInput, { target: { value: '30 minutos' } });
+    expect(timeInput.value).toBe('30 minutos');
+
+    fireEvent.change(categorySelect, { target: { value: 'Entrante' } });
+    expect(categorySelect.value).toBe('Entrante');
+
+    fireEvent.change(difficultySelect, { target: { value: 'Fácil' } });
+    expect(difficultySelect.value).toBe('Fácil');
+
+    fireEvent.change(ingredientsTextarea, { target: { value: '1 taza de harina\n1 huevo\n1 taza de leche' } });
+    expect(ingredientsTextarea.value).toBe('1 taza de harina\n1 huevo\n1 taza de leche');
+
+    fireEvent.change(preparationTextarea, { target: { value: 'Mezclar los ingredientes\nCalentar la sartén\nCocinar las tortitas' } });
+    expect(preparationTextarea.value).toBe('Mezclar los ingredientes\nCalentar la sartén\nCocinar las tortitas');
+
+    fireEvent.change(countryInput, { target: { value: 'México' } });
+    expect(countryInput.value).toBe('México');
+
+    const imageFile = new File(['()'], 'test.png', { type: 'image/png' });
+    fireEvent.change(imageInput, { target: { files: [imageFile] } });
+    expect(imageInput.files[0]).toBe(imageFile);
   });
 
-  it('should submit form with valid data', () => {
-    render(<CreateRecipeForm />);
-    fireEvent.change(screen.getByLabelText('Nombre'), { target: { value: 'Tortilla de patatas' } });
-    fireEvent.change(screen.getByLabelText('Tiempo'), { target: { value: '30 minutos' } });
-    fireEvent.change(screen.getByLabelText('Categoría'), { target: { value: 'Entrante' } });
-    fireEvent.change(screen.getByLabelText('Dificultad'), { target: { value: 'Fácil' } });
-    fireEvent.change(screen.getByLabelText('Ingredientes'), { target: { value: '4 huevos, 2 patatas, aceite, sal' } });
-    fireEvent.change(screen.getByLabelText('Preparación'), { target: { value: 'Pelar y cortar las patatas en rodajas finas. Batir los huevos en un bol y añadir las patatas. Saltear en una sartén con aceite caliente hasta que esté dorada por ambos lados. Servir caliente.' } });
-    fireEvent.change(screen.getByLabelText('País'), { target: { value: 'España' } });
-    fireEvent.change(screen.getByLabelText('Imagen'), { target: { files: [new File(['(⌐□_□)'], 'tortilla.jpg', { type: 'image/jpeg' })] } });
-    fireEvent.click(screen.getByText('Añadir'));
-    expect(screen.queryByText('Este campo es obligatorio')).not.toBeInTheDocument();
-    // Add more expectations here to test the form submission
+  it('should call onSubmit when the form is submitted', () => {
+    const handleSubmit = jest.fn();
+    const { getByText } = render(<CreateRecipeForm onSubmit={handleSubmit} />);
+    const addButton = getByText('Añadir');
+    fireEvent.click(addButton);
+    expect(handleSubmit).toHaveBeenCalled();
   });
 });

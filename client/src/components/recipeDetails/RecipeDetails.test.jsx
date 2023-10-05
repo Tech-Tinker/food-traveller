@@ -1,4 +1,7 @@
-import {  screen } from '@testing-library/react';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter, Route } from 'react-router-dom';
+import RecipeDetails from './RecipeDetails';
 import { getRecipeById } from '../../services/ApiServices';
 
 jest.mock('../../services/ApiServices');
@@ -7,7 +10,6 @@ describe('RecipeDetails', () => {
   const mockRecipe = {
     recipe: {
       title: 'Mock Recipe',
-      image: 'mock-image.jpg',
       country: 'Mock Country',
       difficulty: 'Easy',
       time: '30 minutes',
@@ -17,56 +19,59 @@ describe('RecipeDetails', () => {
     },
     username: 'Mock User',
     category: 'Mock Category',
+    image_url: 'https://mockimage.com',
   };
 
   beforeEach(() => {
     getRecipeById.mockResolvedValue(mockRecipe);
-
   });
 
   afterEach(() => {
     jest.resetAllMocks();
   });
 
-  it('should render recipe details', async () => {
+  it('renders the recipe details', async () => {
+    render(
+      <MemoryRouter initialEntries={[`/recipe/${mockRecipe.id}`]}>
+        <Route path="/recipe/:id">
+          <RecipeDetails />
+        </Route>
+      </MemoryRouter>
+    );
 
-    expect(getRecipeById).toHaveBeenCalledWith(mockRecipe.id);
-    expect(getRecipeById).toHaveBeenCalledTimes(1);
-
-    await screen.findByText(mockRecipe.recipe.title);
-    expect(screen.getByText(mockRecipe.recipe.title)).toBeInTheDocument();
     expect(screen.getByAltText('Go back icon')).toBeInTheDocument();
-    expect(screen.getByAltText('Go back icon')).toHaveAttribute('src', 'back.svg');
-    expect(screen.getByAltText('Mock Recipe')).toBeInTheDocument();
-    expect(screen.getByAltText('Mock Recipe')).toHaveAttribute('src', 'mock-image.jpg');
-    expect(screen.getByText('Mock User')).toBeInTheDocument();
-    expect(screen.getByText('Mock Country')).toBeInTheDocument();
-    expect(screen.getByText('Easy')).toBeInTheDocument();
-    expect(screen.getByText('30 minutes')).toBeInTheDocument();
-    expect(screen.getByText('Mock Category')).toBeInTheDocument();
-    expect(screen.getByText('Mock description')).toBeInTheDocument();
+    expect(await screen.findByText(mockRecipe.recipe.title)).toBeInTheDocument();
+    expect(screen.getByAltText('')).toHaveAttribute('src', mockRecipe.image_url);
+    expect(screen.getByText(mockRecipe.username)).toBeInTheDocument();
+    expect(screen.getByText(mockRecipe.recipe.country)).toBeInTheDocument();
+    expect(screen.getByText(mockRecipe.recipe.difficulty)).toBeInTheDocument();
+    expect(screen.getByText(mockRecipe.recipe.time)).toBeInTheDocument();
+    expect(screen.getByText(mockRecipe.category)).toBeInTheDocument();
+    expect(screen.getByText(mockRecipe.recipe.description)).toBeInTheDocument();
 
+    // Click on the "Ingredientes" button
+    const ingredientsButton = screen.getByText('Ingredientes');
+    ingredientsButton.click();
+    expect(screen.getByText(mockRecipe.recipe.ingredients)).toBeInTheDocument();
 
+    // Click on the "Preparación" button
+    const preparationButton = screen.getByText('Preparación');
+    preparationButton.click();
+    expect(screen.getByText(mockRecipe.recipe.preparation)).toBeInTheDocument();
   });
 
-  it('should render recipe details with ingredients and preparation', async () => {
-    await screen.findByText('Mock description');
+  it('handles errors when fetching the recipe', async () => {
+    const errorMessage = 'Error fetching show info';
+    getRecipeById.mockRejectedValue(new Error(errorMessage));
 
-    expect(screen.getByText('Mock description')).toBeInTheDocument();
-    expect(screen.queryByText('Mock ingredients')).not.toBeInTheDocument();
-    expect(screen.queryByText('Mock preparation')).not.toBeInTheDocument();
-  
+    render(
+      <MemoryRouter initialEntries={[`/recipe/${mockRecipe.id}`]}>
+        <Route path="/recipe/:id">
+          <RecipeDetails />
+        </Route>
+      </MemoryRouter>
+    );
 
-    screen.getByText('Ingredientes').click();
-
-    expect(screen.queryByText('Mock description')).not.toBeInTheDocument();
-    expect(screen.getByText('Mock ingredients')).toBeInTheDocument();
-    expect(screen.queryByText('Mock preparation')).not.toBeInTheDocument();
-
-    screen.getByText('Preparación').click();
-
-    expect(screen.queryByText('Mock description')).not.toBeInTheDocument();
-    expect(screen.queryByText('Mock ingredients')).not.toBeInTheDocument();
-    expect(screen.getByText('Mock preparation')).toBeInTheDocument();
+    expect(await screen.findByText(errorMessage)).toBeInTheDocument();
   });
 });

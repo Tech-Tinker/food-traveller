@@ -26,7 +26,7 @@ class RecipeFactory extends Factory
             'ingredients' => fake()->text(),
             'preparation' => fake()->text(),
             'country' => fake()->text(),
-            'image' => fake()->imageUrl($width = 640, $height = 480),
+            'image' => fake(15)->imageUrl($width = 640, $height = 480),
         ];
     }
 }

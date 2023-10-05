@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './ProfileComponent.css';
-import axios from 'axios';
 import Avatar from '../../assets/Avatar.svg';
 
 const ProfileComponent = () => {

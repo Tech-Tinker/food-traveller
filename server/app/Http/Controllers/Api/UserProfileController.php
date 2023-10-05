@@ -21,9 +21,20 @@ class UserProfileController extends Controller
 
             $profile = $user->profile;
 
-            return response()->json(['profile' => $profile]);
+            if ($profile && $profile->profile_image) {
+                $imageUrl = asset('storage/' . $profile->profile_image);
+            } else {
+                $imageUrl = null;
+            }
+
+            return response()->json([
+                'profile' => $profile,
+                'image_url' => $imageUrl
+            ]);
         } else {
-            return response()->json(['message' => 'Usuario no autenticado'], 401);
+            return response()->json([
+                'message' => 'Usuario no autenticado'
+            ], 401);
         }
     }
 
@@ -36,13 +47,13 @@ class UserProfileController extends Controller
                 return response()->json(['error' => 'Solicitud inválida'], 400);
             }
             $request->validate([
-                'user_name' => 'nullable|string|max:255',
+                'user_name' => 'required|string|max:255',
                 'description' => 'nullable|string',
-                'profile_image' => 'nullable|string',
+                // 'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
                 'birthdate' => 'nullable|string',
-                'country' => 'nullable|string',
-                'interests' => 'nullable|string',
-                'culinary_experience' => 'nullable|string',
+                'country' => 'required|string',
+                'interests' => 'required|string',
+                'culinary_experience' => 'required|string',
             ]);
 
             $profile = $user->profile;
@@ -53,18 +64,23 @@ class UserProfileController extends Controller
 
             $profileData = [
                 'user_name' => $request->input('user_name'),
+                // 'profile_image' => $imagePath,
                 'description' => $request->input('description'),
-                'profile_image' => $request->input('profile_image'),
+                // 'profile_image' => $request->input('profile_image'),
                 'birthdate' => $request->input('birthdate'),
                 'country' => $request->input('country'),
                 'interests' => $request->input('interests'),
                 'culinary_experience' => $request->input('culinary_experience'),
             ];
 
-            // if ($request->hasFile('profile_image')) {
-            //     $imagePath = $request->file('profile_image')->store('profile_images', 'public');
-            //     $profileData['profile_image'] = $imagePath;
-            // }
+
+            if ($request->hasFile('profile_image')) {
+                $imagePath = $request->file('profile_image')->store('profile_images', 'public');
+
+                $profileData['profile_image'] = $imagePath;
+
+                $imageUrl = asset('storage/' . $imagePath);
+            }
 
             $profile->update($profileData);
 
@@ -72,8 +88,11 @@ class UserProfileController extends Controller
                 $user->update(['name' => $request->input('user_name')]);
             }
 
+            $imageUrl = isset($imageUrl) ? $imageUrl : null;
+
             return response()->json([
-                'message' => 'Perfil actualizado con éxito'
+                'message' => 'Perfil actualizado con éxito',
+                'image_url' => $imageUrl
             ], 200);
         } else {
             return response()->json([
@@ -81,6 +100,7 @@ class UserProfileController extends Controller
             ], 401);
         }
     }
+
 
     public function destroy(Request $request)
     {
@@ -103,6 +123,10 @@ class UserProfileController extends Controller
                 return response()->json(['error' => 'El perfil no se encontró'], 404);
             }
 
+            if ($profile->image) {
+                Storage::disk('public')->delete($profile->image);
+            }
+
             $profile->delete();
 
             $user->delete();
@@ -113,4 +137,3 @@ class UserProfileController extends Controller
         }
     }
 }
-

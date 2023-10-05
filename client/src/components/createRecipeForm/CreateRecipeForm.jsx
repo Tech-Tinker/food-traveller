@@ -29,7 +29,15 @@ const CreateRecipeForm = () => {
         country: null,
         image: null
     })
+    const [selectedFile, setSelectedFile] = useState(null);
+
     const navigate = useNavigate()
+
+    const handleImageChange = (e) => {
+        const selectedFile = e.target.files[0];
+        setImage(selectedFile);
+        setSelectedFile(selectedFile);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -216,12 +224,15 @@ const CreateRecipeForm = () => {
 
                 <div className="d-flex flex-column">
                     <label htmlFor="image" className="fw-bold label-text text">Imagen</label>
+                    <input className='select d-active' value='Selecciona' />
                     <input
-                        onChange={(e) => setImage(e.target.files[0])}
+                        onChange={handleImageChange}
                         type="file"
                         name="image"
-                        className="input-style-1 input-height-1 b-r"
+                        accept="image/*"
+                        className="display-none top-40"
                     />
+                    {selectedFile && <p>Archivo seleccionado: {selectedFile.name}</p>}
                 </div>
 
                 {

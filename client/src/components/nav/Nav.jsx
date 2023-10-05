@@ -2,8 +2,8 @@ import React from 'react';
 import './Nav.css';
 import { Link } from 'react-router-dom';
 import Home from '../../assets/Home.svg';
-import Search from '../../assets/search.svg';
-import Create from '../../assets/create.svg';
+import SearchIcon from '../../assets/SearchIcon.svg';
+import Create from '../../assets/Create.svg';
 import Avatar from '../../assets/Avatar.svg';
 
 const Nav = () => {
@@ -14,8 +14,8 @@ const Nav = () => {
         <img src={Home} alt="Home Icon" />
       </Link>
 
-      <Link to="">
-        <img src={Search} alt="Search Icon" />
+      <Link to="/result">
+        <img src={SearchIcon} alt="Search Icon" />
       </Link>
 
       <Link to={'/create-recipe'}>

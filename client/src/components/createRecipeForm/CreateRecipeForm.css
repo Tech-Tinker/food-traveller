@@ -34,6 +34,21 @@
     width: 80%;
 }
 
+.display-none{
+    position: absolute;
+    left: 2.4rem;
+    opacity: 0;
+    width: 100%;
+    cursor: pointer;
+}
+.top-40{
+    top: 40rem;
+}
+
+.d-active{
+    position: relative;
+    display: inline-block;
+}
 @media (min-width: 400px) {
 
     .create-form {

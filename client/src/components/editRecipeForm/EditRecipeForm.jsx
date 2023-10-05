@@ -20,7 +20,7 @@ const EditRecipeForm = () => {
     const [preparation, setPreparation] = useState('')
     const [country, setCountry] = useState('')
     const [image, setImage] = useState('')
-
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const [errors, setErrors] = useState({
         title: null,
@@ -38,11 +38,8 @@ const EditRecipeForm = () => {
 
     const handleFileInputChange = (e) => {
         const selectedFile = e.target.files[0];
-
         setImage(selectedFile);
-
-        // console.log('Archivo seleccionado:', selectedFile);
-
+        setSelectedFile(selectedFile);
     };
 
     const handleSubmit = async (e) => {
@@ -61,7 +58,7 @@ const EditRecipeForm = () => {
 
         try {
             const response = await updateRecipe(id, formData);
-            console.log(response);
+            // console.log(response);
             if (response.errors) {
                 console.log('Errors:', response.errors);
             } else {
@@ -83,7 +80,6 @@ const EditRecipeForm = () => {
                     navigate('/')
                     return
                 }
-                // console.log(data);
                 setTitle(data.recipe.title)
                 setDescription(data.recipe.description)
                 setTime(data.recipe.time)
@@ -92,8 +88,6 @@ const EditRecipeForm = () => {
                 setIngredients(data.recipe.ingredients)
                 setPreparation(data.recipe.preparation)
                 setCountry(data.recipe.country)
-                // setImage(data.recipe.image)
-                // console.log(data.recipe.image);
             } catch (error) {
                 console.error('Error fetching recipe by ID:', error);
             }
@@ -256,15 +250,15 @@ const EditRecipeForm = () => {
 
                 <div className="d-flex flex-column">
                     <label htmlFor="image" className="fw-bold label-text text">Imagen</label>
-
+                    <input className='select d-active' value='Selecciona' />
                     <input
-                        // value={image}
                         onChange={handleFileInputChange}
                         type="file"
                         name="image"
                         accept="image/*"
-                        className="input-style-1 input-height-1 b-r"
+                        className="display-none top-42"
                     />
+                    {selectedFile && <p>Archivo seleccionado: {selectedFile.name}</p>}
                 </div>
 
                 {

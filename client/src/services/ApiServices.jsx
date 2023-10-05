@@ -50,7 +50,7 @@ export async function deleteRecipe(id) {
     }
 }
 
-export async function getUserById() {
+export async function getProfile() {
     try {
         const response = await axios.get(`${endpoint}/profile`);
         return response.data;
@@ -61,7 +61,11 @@ export async function getUserById() {
 
 export async function updateProfile(data) {
     try {
-        const response = await axios.put(`${endpoint}/edit-profile`, data);
+        const response = await axios.post(`${endpoint}/edit-profile`, data, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
         return response.data;
     } catch (error) {
         throw error;
