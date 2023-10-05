@@ -19,7 +19,6 @@ const Result = () => {
           <li key={result.id}>{result.title}</li>
         ))}
       </ul>
-      <Nav />
     </div>
   );
 };
