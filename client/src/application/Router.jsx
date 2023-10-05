@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter} from "react-router-dom";
 import App from "../App";
 import Login from "../pages/login/Login";
 import RegisterView from "../pages/registerView/RegisterView";
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
 
     {
         path: '/result',
-        element: <PrivateRoutes><Result /></PrivateRoutes>
+        element: <Result />
     }
 
 ]);

@@ -1,29 +1,31 @@
+import './Search.css';
 import React, { useState } from 'react';
-import axios from 'axios';
+import Header from '../../components/header/Header';
+import Search from '../../components/search/Search';
+import RecipePost from '../../components/recipepost/RecipePost';
 
-const Search = ({ onSearch }) => {
-  const [query, setQuery] = useState('');
+const Result = () => {
+  const [searchResults, setSearchResults] = useState([]);
 
-  const handleSearch = async () => {
-    try {
-      const response = await axios.get('/api/recipes');
-      onSearch(response.data);
-    } catch (error) {
-      console.error('Error al buscar:', error);
-    }
+  const handleSearch = (results) => {
+    setSearchResults(results);
   };
 
   return (
-    <div className="searchBar">
-      <input
-        type="text"
-        placeholder="Buscar recetas..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button onClick={handleSearch}>Buscar</button>
+    <div>
+      <Header />
+      <Search onSearch={handleSearch} />
+      <div className="recipe-posts">
+        <ul>
+          {searchResults.map((result) => (
+            <li key={result.id}>
+              <RecipePost recipe={result} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
 
-export default Search;
+export default Result;

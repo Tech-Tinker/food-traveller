@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RecipeController;
+use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;

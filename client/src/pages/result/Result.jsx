@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Header from '../../components/header/Header';
 import Search from '../../components/search/Search';
-import RecipePost from '../../components/recipepost/RecipePost'; 
+// import './Result.css';
 
 const Result = () => {
-  const [searchResults, setSearchResults] = useState([]);
+  let [searchResults, setSearchResults] = useState([]);
 
-  const handleSearch = async (results) => {
+  let handleSearch = async (results) => {
     setSearchResults(results);
   };
 
@@ -14,11 +14,11 @@ const Result = () => {
     <div>
       <Header />
       <Search onSearch={handleSearch} />
-      <div className="recipe-posts">
+      <ul>
         {searchResults.map((result) => (
-          <RecipePost key={result.id} recipe={result} />
+          <li key={result.id}>{result.title}</li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

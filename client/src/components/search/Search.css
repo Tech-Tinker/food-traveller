@@ -1,0 +1,7 @@
+.searchBar {
+    margin-left: 27vw;
+    pointer-events: none;
+    z-index: 9999;
+
+
+}
