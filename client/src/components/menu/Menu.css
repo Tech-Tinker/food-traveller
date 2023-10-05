@@ -6,3 +6,13 @@
     font-size: inherit; 
     color: inherit;
 }
+.linea-horizontal{
+    width: 50%;
+    margin: 1rem 0;
+    color: inherit;
+    border: 0;
+    border-top: var(--bs-border-width) solid;
+    opacity: .25;
+    text-align: center;
+    z-index: 8000;
+  }

@@ -4,6 +4,7 @@ import AvatarGray from '../../assets/AvatarGray.svg';
 import Logout from '../../assets/Logout.svg';
 import Menu from '../../assets/Menu.svg';
 import Edit from '../../assets/Edit.svg';
+import Close from '../../assets/Close.svg';
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const MenuBurguer = ({ currentPage }) => {
@@ -46,16 +47,19 @@ const MenuBurguer = ({ currentPage }) => {
 
           {['/', '/create-recipe', `/edit-recipe/${id}`].includes(currentPage) && (
             <>
-              <li className="list-item">
+              <div className="list-item">
                 <Link to={'/profile'} className="link-style-none">
-                  <img src={AvatarGray} alt="Mi Perfil" />
+                  <img src={AvatarGray} alt="Mi Perfil" className="icon-list-menu" />
                   <span className="mx-2">Mi Perfil</span>
                 </Link>
-              </li>
-              <li className="list-item" onClick={handleLogout}>
-                <img  src={Logout} alt="Cerrar Sesión" />
+              </div>
+
+              <hr class="linea-horizontal link-style-none"></hr>
+              
+              <div className="list-item" onClick={handleLogout}>
+                <img  src={Logout} alt="Cerrar Sesión" className="icon-list-menu" />
                 <span className="mx-2">Cerrar Sesión</span>
-              </li>
+              </div>
             </>
           )}
         </ul>
