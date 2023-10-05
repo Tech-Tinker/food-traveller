@@ -7,24 +7,20 @@ describe('Dropdown', () => {
     shallow(<Dropdown />);
   });
 
-  it('renders the Select component', () => {
+  it('renders the default option', () => {
     const wrapper = shallow(<Dropdown />);
-    expect(wrapper.find('Select')).toHaveLength(1);
+    const select = wrapper.find('Select');
+    expect(select.prop('defaultValue')).toEqual({ label: 'Selecciona', value: 'Select' });
   });
 
   it('renders the correct options', () => {
     const wrapper = shallow(<Dropdown />);
-    const options = [
+    const select = wrapper.find('Select');
+    expect(select.prop('options')).toEqual([
       { label: 'Entrante', value: 'starter' },
       { label: 'Primero', value: 'first' },
       { label: 'Segundo', value: 'second' },
       { label: 'Postre', value: 'desert' }
-    ];
-    expect(wrapper.find('Select').prop('options')).toEqual(options);
-  });
-
-  it('renders the default value', () => {
-    const wrapper = shallow(<Dropdown />);
-    expect(wrapper.find('Select').prop('defaultValue')).toEqual({ label: 'Selecciona', value: 'Select' });
+    ]);
   });
 });
