@@ -250,7 +250,7 @@ const EditRecipeForm = () => {
 
                 <div className="d-flex flex-column">
                     <label htmlFor="image" className="fw-bold label-text text">Imagen</label>
-                    <input className='select d-active' value='Selecciona' />
+                    <div className='select d-active'>Selecciona</div>
                     <input
                         onChange={handleFileInputChange}
                         type="file"
