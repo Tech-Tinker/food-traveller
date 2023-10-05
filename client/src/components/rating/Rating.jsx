@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import "./Rating.css"; 
+import "./Rating.css";
 
 function Rating() {
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
+  const [comment, setComment] = useState("");
+  const [serverResponse, setServerResponse] = useState(null);
 
   const handleClick = (value) => {
     setCurrentValue(value);
@@ -15,6 +17,28 @@ function Rating() {
 
   const handleMouseLeave = () => {
     setHoverValue(undefined);
+  };
+
+  const handleCommentChange = (event) => {
+    setComment(event.target.value);
+  };
+
+  const handleSubmit = () => {
+  
+    fetch("/api/rating", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ rating: currentValue, comment: comment }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setServerResponse(data.message);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   const maxStars = 5;
@@ -32,16 +56,22 @@ function Rating() {
               index < (hoverValue || currentValue) ? "orange" : "blue"
             }`}
           >
-            ★ 
+            ★
           </span>
         ))}
       </div>
       <textarea
         placeholder="¿Te ha gustado la receta?"
         className="textarea"
+        value={comment}
+        onChange={handleCommentChange}
       />
 
-      <button className="button">Submit</button>
+      <button className="button" onClick={handleSubmit}>
+        Submit
+      </button>
+
+      {serverResponse && <p>{serverResponse}</p>}
     </div>
   );
 }
