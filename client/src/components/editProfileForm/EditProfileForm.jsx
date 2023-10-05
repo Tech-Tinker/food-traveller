@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import swal from 'sweetalert';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from '../button/Button';
 import { updateProfile, getUserById } from '../../services/ApiServices';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

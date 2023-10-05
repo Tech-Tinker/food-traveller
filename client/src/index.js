@@ -1,16 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom';
 import './index.css';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter } from 'react-router-dom';
+import Router from './application/Router';
 
-import { RouterProvider } from 'react-router-dom';
-import router from './application/Router';
+const token = window.csrf_token;
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <BrowserRouter>
+      <Router csrfToken={token} />
+    </BrowserRouter>
   </React.StrictMode>
 );
 

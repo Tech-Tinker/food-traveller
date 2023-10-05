@@ -1,5 +1,6 @@
 import React from 'react';
 import './Recipes.css';
+import Rating from '../rating/Rating'; 
 
 const Recipes = ({ title, ingredients, instructions }) => {
   return (
@@ -17,6 +18,15 @@ const Recipes = ({ title, ingredients, instructions }) => {
           <li key={index}>{step}</li>
         ))}
       </ol>
+
+      {/* Muestra las estrellas del componente Rating */}
+      <Rating />
+
+      {/* Recuadro de comentario y botón */}
+      <div className="comment-box">
+        <textarea placeholder="¿Qué opinas de esta receta?"></textarea>
+        <button>Enviar</button>
+      </div>
     </div>
   );
 };

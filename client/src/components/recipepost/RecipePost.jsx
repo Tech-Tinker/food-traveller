@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './RecipePost.css'
+import './RecipePost.css';
+import Rating from '../rating/Rating'; 
 
 const RecipePost = ({ recipe }) => {
   const { title, category, country, image } = recipe;
@@ -17,8 +18,12 @@ const RecipePost = ({ recipe }) => {
           <p>Inspirado en la gastronomía de {country}</p>
         </div>
       </Link>
+
+
+      <Rating />
     </div>
   );
 };
 
 export default RecipePost;
+
