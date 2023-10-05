@@ -28,7 +28,7 @@ const Header = () => {
         <img className='logo-header' src={Logo} alt='Logo Foodtraveller' />
       </Link>
 
-      {isLoggedIn && (currentPage === '/' || currentPage === '/profile' || currentPage === '/create-recipe' || currentPage.match(/^\/edit-recipe\/\d+$/)) && (
+      {isLoggedIn && (currentPage === '/' || currentPage === '/profile' || currentPage === '/result' || currentPage === '/create-recipe' || currentPage.match(/^\/edit-recipe\/\d+$/)) && (
         <MenuBurguer currentPage={currentPage} />
       )}
 
