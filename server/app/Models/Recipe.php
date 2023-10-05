@@ -35,4 +35,8 @@ class Recipe extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function recipeReviews()
+    {
+        return $this->hasMany(RecipeReview::class, 'recipe_id');
+    }
 }

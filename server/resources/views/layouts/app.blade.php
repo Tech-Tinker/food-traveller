@@ -6,6 +6,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>
+        window.csrf_token = "{{ csrf_token() }}";
+     </script>
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 

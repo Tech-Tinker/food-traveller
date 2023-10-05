@@ -16,6 +16,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/recipes', [RecipeController::class, 'index']);
 Route::get('/search', 'SearchController@search')->name('search');
+Route::post('/recipe-reviews', [RecipeReviewController::class, 'store']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/users', UserController::class);
@@ -28,6 +29,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/recipe/{id}', [RecipeController::class, 'show']);
     Route::put('/recipe/{id}', [RecipeController::class, 'update']);
     Route::delete('/recipe/{id}', [RecipeController::class, 'destroy']);
+    
 
 
     // Ruta para obtener el perfil del usuario
