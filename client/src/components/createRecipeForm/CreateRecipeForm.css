@@ -55,4 +55,23 @@
         width: 40%;
        
     }
+
+    .autocomplete-options {
+        position: absolute;
+        z-index: 1;
+        border: 1px solid #ccc;
+        max-height: 150px;
+        overflow-y: auto;
+        background-color: white;
+      }
+      
+      .autocomplete-option {
+        padding: 8px;
+        cursor: pointer;
+      }
+      
+      .autocomplete-option:hover {
+        background-color: #f1f1f1;
+      }
+      
 }    

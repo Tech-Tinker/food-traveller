@@ -5,6 +5,7 @@ import swal from 'sweetalert';
 import Button from '../button/Button';
 import '../createRecipeForm/CreateRecipeForm.css';
 import { storeRecipe } from '../../services/ApiServices';
+import axios from 'axios'
 
 const CreateRecipeForm = () => {
 
@@ -17,6 +18,10 @@ const CreateRecipeForm = () => {
     const [preparation, setPreparation] = useState('')
     const [country, setCountry] = useState('')
     const [image, setImage] = useState('')
+    const [countryOptions, setCountryOptions] = useState([]);
+    const [countryInput, setCountryInput] = useState('');
+    const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
+
 
     const [errors, setErrors] = useState({
         title: null,
@@ -39,6 +44,41 @@ const CreateRecipeForm = () => {
         setSelectedFile(selectedFile);
     };
 
+    const handleCountryInputChange = async (e) => {
+        const input = e.target.value;
+        setCountryInput(input);
+      
+        try {
+          const response = await axios.get(
+            `https://restcountries.com/v3/name/${input}`
+          );
+      
+          if (Array.isArray(response.data)) {
+            const options = response.data.map((country) => ({
+              label: country.name.common,
+              value: country.name.common,
+              
+            }));
+            setCountryOptions(options);
+            setIsCountryDropdownOpen(true); // Abre la ventana de sugerencias
+    
+          } else {
+            setCountryOptions([]);
+            setIsCountryDropdownOpen(false); // Cierra la ventana de sugerencias
+
+          }
+        } catch (error) {
+          console.error('Error fetching countries:', error);
+        }
+      };
+
+      const handleCountryOptionClick = (option) => {
+        setCountryInput(option.value);
+        setIsCountryDropdownOpen(false); // Cierra la ventana de sugerencias
+      };
+      
+      
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -50,7 +90,7 @@ const CreateRecipeForm = () => {
         formData.append('difficulty', difficulty);
         formData.append('ingredients', ingredients);
         formData.append('preparation', preparation);
-        formData.append('country', country);
+        formData.append('country', countryInput);
         formData.append('image', image);
 
         try {
@@ -205,16 +245,33 @@ const CreateRecipeForm = () => {
                     </div>
                 }
 
-                <div className="d-flex flex-column">
-                    <label htmlFor="country" className="fw-bold label-text text">País</label>
-                    <input
-                        value={country}
-                        onChange={(e) => setCountry(e.target.value)}
-                        type="text"
-                        name="image"
-                        className="input-style-1 input-height-1 b-r"
-                    />
-                </div>
+<div className="d-flex flex-column">
+  <label htmlFor="country" className="fw-bold label-text text">País</label>
+  <input
+    value={countryInput}
+    onChange={handleCountryInputChange}
+    type="text"
+    name="country"
+    className="input-style-1 input-height-1 b-r"
+    onFocus={() => setIsCountryDropdownOpen(true)} // Abre la ventana de sugerencias cuando el campo gana foco
+  />
+  {isCountryDropdownOpen && countryOptions.length > 0 && (
+    <div className="autocomplete-options">
+      {countryOptions.map((option) => (
+        <div
+          key={option.value}
+          className="autocomplete-option"
+          onClick={() => handleCountryOptionClick(option)}
+        >
+          {option.label}
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
+
+
 
                 {
                     errors.country && <div className="error-text text-center">
@@ -222,7 +279,7 @@ const CreateRecipeForm = () => {
                     </div>
                 }
 
-                <div className="d-flex flex-column">
+                <div className="d-flex flex-column mb-5 mt-3">
                     <label htmlFor="image" className="fw-bold label-text text">Imagen</label>
                     <div className='select d-active'>Selecciona</div>
                     <input

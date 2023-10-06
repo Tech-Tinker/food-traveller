@@ -6,6 +6,9 @@ use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CountryController;
+
+
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
@@ -27,6 +30,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/recipe/{id}', [RecipeController::class, 'show']);
     Route::post('/recipe/{id}', [RecipeController::class, 'update']);
     Route::delete('/recipe/{id}', [RecipeController::class, 'destroy']);
+    Route::get('/countries', [CountryController::class, 'getCountries']);
 
     // Ruta para obtener el perfil del usuario
     // Route::middleware(['auth:sanctum'])->get('/user-profile', [UserController::class, 'getUserProfile']);
