@@ -230,7 +230,7 @@ const CreateRecipeForm = () => {
                         type="file"
                         name="image"
                         accept="image/*"
-                        className="display-none top-40"
+                        className="display-none top-42"
                     />
                     {selectedFile && <p>Archivo seleccionado: {selectedFile.name}</p>}
                 </div>
