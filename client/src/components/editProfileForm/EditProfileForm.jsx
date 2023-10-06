@@ -5,6 +5,7 @@ import Button from '../button/Button';
 import { updateProfile, getProfile } from '../../services/ApiServices';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faPlus } from '@fortawesome/free-solid-svg-icons';
+import User from '../../components/User/User'
 import './EditProfileForm.css';
 import axios from 'axios';
 // import Foto from '../../assets/Foto.png';
@@ -68,6 +69,7 @@ const EditProfileForm = () => {
 
     const [countries, setCountries] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    
 
     useEffect(() => {
         const fetchCountries = async () => {
@@ -93,14 +95,21 @@ const EditProfileForm = () => {
         fetchCountries();
     }, []);
 
-    useEffect(() => {
-        if (country) {
-            const selectedCountry = countries.find(c => c.code === country);
-            if (selectedCountry) {
-                setContinent(selectedCountry.continent);
-            }
+    const getContinentByCountry = (selectedCountryCode) => {
+        const selectedCountry = countries.find((c) => c.code === selectedCountryCode);
+        if (selectedCountry) {
+          return selectedCountry.continent;
         }
-    }, [country, countries]);
+        return null; // Si no se encuentra el continente, retornamos null
+      };
+
+      useEffect(() => {
+        if (country) {
+          // Utiliza la función getContinentByCountry para obtener el continente
+          const continent = getContinentByCountry(country);
+          setContinent(continent);
+        }
+      }, [country, countries]);
 
     const handleSaveChanges = async (e) => {
         e.preventDefault();
