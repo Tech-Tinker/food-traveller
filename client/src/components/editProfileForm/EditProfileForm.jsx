@@ -6,6 +6,7 @@ import { updateProfile, getProfile } from '../../services/ApiServices';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faPlus } from '@fortawesome/free-solid-svg-icons';
 import './EditProfileForm.css';
+import axios from 'axios';
 
 const EditProfileForm = () => {
     const navigate = useNavigate();
@@ -53,6 +54,59 @@ const EditProfileForm = () => {
         return selectedInterests.includes(interest);
     };
 
+    const [continent, setContinent] = useState(null);
+
+    const continentColors = {
+        Africa: 'red',
+        Europe: 'blue',
+        Asia: 'yellow',
+        Americas: 'orange',
+        Oceania: 'purple',
+    };
+
+    const [countries, setCountries] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+
+    useEffect(() => {
+        const fetchCountries = async () => {
+            try {
+                const response = await axios.get('https://restcountries.com/v3.1/all');
+                const data = response.data;
+                const countryOptions = data.map(country => ({
+                    code: country.cca2,
+                    name: country.name.common,
+                    continent: country.region,
+                }));
+
+                countryOptions.sort((a, b) => a.name.localeCompare(b.name));
+
+                setCountries(countryOptions);
+                setIsLoading(false);
+            } catch (error) {
+                console.error('Error fetching countries:', error);
+            }
+        };
+
+        fetchCountries();
+    }, []);
+
+    const getContinentByCountry = (selectedCountryCode) => {
+        const selectedCountry = countries.find((c) => c.code === selectedCountryCode);
+        if (selectedCountry) {
+            return selectedCountry.continent;
+        }
+        return null;
+    };
+
+    useEffect(() => {
+        if (country) {
+            const continent = getContinentByCountry(country);
+            setContinent(continent);
+        }
+        // eslint-disable-next-line
+    }, [country, countries]);
+
     const handleSaveChanges = async (e) => {
         e.preventDefault();
 
@@ -97,6 +151,13 @@ const EditProfileForm = () => {
         fetchData();
     }, []);
 
+    const getBorderColor = () => {
+        if (continent && continentColors.hasOwnProperty(continent)) {
+            return continentColors[continent];
+        }
+        return 'grey';
+    };
+
     return (
         <div className="d-flex flex-column align-items-center mt-5">
             <form className="edit-profile-form rounded-1" style={{ margin: '20px' }} onSubmit={handleSaveChanges}>
@@ -114,7 +175,7 @@ const EditProfileForm = () => {
                             width: '120px',
                             height: '120px',
                             borderRadius: '50%',
-                            border: '2px solid #00963F',
+                            border: `5px solid ${getBorderColor()}`,
                             overflow: 'hidden',
                         }}
                     >
@@ -267,56 +328,15 @@ const EditProfileForm = () => {
                         style={{ borderColor: "#B4B4B4" }}
                     >
                         <option value="">Selecciona un país</option>
-                        <option value="Alemania">Alemania</option>
-                        <option value="Argentina">Argentina</option>
-                        <option value="Australia">Australia</option>
-                        <option value="Austria">Austria</option>
-                        <option value="Bélgica">Bélgica</option>
-                        <option value="Bolivia">Bolivia</option>
-                        <option value="Brasil">Brasil</option>
-                        <option value="Canadá">Canadá</option>
-                        <option value="Chile">Chile</option>
-                        <option value="China">China</option>
-                        <option value="Colombia">Colombia</option>
-                        <option value="Corea del Sur">Corea del Sur</option>
-                        <option value="Costa de Marfil">Costa de Marfil</option>
-                        <option value="Costa Rica">Costa Rica</option>
-                        <option value="Cuba">Cuba</option>
-                        <option value="Ecuador">Ecuador</option>
-                        <option value="Egipto">Egipto</option>
-                        <option value="El Salvador">El Salvador</option>
-                        <option value="aEspaña">España</option>
-                        <option value="Estados Unidos">Estados Unidos</option>
-                        <option value="Francia">Francia</option>
-                        <option value="Ghana">Ghana</option>
-                        <option value="Guatemala">Guatemala</option>
-                        <option value="Honduras">Honduras</option>
-                        <option value="Idia">India</option>
-                        <option value="Idonesia">Indonesia</option>
-                        <option value="Italia">Italia</option>
-                        <option value="Japón">Japón</option>
-                        <option value="Kenia">Kenia</option>
-                        <option value="Malasia">Malasia</option>
-                        <option value="Marruecos">Marruecos</option>
-                        <option value="México">México</option>
-                        <option value="aNicaragua">Nicaragua</option>
-                        <option value="aNigeria">Nigeria</option>
-                        <option value="Nueva Zelanda">Nueva Zelanda</option>
-                        <option value="Países Bajos">Países Bajos</option>
-                        <option value="Panamá">Panamá</option>
-                        <option value="Paraguay">Paraguay</option>
-                        <option value="Perú">Perú</option>
-                        <option value="Portugal">Portugal</option>
-                        <option value="Puerto Ricpo">Puerto Rico</option>
-                        <option value="Reino Unido">Reino Unido</option>
-                        <option value="República Dominicana">República Dominicana</option>
-                        <option value="Suiza">Suiza</option>
-                        <option value="Tailandia">Tailandia</option>
-                        <option value="Tanzania">Tanzania</option>
-                        <option value="Uruguay">Uruguay</option>
-                        <option value="Venezuela">Venezuela</option>
-                        <option value="Vietnam">Vietnam</option>
-                        <option value="Uganda">Uganda</option>
+                        {isLoading ? (
+                            <option value="" disabled>Cargando países...</option>
+                        ) : (
+                            countries.map(country => (
+                                <option key={country.code} value={country.code}>
+                                    {country.name}
+                                </option>
+                            ))
+                        )}
                     </select>
                 </div>
 

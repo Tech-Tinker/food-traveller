@@ -1,55 +1,85 @@
-
 import React, { useEffect, useState } from 'react';
 import Foto from '../../assets/Foto.png';
 import { getProfile } from '../../services/ApiServices';
 
-
-const User = () => {
-
+const User = ({ country, continent }) => {
   const [profileData, setProfileData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     const getUserProfile = async () => {
       try {
         const response = await getProfile();
-
         setProfileData(response);
       } catch (error) {
         console.error(error);
         throw new Error('No se pudo obtener el perfil de usuario');
       }
 
-      setIsLoading(false)
+      setIsLoading(false);
     };
     getUserProfile();
   }, []);
 
-  const { user_name, description, country, interests, culinary_experience } = profileData.profile || {}
+  const { user_name, description, culinary_experience } = profileData.profile || {};
+
+  const profileImageUrl = profileData.image_url;
+
+  const getBorderColor = () => {
+    const continentColors = {
+      Africa: 'red',
+      Europe: 'blue',
+      Asia: 'yellow',
+      Americas: 'orange',
+      Oceania: 'purple',
+    };
+    return continentColors[continent] || 'grey';
+  };
 
   return (
-    <div>
+    <div className="d-flex flex-column">
       {isLoading ? (
         <div>Cargando perfil de usuario...</div>
       ) : (
-        <div className="d-flex flex-column justify-content-start">
+        <div className="d-flex flex-column align-items-start mb-4"> {/* Aplicamos la clase "mb-4" para agregar espacio inferior */}
           <div
-            className="avatar-upload mx-auto b-r50 of-hidden b-green">
+            className="avatar-upload"
+            style={{
+              maxWidth: '120px',
+              maxHeight: '120px',
+              overflow: 'hidden',
+              marginRight: '15px',
+              marginBottom: '15px',
+            }}
+          >
             <div
-              className="d-flex justify-content-center align-items-center selected-image-container">
+              className="d-flex justify-content-center align-items-center selected-image-container"
+              style={{
+                border: `5px solid ${getBorderColor()}`,
+                borderRadius: '50%',
+                width: '100%',
+                height: '100%',
+              }}
+            >
               <img
-                src={profileData.image_url || Foto}
+                src={profileImageUrl || Foto}
                 alt="Avatar"
-                className="selected-image b-r50" />
+                className="selected-image b-r50"
+                style={{
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  borderRadius: '50%',
+                }}
+              />
             </div>
           </div>
-          <div className="d-flex flex-column justify-content-center align-items-start p-4">
-            <p className="fw-bold">{user_name}</p>
-            <p className="">{country}</p>
-            <p className="">{description}</p>
-            <p className="">Me interesa la comida...{interests}</p>
-            <p className="">En la cocina me considero... {culinary_experience}</p>
+          <div className="d-flex flex-column">
+            <p className="fw-bold mb-0">{user_name}</p>
+            <p className="mb-1">{description}</p>
+            <p className="mb-1">
+              {culinary_experience}
+            </p>
           </div>
         </div>
       )}
@@ -58,6 +88,10 @@ const User = () => {
 };
 
 export default User;
+
+
+
+
 
 
 
