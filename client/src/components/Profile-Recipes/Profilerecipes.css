@@ -2,6 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-bottom: 3rem;
 }
 
 .recipe-card {
@@ -26,8 +27,7 @@
 }
 
 .recipe-details {
-    text-align: left; /* Alineación izquierda */
-    padding: 0 12px; /* Espacio adicional a la izquierda para igualar el margen de la imagen */
+    text-align: left; 
 }
 
 .recipe-title-menu {
@@ -37,9 +37,16 @@
     margin-top: 7px;
 }
 
+.menu-icon{
+    display: flex;
+    padding-bottom: 7px;
+}
+
 .recipe-title {
     font-size: 1.2rem;
-    margin: 0;
+    margin-left: 7px;
+    margin-top: 0;
+    
 }
 
 .link-style-none {

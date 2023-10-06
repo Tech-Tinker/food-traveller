@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Foto from '../../assets/Foto.png';
 import { getProfile } from '../../services/ApiServices';
+import Profilerecipes from '../Profile-Recipes/Profilerecipes'; // Importa el componente Profilerecipes
 
 const User = ({ country, continent }) => {
   const [profileData, setProfileData] = useState({});
@@ -44,7 +45,7 @@ const User = ({ country, continent }) => {
       {isLoading ? (
         <div>Cargando perfil de usuario...</div>
       ) : (
-        <div className="d-flex flex-column align-items-start">
+        <div className="d-flex flex-column align-items-start mb-4"> {/* Aplicamos la clase "mb-4" para agregar espacio inferior */}
           <div
             className="avatar-upload"
             style={{
@@ -52,6 +53,7 @@ const User = ({ country, continent }) => {
               maxHeight: '120px', 
               overflow: 'hidden', 
               marginRight: '15px', 
+              marginBottom: '15px', // Añadimos margen inferior para igualar el margen de la imagen
             }}
           >
             <div
@@ -76,9 +78,9 @@ const User = ({ country, continent }) => {
             </div>
           </div>
           <div className="d-flex flex-column">
-          <p className="fw-bold">{user_name}</p>
-            <p className="">{description}</p>
-            <p className="">
+            <p className="fw-bold mb-0">{user_name}</p> {/* Eliminamos el margen inferior para el título */}
+            <p className="mb-1">{description}</p> {/* Aplicamos la clase "mb-1" para reducir la separación */}
+            <p className="mb-1">
               {culinary_experience}
             </p>
           </div>
@@ -89,6 +91,8 @@ const User = ({ country, continent }) => {
 };
 
 export default User;
+
+
 
 
 
