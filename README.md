@@ -17,7 +17,7 @@
 - [Desarrolladoras](#developers)
 
 
-### Food Traveller
+### Food Travel
 Como proyecto pedagógico de fin de curso en el bootcamp de desarrollo fullstack de FemCoders, se nos ha encomendado la creación de una página web con un enfoque estilo red social. En esta plataforma, los usuarios tendrán la oportunidad de compartir sus experiencias de viaje a través de la gastronomía de los lugares que han visitado.
 
 ### Sobre el proyecto
