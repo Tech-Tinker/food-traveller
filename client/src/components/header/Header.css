@@ -16,3 +16,11 @@
     width: 45px;
     height: 55px;
 }
+
+.menu-links{
+    gap: 2rem;
+}
+
+.pointer{
+    cursor: pointer;
+}

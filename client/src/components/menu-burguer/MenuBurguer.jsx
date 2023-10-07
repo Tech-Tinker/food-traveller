@@ -22,6 +22,7 @@ const MenuBurguer = ({ currentPage }) => {
     localStorage.removeItem('auth_user_id');
     setMenuVisible(false);
     navigate('/');
+    window.location.reload();
   };
 
   return (
@@ -36,7 +37,7 @@ const MenuBurguer = ({ currentPage }) => {
             <div className="close-icon" onClick={toggleMenu}>
               <span><img src={Cruz} alt="" /></span>
             </div>
-            <ul className="menu-list">
+            <ul className="menu-list d-flex flex-column justify-content-between">
               {currentPage === '/profile' && (
                 <>
                   <li className="list-item">
@@ -45,7 +46,7 @@ const MenuBurguer = ({ currentPage }) => {
                       <span className="mx-2">Editar Perfil</span>
                     </Link>
                   </li>
-                  <li className="list-item" onClick={handleLogout}>
+                  <li className="list-item pointer" onClick={handleLogout}>
                     <img src={Logout} alt="Cerrar Sesión" />
                     <span className="mx-2">Cerrar Sesión</span>
                   </li>
