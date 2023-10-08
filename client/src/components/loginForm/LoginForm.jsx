@@ -16,8 +16,6 @@ const LoginForm = () => {
     error_list: [],
   });
 
-  // const auth = AuthService();
-
   const handleOnChange = (e) => {
     e.persist();
     setLogin({ ...login, [e.target.name]: e.target.value });
@@ -37,7 +35,6 @@ const LoginForm = () => {
           localStorage.setItem('auth_token', res.data.token);
           localStorage.setItem('auth_name', res.data.username);
           localStorage.setItem('auth_user_id', res.data.id);
-          // window.location.reload();
           swal('Success', res.data.message, 'success');
           navigate('/');
         } else if (res.data.status === 401) {
@@ -48,23 +45,6 @@ const LoginForm = () => {
       });
     });
   };
-
-  // Función para obtener el nombre de usuario almacenado en localStorage
-  // const getUserName = () => {
-  //   return localStorage.getItem('auth_name');
-  // };
-
-  // Cerrar sesión
-  // const handleLogout = () => {
-  // Eliminar los datos de usuario almacenados en localStorage
-  // localStorage.removeItem('auth_token');
-  // localStorage.removeItem('auth_name');
-  // localStorage.removeItem('auth_user_id');
-
-  // Redirigir a la página de inicio de sesión u otra página de tu elección
-  // navigate('/');
-  //  window.location.reload();
-  // }
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">

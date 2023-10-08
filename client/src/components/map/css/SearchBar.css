@@ -78,7 +78,7 @@
     padding-left: 40px;
 }
 
-@media (min-width: 1280px) and (min-height: 832px) {
+@media (min-width: 1080px) and (min-height: 720px) {
     .container-search-map{
         margin: 4rem;
     }   
