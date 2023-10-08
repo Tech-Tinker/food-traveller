@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Header from '../../components/header/Header';
 import Search from '../../components/search/Search';
-// import './Result.css';
+import Nav from '../../components/nav/Nav';
+
 
 const Result = () => {
   let [searchResults, setSearchResults] = useState([]);
@@ -19,6 +20,7 @@ const Result = () => {
           <li key={result.id}>{result.title}</li>
         ))}
       </ul>
+      <Nav />
     </div>
   );
 };
