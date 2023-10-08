@@ -18,9 +18,9 @@ function MapboxMap() {
       container: 'map',
       style: isFlatMode
         ? 'mapbox://styles/mapbox/streets-v11'
-        : 'mapbox://styles/genenf/clmtheczn02el01nz01kp67bk',
-      center: [-74.006, 40.7128],
-      zoom: 1,
+        : 'mapbox://styles/leabujhamer/clnhocnwm024s01qnf3ysdk78',
+      center: [2.1734, 41.3851],
+      zoom: 0.95,
     });
 
     setMap(mapInstance);
@@ -37,7 +37,7 @@ function MapboxMap() {
       <h1 className='banner-map'>Where Food Meets Culture</h1>
       <MapToggle isFlatMode={isFlatMode} toggleMode={toggleMode} />
       <MapDisplay map={map} marker={marker} />
-      <SearchBar map={map} setMarker={setMarker} marker={marker} /> 
+      <SearchBar map={map} setMarker={setMarker} marker={marker} />
 
     </div>
   );
