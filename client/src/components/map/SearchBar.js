@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import './css/SearchBar.css';
-import Search from '../../assets/Search.svg';
+import Search from '../../assets/search.svg';
 import ViewOptions from './ViewOptions';
 import axios from 'axios';
 

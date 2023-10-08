@@ -2,7 +2,7 @@ import React from 'react';
 import './Nav.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Home from '../../assets/Home.svg';
-import Search from '../../assets/Search.svg';
+import Search from '../../assets/search.svg';
 import Create from '../../assets/Create.svg';
 import Avatar from '../../assets/Avatar.svg';
 
