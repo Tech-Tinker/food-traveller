@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RecipeController;
 use App\Http\Controllers\Api\SearchController;
+use App\Http\Controllers\Api\RecipeReviewController;
 use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -14,6 +15,8 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/recipes', [RecipeController::class, 'index']);
 Route::get('/search', 'SearchController@search')->name('search');
+Route::get('/recipe_reviews', 'RecipeReviewController@show')->name('rating');
+
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/users', UserController::class);
@@ -26,5 +29,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/recipe/{id}', [RecipeController::class, 'update']);
     Route::delete('/recipe/{id}', [RecipeController::class, 'destroy']);
     Route::get('/search', 'SearchController@search')->name('search');
-    Route::post('/recipe-reviews', [RecipeReviewController::class, 'store']);
+    Route::post('/recipe_reviews', 'RecipeReviewController@store')->name('rating');
+    
 });
