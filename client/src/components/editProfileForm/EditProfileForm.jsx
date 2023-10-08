@@ -5,7 +5,6 @@ import Button from '../button/Button';
 import { updateProfile, getProfile } from '../../services/ApiServices';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faPlus } from '@fortawesome/free-solid-svg-icons';
-import User from '../../components/User/User'
 import './EditProfileForm.css';
 import axios from 'axios';
 // import Foto from '../../assets/Foto.png';
