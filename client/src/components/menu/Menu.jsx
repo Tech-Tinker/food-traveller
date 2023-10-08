@@ -6,6 +6,8 @@ import Edit from '../../assets/Edit.svg';
 import { Link } from "react-router-dom";
 import { deleteRecipe } from "../../services/ApiServices";
 import Swal from 'sweetalert';
+import Cruz from '../../assets/Cruz.svg';
+
 
 const Menu = ({ currentPage, recipeId, recipes, setRecipes }) => {
 
@@ -42,33 +44,34 @@ const Menu = ({ currentPage, recipeId, recipes, setRecipes }) => {
     };
 
     return (
-        <div className="menu-hamburguesa">
-            <div className="menu-icon" onClick={toggleMenu}>
-                <img src={ellipsis} alt="" />
+        <div className="menu-container">
+            {menuVisible && <div className="overlay" onClick={toggleMenu}></div>}
+            <div className="menu-hamburguesa">
+                <div className="menu-icon" onClick={toggleMenu}>
+                    <img src={ellipsis} alt="" />
+                </div>
+                {menuVisible && (
+                    <div>
+                        <div className="close" onClick={toggleMenu}>
+                            <span><img src={Cruz} alt="" /></span>
+                        </div>
+                        <ul className="menu-ls">
+                            {currentPage === '/profile' && (
+                                <>
+                                    <li className="list-item"><Link to={`/edit-recipe/${recipeId}`} className="link-style-none">
+                                        <img src={Edit} alt="" />
+                                        <span className="mx-2">Editar Receta</span></Link>
+                                    </li>
+                                    <li className="list-item">
+                                        <button onClick={(e) => handleDelete(e, recipeId)} className='delete-button'><img src={Delete} alt="" /><span className="mx-2">Eliminar receta</span></button>
+                                    </li>
+                                </>
+                            )}
+
+                        </ul>
+                    </div>
+                )}
             </div>
-            {menuVisible && (
-                <ul className="menu-list">
-                    {currentPage === '/profile' && (
-                        <>
-                            <li className="list-style-none"><Link to={`/edit-recipe/${recipeId}`} className="link-style-none">
-                                <img src={Edit} alt="" />
-                                <span>Editar Receta</span></Link>
-                               
-                            </li>
-                        
-                            <hr class="linea-horizontal link-style-none"></hr>
-
-                            <li className="list-style-none">
-                                <button onClick={(e) => handleDelete(e, recipeId)} className='delete-button'><img src={Delete} alt="" /></button>
-                                <span>Eliminar receta</span>
-                                
-                            </li>
-                            
-                        </>
-                    )}
-
-                </ul>
-            )}
         </div>
     );
 };

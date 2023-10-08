@@ -224,13 +224,13 @@ const CreateRecipeForm = () => {
 
                 <div className="d-flex flex-column">
                     <label htmlFor="image" className="fw-bold label-text text">Imagen</label>
-                    <input className='select d-active' value='Selecciona' />
+                    <div className='select d-active'>Selecciona</div>
                     <input
                         onChange={handleImageChange}
                         type="file"
                         name="image"
                         accept="image/*"
-                        className="display-none top-40"
+                        className="display-none top-42"
                     />
                     {selectedFile && <p>Archivo seleccionado: {selectedFile.name}</p>}
                 </div>

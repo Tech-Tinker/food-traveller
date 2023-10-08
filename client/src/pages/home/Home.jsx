@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Importa Axios
+import axios from 'axios';
 import './Home.css';
 import Header from '../../components/header/Header';
 import Nav from '../../components/nav/Nav';
@@ -11,27 +11,26 @@ const Home = () => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    
+
     axios.get('/api/recipes')
       .then((response) => {
-        
         setRecipes(response.data);
       })
       .catch((error) => {
         console.error('Error al obtener las recetas:', error);
       });
-  }, []); 
+  }, []);
 
   return (
     <div>
       <Header />
       <MapboxMap />
-      <Nav />
       <div className="recipe-posts">
         {recipes.map((recipe) => (
           <RecipePost key={recipe.id} recipe={recipe} />
         ))}
       </div>
+      <Nav />
     </div>
   );
 };

@@ -64,15 +64,12 @@ class UserProfileController extends Controller
 
             $profileData = [
                 'user_name' => $request->input('user_name'),
-                // 'profile_image' => $imagePath,
                 'description' => $request->input('description'),
-                // 'profile_image' => $request->input('profile_image'),
                 'birthdate' => $request->input('birthdate'),
                 'country' => $request->input('country'),
                 'interests' => $request->input('interests'),
                 'culinary_experience' => $request->input('culinary_experience'),
             ];
-
 
             if ($request->hasFile('profile_image')) {
                 $imagePath = $request->file('profile_image')->store('profile_images', 'public');
@@ -100,7 +97,6 @@ class UserProfileController extends Controller
             ], 401);
         }
     }
-
 
     public function destroy(Request $request)
     {

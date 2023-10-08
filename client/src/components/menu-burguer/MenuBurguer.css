@@ -21,33 +21,15 @@
   }
   
   .menu-list {
-    background-color: white;
-    z-index: 7000;
-    width: 100%;
-    height: 425px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    
-    
-  }
-  .icon-list-menu{
-   
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: row;
-    
-  }
-  .linea-horizontal{
-    width: 50%;
-    margin: 1rem 0;
-    color: inherit;
-    border: 0;
-    border-top: var(--bs-border-width) solid;
-    opacity: .25;
+    position: absolute;
+    z-index: 1;
+    left: -328px;
+    top: -39px;
+    background-color: #ffffff;
+    width: 390px;
+    height: 250px;
+    margin: 0;
+    padding: 5rem;
     text-align: center;
   }
   
@@ -67,4 +49,13 @@
     margin-bottom: 20px; 
     display: flex;
     align-items: center;
+  }
+  
+  .close-icon{
+    position: absolute;
+    z-index: 2;
+    top: 0px;
+    right: 3px;
+    cursor: pointer;
+    font-size: 24px;
   }
