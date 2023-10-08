@@ -42,20 +42,24 @@ class RecipeController extends Controller
             'ingredients' => 'required|string',
             'preparation' => 'required|string',
             'country' => 'required|string',
-            // 'image' => 'required', 
+            // 'image' => 'required', // podemos ajustar la reglas
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
+        // Obtiene la imagen subida y la almacena en el directorio RecipeImages
         $imagePath = $request->file('image')->store('images', 'public');
 
+        // Construye la URL de la imagen
         $imageUrl = asset('storage/' . $imagePath);
 
+        // Verifica si la categoría ya existe
         $category = Category::where('name', $request->category)->first();
 
         if (!$category) {
+            // Si no existe, crea una nueva categoría
             $category = new Category();
             $category->name = $request->category;
             $category->save();
@@ -100,6 +104,7 @@ class RecipeController extends Controller
         $username = $recipe->user->name;
         $category = $recipe->category;
 
+        // Obtener la URL de la imagen
         $imageUrl = asset('storage/' . $recipe->image);
 
         unset($recipe->user);
@@ -142,6 +147,8 @@ class RecipeController extends Controller
             // 'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ];
 
+        // print_r($request->all());
+
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
@@ -158,9 +165,10 @@ class RecipeController extends Controller
 
         $recipe->category_id = $category->id;
 
+        // Maneja la actualización de la imagen si se proporciona
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
-
+            // Elimina la imagen anterior si existe
             if ($recipe->image) {
                 Storage::disk('public')->delete($recipe->image);
             }
@@ -193,6 +201,7 @@ class RecipeController extends Controller
             return response()->json(['error' => 'No tienes permiso para eliminar esta receta'], 403);
         }
 
+        // Elimina la imagen asociada a la receta si existe
         if ($recipe->image) {
             Storage::disk('public')->delete($recipe->image);
         }
