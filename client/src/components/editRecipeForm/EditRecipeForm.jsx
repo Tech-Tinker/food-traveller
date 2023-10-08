@@ -58,7 +58,6 @@ const EditRecipeForm = () => {
 
         try {
             const response = await updateRecipe(id, formData);
-            // console.log(response);
             if (response.errors) {
                 console.log('Errors:', response.errors);
             } else {

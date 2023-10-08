@@ -3,8 +3,12 @@ import mapboxgl from 'mapbox-gl';
 import './css/SearchBar.css';
 import Search from '../../assets/Search.svg';
 import ViewOptions from './ViewOptions';
+import axios from 'axios';
 
-function SearchBar({ map, setMarker }) {
+function SearchBar({ searchEvent, map, setMarker, scrollToSearchBar }) {
+  const [searchMessage, setSearchMessage] = useState('');
+  const [search, setSearch] = useState('');
+  // eslint-disable-next-line
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
@@ -12,7 +16,7 @@ function SearchBar({ map, setMarker }) {
     setSearchQuery(query);
 
     if (map && query) {
-      fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxgl.accessToken}`)
+      fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?language=es&access_token=${mapboxgl.accessToken}`)
         .then(response => response.json())
         .then(data => {
           const features = data.features;
@@ -21,7 +25,11 @@ function SearchBar({ map, setMarker }) {
             feature.place_type.includes('country') || feature.place_type.includes('country')
           );
 
-          setSearchResults(filteredResults);
+          if (filteredResults.length === 1) {
+            handleResultClick(filteredResults[0]);
+          } else {
+            setSearchResults(filteredResults);
+          }
         });
     } else {
       setSearchResults([]);
@@ -46,6 +54,8 @@ function SearchBar({ map, setMarker }) {
         return newMarker;
       });
     }
+
+    setSearchResults([]);
   };
 
   const flyToContinent = (continent) => {
@@ -75,6 +85,30 @@ function SearchBar({ map, setMarker }) {
     map.flyTo({ center, zoom: zoomLevel });
   };
 
+  const handleButtonSearch = (value) => {
+    handleSearch(value)
+    axios.post(`http://localhost:8000/api/search?query=${value}`).then(res => {
+      if (res.data.message) {
+        setSearchMessage(res.data.message);
+        searchEvent([]);
+      } else {
+        setSearchMessage('');
+        searchEvent(res.data);
+      }
+      if (scrollToSearchBar) {
+        scrollToSearchBar();
+      }
+    }).catch(function (err) {
+      console.log('error', err)
+    });
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleButtonSearch(search);
+    }
+  };
+
   return (
     <>
       <div className='container-search-map'>
@@ -82,21 +116,23 @@ function SearchBar({ map, setMarker }) {
           className='search-map'
           type="text"
           placeholder="Buscar por país o receta..."
-          value={searchQuery}
-          onChange={(e) => handleSearch(e.target.value)}
+          name="query"
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
-        <button className='btn-search' onClick={() => handleSearch(searchQuery)}>
+        <button className='btn-search' onClick={() => handleButtonSearch(search)}>
           <img src={Search} alt="Search" />
         </button>
       </div>
 
       <div>
-        <ul>
+        {searchMessage && <div className="message error-text fw-bold text-center">{searchMessage}</div>}
+        <ul className="country-list">
           {searchResults.map((result, index) => (
             <li
               key={index}
               onClick={() => handleResultClick(result)}
-              style={{ cursor: 'pointer' }}
+              className="country-list-item"
             >
               {result.place_name}
             </li>

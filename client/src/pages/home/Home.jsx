@@ -9,28 +9,41 @@ import RecipePost from '../../components/recipepost/RecipePost';
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
+  const [allRecipes, setAllRecipes] = useState([]);
 
   useEffect(() => {
 
     axios.get('/api/recipes')
       .then((response) => {
         setRecipes(response.data);
+        setAllRecipes(response.data)
       })
       .catch((error) => {
         console.error('Error al obtener las recetas:', error);
       });
   }, []);
 
+  const searchEvent = (recipes) => setRecipes(recipes)
+
+  const homeEvent = () => setRecipes(allRecipes);
+
+  const scrollToSearchBar = () => {
+    const searchBarElement = document.getElementById('searchBar');
+    if (searchBarElement) {
+      searchBarElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div>
-      <Header />
-      <MapboxMap />
+      <Header homeEvent={homeEvent} />
+      <MapboxMap searchEvent={searchEvent} scrollToSearchBar={scrollToSearchBar} />
       <div className="recipe-posts">
         {recipes.map((recipe) => (
           <RecipePost key={recipe.id} recipe={recipe} />
         ))}
       </div>
-      <Nav />
+      <Nav homeEvent={homeEvent} />
     </div>
   );
 };

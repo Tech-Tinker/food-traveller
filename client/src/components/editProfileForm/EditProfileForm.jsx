@@ -121,7 +121,6 @@ const EditProfileForm = () => {
 
         try {
             const response = await updateProfile(formData);
-            console.log(response);
             if (response.errors) {
                 console.log('Errors:', response.errors);
             } else {

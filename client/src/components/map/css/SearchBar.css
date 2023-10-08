@@ -13,6 +13,18 @@
     text-align: center;
 }
 
+.country-list-item{
+    text-align: center;
+    list-style: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.country-list{
+    padding-bottom: 2rem;
+    margin: 0;
+}
+
 @media (min-width: 400px) {
 
     .search-map {

@@ -9,7 +9,7 @@ import Logout from '../../assets/Logout.svg';
 import MenuBurguer from '../menu-burguer/MenuBurguer';
 
 
-const Header = () => {
+const Header = (props) => {
   const location = useLocation();
   const currentPage = location.pathname;
 
@@ -35,6 +35,16 @@ const Header = () => {
     setIsLargeScreen(window.innerWidth >= 1280);
   };
 
+  const handleLogoClick = () => {
+    if (location.pathname !== '/') {
+      navigate('/');
+    } else {
+      if (props.homeEvent) {
+        props.homeEvent();
+      }
+    }
+  };
+
   const handleLogout = () => {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('auth_name');
@@ -46,8 +56,8 @@ const Header = () => {
   return (
 
     <div className='d-flex justify-content-between align-items-center header-margin'>
-      <Link to={'/'}>
-        <img className='logo-header' src={Logo} alt='Logo Foodtraveller' />
+      <Link to={'/'} onClick={handleLogoClick}>
+        <img className='logo-header' src={Logo} alt='Logo Foodtravel' />
       </Link>
 
       {(isLoggedIn && (
