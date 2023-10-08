@@ -10,7 +10,7 @@ const RecipePost = ({ recipe }) => {
     <div className="recipe-post">
       <Link to={`/recipe/${recipe.id}`}>
         <div className='image-container'>
-            <img src={image} alt={title} />
+            <img src={image_url} alt={title} />
         </div>
         <div className='date-container'>
           <h3>{title}</h3>

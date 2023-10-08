@@ -14,7 +14,7 @@ const Nav = () => {
         <img src={Home} alt="Home Icon" />
       </Link>
 
-      <Link to="/result">
+      <Link to="/Search">
         <img src={SearchIcon} alt="Search Icon" />
       </Link>
 

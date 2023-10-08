@@ -86,7 +86,7 @@ function SearchBar({ map, setMarker }) {
           onChange={(e) => handleSearch(e.target.value)}
         />
         <button className='btn-search' onClick={() => handleSearch(searchQuery)}>
-          <img src={Search} alt="Search" />
+          <img src={SearchIcon} alt="Search" />
         </button>
       </div>
 
