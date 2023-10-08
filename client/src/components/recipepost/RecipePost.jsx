@@ -15,9 +15,10 @@ const RecipePost = ({ recipe }) => {
         <div className='date-container'>
           <h3>{title}</h3>
           <p>Inspirado en la gastronomía de {country}</p>
+          <Rating />
         </div>
       </Link>
-      <Rating />
+      
     </div>
   );
 };
