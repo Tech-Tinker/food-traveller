@@ -10,3 +10,11 @@
     margin: 2.5rem 1.5rem;
     text-shadow: 0px 3px 3px rgba(187, 155, 142, 0.54);
 }
+
+@media (min-width: 1280px) and (min-height: 832px) {
+    .banner-map{
+        font-size: 3rem;
+        margin: 3rem;
+    }
+
+}

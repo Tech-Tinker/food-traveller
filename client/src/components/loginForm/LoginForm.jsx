@@ -68,15 +68,15 @@ const LoginForm = () => {
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
-      <h2 className="p-5 fw-bold text-center headline-form-color headline-form-size">A dónde quieres viajar hoy?</h2>
+      <h2 className="p-5 fw-bold text-center headline-form-color headline-form-size margin-1 font-size-desktop">A dónde quieres viajar hoy?</h2>
       <form onSubmit={handleOnSubmit} className="form-login">
-        <div className="d-flex flex-column">
+        <div className="d-flex flex-column gap-0-5">
           <label htmlFor="email" className="fw-bold fs-5 label-text text">Email</label>
           <input type="email" name="email" onChange={handleOnChange} value={login.email} className="input-none-style border-b"></input>
         </div>
         <span className="error-text text-center">{login.error_list.email}</span>
 
-        <div className="d-flex flex-column">
+        <div className="d-flex flex-column gap-0-5">
           <label htmlFor="password" className="fw-bold fs-5 label-text text">Contraseña</label>
           <input type="password" name="password" onChange={handleOnChange} value={login.password} className="input-none-style border-b"></input>
         </div>

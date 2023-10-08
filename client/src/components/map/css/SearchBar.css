@@ -65,3 +65,19 @@
     list-style: none;
     padding-left: 40px;
 }
+
+@media (min-width: 1280px) and (min-height: 832px) {
+    .container-search-map{
+        margin: 4rem;
+    }   
+
+    .search-map{
+        margin: 0;
+        text-align: center;
+        width: 35rem;
+    }
+
+    .btn-search{
+        right: 22rem;
+    }
+}
