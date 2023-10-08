@@ -48,45 +48,11 @@
     text-align: justify;
 }
 
-@media (min-width: 1280px) and (min-height: 832px) {
-    .padding-2-4{
-        padding: 2rem 4rem;
-    }
+.recipe-foto {
+    width: 340px;
+    height: 200px;
+}
 
-    .center{
-        text-align: center;
-    }
-
-    .margin-1{
-        margin: 1rem;
-    }
-
-    .width-40{
-        width: 40%;
-    }
-
-    .flex-desktop{
-        display: flex;
-        justify-content: space-around;
-    }
-
-    .margin-2-0{
-        margin: 2rem 0;
-    }
-
-    .margin-top-0-5{
-        margin-top: 0.5rem;
-    }
-
-    .country{
-        margin-bottom: 1.5rem;
-    }
-
-    .pb-desktop{
-        padding-bottom: 0;
-    }
-
-    .padding-1-5-4{
-        padding: 1.5rem 4rem;
-    }
+.star-rating {
+    background-color: #53A991;
 }

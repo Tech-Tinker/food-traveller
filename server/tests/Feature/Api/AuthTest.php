@@ -12,10 +12,6 @@ class AuthTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Should test a new user.
-     */
-
     public function test_user_can_register(): void
     {
         $this->postJson('api/register', [
@@ -26,10 +22,6 @@ class AuthTest extends TestCase
 
         $this->assertCount(1, User::all());
     }
-
-    /**
-     * Should test a user login.
-     */
 
     public function test_user_can_login(): void
     {
@@ -56,9 +48,6 @@ class AuthTest extends TestCase
         $response->assertJsonFragment(['message' => 'Credenciales incorrectas']);
     }
 
-    /**
-     * Should test a user logout.
-     */
     public function test_user_can_logout(): void
     {
         $user = User::factory()->create([

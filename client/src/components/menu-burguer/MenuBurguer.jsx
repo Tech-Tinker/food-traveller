@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './MenuBurguer.css';
+// import './MenuBurguer.css';
 import AvatarGray from '../../assets/AvatarGray.svg';
 import Logout from '../../assets/Logout.svg';
 import Menu from '../../assets/Menu.svg';

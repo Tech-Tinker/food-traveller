@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import './css/SearchBar.css';
-import Search from '../../assets/Search.svg';
+import SearchIcon from '../../assets/SearchIcon.svg';
 import ViewOptions from './ViewOptions';
 
 function SearchBar({ map, setMarker }) {
@@ -86,7 +86,7 @@ function SearchBar({ map, setMarker }) {
           onChange={(e) => handleSearch(e.target.value)}
         />
         <button className='btn-search' onClick={() => handleSearch(searchQuery)}>
-          <img src={Search} alt="Search" />
+          <img src={SearchIcon} alt="Search" />
         </button>
       </div>
 

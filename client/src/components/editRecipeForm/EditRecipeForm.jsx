@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 import Button from '../button/Button';
-import '../createRecipeForm/CreateRecipeForm.css';
 import { getRecipeById, updateRecipe } from '../../services/ApiServices';
 import './EditRecipeForm.css';
 
@@ -256,7 +255,7 @@ const EditRecipeForm = () => {
                         type="file"
                         name="image"
                         accept="image/*"
-                        className="display-none top-42"
+                        className="display-none top-44"
                     />
                     {selectedFile && <p>Archivo seleccionado: {selectedFile.name}</p>}
                 </div>

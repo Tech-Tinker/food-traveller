@@ -17,6 +17,15 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             [
+                'name' => 'Rafaela',
+                'email' => 'r@mail.com',
+                'email_verified_at' => now(),
+                'password' => Hash::make('123456759'),
+                'remember_token' => Str::random(10),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
                 'name' => 'Julia',
                 'email' => 'j@mail.com',
                 'email_verified_at' => now(),

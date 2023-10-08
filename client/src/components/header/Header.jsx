@@ -50,42 +50,9 @@ const Header = () => {
         <img className='logo-header' src={Logo} alt='Logo Foodtraveller' />
       </Link>
 
-      {(isLoggedIn && (
-        isLargeScreen) && (
-          <div className="menu-links d-flex justify-content-between align-items-center">
-            {(currentPage === '/' || currentPage === '/create-recipe' || currentPage.match(/^\/edit-recipe\/\d+$/)) && (
-              <>
-                <Link to={'/profile'} className="link-style-none">
-                  <img src={AvatarGray} alt="Mi Perfil" />
-                  <span className="mx-2">Mi Perfil</span>
-                </Link>
-                <div className="list-item pointer" onClick={handleLogout}>
-                  <img src={Logout} alt="Cerrar Sesión" />
-                  <span className="mx-2">Cerrar Sesión</span>
-                </div>
-              </>
-            )}
-
-            {(currentPage === '/profile') && (
-              <>
-                <Link to={'/edit-profile'} className="link-style-none">
-                  <img src={Edit} alt="Mi Perfil" />
-                  <span className="mx-2">Editar Perfil</span>
-                </Link>
-                <div className="list-item pointer" onClick={handleLogout}>
-                  <img src={Logout} alt="Cerrar Sesión" />
-                  <span className="mx-2">Cerrar Sesión</span>
-                </div>
-              </>
-            )}
-
-          </div>
-        ))}
-
-      {isLoggedIn && (
-        !isLargeScreen) && (currentPage === '/' || currentPage === '/profile' || currentPage === '/create-recipe' || currentPage.match(/^\/edit-recipe\/\d+$/)) && (
-          <MenuBurguer currentPage={currentPage} />
-        )}
+      {isLoggedIn && (currentPage === '/' || currentPage === '/profile' || currentPage === '/result' || currentPage === '/create-recipe' || currentPage.match(/^\/edit-recipe\/\d+$/)) && (
+        <MenuBurguer currentPage={currentPage} />
+      )}
 
       {!isLoggedIn && currentPage === '/' && (
         <Link to={'/login'}>

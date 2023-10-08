@@ -1,9 +1,23 @@
-.menu-hamburguesa {
-    position: relative;
+ .menu-hamburguesa {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%; /* Abarca la mitad de la página */
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    /* z-index: 7000; */
+    
+
+    justify-content: center;
   }
   
   .menu-icon {
     cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 5%;
   }
   
   .menu-list {
@@ -23,10 +37,18 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    text-align: center;
+    display: flex;
+  align-items: center
   }
   
   .link-style-none {
     text-decoration: none;
+    color: #333;
+    display:block;
+    margin-bottom: 20px; 
+    display: flex;
+    align-items: center;
   }
   
   .close-icon{

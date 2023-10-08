@@ -34,7 +34,6 @@ const User = ({ country, continent }) => {
       Americas: 'orange',
       Oceania: 'purple',
     };
-
     return continentColors[continent] || 'grey';
   };
 

@@ -49,23 +49,6 @@ const LoginForm = () => {
     });
   };
 
-  // Función para obtener el nombre de usuario almacenado en localStorage
-  // const getUserName = () => {
-  //   return localStorage.getItem('auth_name');
-  // };
-
-  // Cerrar sesión
-  // const handleLogout = () => {
-  // Eliminar los datos de usuario almacenados en localStorage
-  // localStorage.removeItem('auth_token');
-  // localStorage.removeItem('auth_name');
-  // localStorage.removeItem('auth_user_id');
-
-  // Redirigir a la página de inicio de sesión u otra página de tu elección
-  // navigate('/');
-  //  window.location.reload();
-  // }
-
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
       <h2 className="p-5 fw-bold text-center headline-form-color headline-form-size margin-1 font-size-desktop">A dónde quieres viajar hoy?</h2>

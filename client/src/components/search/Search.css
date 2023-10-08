@@ -1,0 +1,15 @@
+
+
+.searchBar {
+    margin-left: 15vw;
+}
+
+.searchbtn {
+    height: 3rem;
+    padding: 0 1.5rem;
+    border-style: none;
+    border-radius: 0.5rem; 
+    background-color: #2F93A9;
+    color: white;
+    margin-left: 5vw;
+}

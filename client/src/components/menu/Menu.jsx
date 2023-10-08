@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './Menu.css';
+import '../menu-burguer/MenuBurguer.css';
 import Delete from '../../assets/Delete.svg';
 import ellipsis from '../../assets/ellipsis.svg';
 import Edit from '../../assets/Edit.svg';

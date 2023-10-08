@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter} from "react-router-dom";
 import App from "../App";
 import Login from "../pages/login/Login";
 import RegisterView from "../pages/registerView/RegisterView";
@@ -8,6 +8,8 @@ import EditRecipe from "../pages/editRecipe/EditRecipe";
 import EditProfile from "../pages/editProfile/EditProfile";
 import Profile from "../pages/profile/Profile";
 import { PrivateRoutes } from "../utils/PrivateRoutes";
+import Result from "../pages/result/Result";
+
 
 const router = createBrowserRouter([
     {
@@ -48,6 +50,11 @@ const router = createBrowserRouter([
     {
         path: '/edit-profile',
         element: <PrivateRoutes><EditProfile /></PrivateRoutes>
+    },
+
+    {
+        path: '/search',
+        element: <Result />
     }
 
 ]);
