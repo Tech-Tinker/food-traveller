@@ -1,6 +1,10 @@
 .container-toggle{
         color: white;
         align-items: center;
+        position: absolute;
+        right: 10px;
+        z-index: 1;
+        display: flex;
 }
 
 .container-toggle p{

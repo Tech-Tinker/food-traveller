@@ -5,10 +5,8 @@ import Button from '../button/Button';
 import { updateProfile, getProfile } from '../../services/ApiServices';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faPlus } from '@fortawesome/free-solid-svg-icons';
-import User from '../../components/User/User'
 import './EditProfileForm.css';
 import axios from 'axios';
-// import Foto from '../../assets/Foto.png';
 
 const EditProfileForm = () => {
     const navigate = useNavigate();
@@ -58,18 +56,17 @@ const EditProfileForm = () => {
 
     const [continent, setContinent] = useState(null);
 
-    // Mapeo de colores por continente
     const continentColors = {
-        Africa: 'red',      // Color para África
-        Europe: 'blue',    // Color para Europa
-        Asia: 'yellow',    // Color para Asia
-        Americas: 'orange', // Color para América
-        Oceania: 'purple',  // Color para Oceanía
+        Africa: 'red',
+        Europe: 'blue',
+        Asia: 'yellow',
+        Americas: 'orange',
+        Oceania: 'purple',
     };
 
     const [countries, setCountries] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    
+
 
     useEffect(() => {
         const fetchCountries = async () => {
@@ -79,14 +76,13 @@ const EditProfileForm = () => {
                 const countryOptions = data.map(country => ({
                     code: country.cca2,
                     name: country.name.common,
-                    continent: country.region, // Asumiendo que la región representa el continente
+                    continent: country.region,
                 }));
 
-                // Ordena la lista de países alfabéticamente
                 countryOptions.sort((a, b) => a.name.localeCompare(b.name));
 
                 setCountries(countryOptions);
-                setIsLoading(false); // Indica que la carga ha finalizado
+                setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching countries:', error);
             }
@@ -98,18 +94,18 @@ const EditProfileForm = () => {
     const getContinentByCountry = (selectedCountryCode) => {
         const selectedCountry = countries.find((c) => c.code === selectedCountryCode);
         if (selectedCountry) {
-          return selectedCountry.continent;
+            return selectedCountry.continent;
         }
-        return null; // Si no se encuentra el continente, retornamos null
-      };
+        return null;
+    };
 
-      useEffect(() => {
+    useEffect(() => {
         if (country) {
-          // Utiliza la función getContinentByCountry para obtener el continente
-          const continent = getContinentByCountry(country);
-          setContinent(continent);
+            const continent = getContinentByCountry(country);
+            setContinent(continent);
         }
-      }, [country, countries]);
+        // eslint-disable-next-line
+    }, [country, countries]);
 
     const handleSaveChanges = async (e) => {
         e.preventDefault();
@@ -125,7 +121,6 @@ const EditProfileForm = () => {
 
         try {
             const response = await updateProfile(formData);
-            console.log(response);
             if (response.errors) {
                 console.log('Errors:', response.errors);
             } else {
@@ -159,7 +154,6 @@ const EditProfileForm = () => {
         if (continent && continentColors.hasOwnProperty(continent)) {
             return continentColors[continent];
         }
-        // Si no se encuentra un continente válido, usa el color verde original
         return 'grey';
     };
 
@@ -180,7 +174,7 @@ const EditProfileForm = () => {
                             width: '120px',
                             height: '120px',
                             borderRadius: '50%',
-                            border: `5px solid ${getBorderColor()}`, // Usa el color del borde dinámicamente
+                            border: `5px solid ${getBorderColor()}`,
                             overflow: 'hidden',
                         }}
                     >
@@ -278,7 +272,6 @@ const EditProfileForm = () => {
                                     justifyContent: 'center',
                                 }}
                             >
-                                {/* <img src={Foto} alt='img'></img> */}
                                 <FontAwesomeIcon icon={faPlus} style={{ fontSize: '36px' }} />
                             </label>
                         )}

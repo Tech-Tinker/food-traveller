@@ -16,3 +16,10 @@
 .view-option-btn:focus{
     color: white;
 }
+
+@media (min-width: 1280px) and (min-height: 832px) {
+.view-options{
+    padding: 1.5rem;
+    justify-content: space-evenly;
+}
+}
