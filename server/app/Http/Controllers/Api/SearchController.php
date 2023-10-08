@@ -15,7 +15,7 @@ class SearchController extends Controller
     {
         $search = $request->input('query'); 
         if (!empty($search)) {
-            $result = food-travel::where('id', 'LIKE', "%$search%")
+            $result = foodtravel::where('id', 'LIKE', "%$search%")
                             ->orWhere('title', 'LIKE', "%$search%")
                             ->orWhere('description', 'LIKE', "%$search%")
                             ->orWhere('time', 'LIKE', "%$search%")
