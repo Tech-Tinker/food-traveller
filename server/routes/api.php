@@ -26,5 +26,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/recipe/{id}', [RecipeController::class, 'update']);
     Route::delete('/recipe/{id}', [RecipeController::class, 'destroy']);
     Route::get('/search', 'SearchController@search')->name('search');
-    //Route::post('/recipe-reviews', [RecipeReviewController::class, 'store']);
+    Route::post('/recipe-reviews', [RecipeReviewController::class, 'store']);
 });
