@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './Search.css';
+import { searchService } from '../../services/ApiServices';
 
-
-
-const Search = ({ onSearch }) => {
+const Search = () => {
   const [query, setQuery] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`/api/search?query=${query}`);
-      if (response.data.length === 0) {
-        setErrorMessage('No se encontraron cohicidencias');
+      const results = await searchService(query);
+      if (results.length === 0) {
+        setErrorMessage('No se encontraron coincidencias');
       } else {
         setErrorMessage('');
       }
-      onSearch(response.data);
+      setSearchResults(results);
     } catch (error) {
       console.error('Error al buscar:', error);
       setErrorMessage('Ocurrió un error al buscar las recetas.');
@@ -26,7 +25,8 @@ const Search = ({ onSearch }) => {
   return (
     <div className="search-div">
       <div className="searchBar">
-        <input className="fw-bold fs-5 label-text text"
+        <input
+          className="fw-bold fs-5 label-text text"
           type="text"
           placeholder="Buscar recetas..."
           value={query}
@@ -35,10 +35,13 @@ const Search = ({ onSearch }) => {
         <button className='searchbtn' onClick={handleSearch}>Buscar</button>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
       </div>
+      <ul>
+        {searchResults.map((result) => (
+          <li key={result.id}>{result.title}</li>
+        ))}
+      </ul>
     </div>
   );
 };
 
 export default Search;
-
-

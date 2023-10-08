@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Rating.css";
+import { saveRatingService } from '../../services/ApiServices';
 
 function Rating() {
   const [currentValue, setCurrentValue] = useState(0);
@@ -23,23 +24,14 @@ function Rating() {
     setComment(event.target.value);
   };
 
-  const handleSubmit = () => {
-    fetch("/api/rating", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ rating: currentValue, comment: comment }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setServerResponse(data.message);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+  const handleSubmit = async () => {
+    try {
+      const response = await saveRatingService(currentValue, comment);
+      setServerResponse(response.message);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
-  
 
   const maxStars = 5;
 

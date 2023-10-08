@@ -33,6 +33,7 @@ export async function login($data) {
     }
 }
 
+
 const AuthServices = { register, login };
 
 export default AuthServices;

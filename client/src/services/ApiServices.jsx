@@ -71,3 +71,36 @@ export async function updateProfile(data) {
         throw error;
     }
 }
+export async function searchService(query) {
+    const token = localStorage.getItem('token');
+  
+    try {
+      const response = await axios.get(`${endpoint}/search?query=${query}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+export async function saveRatingService(rating, comment) {
+   const token = localStorage.getItem("token");
+   try {
+     const response = await axios.post(
+       `${endpoint}/recipe_reviews`,
+       { rating, comment },
+       {
+         headers: {
+           Authorization: `Bearer ${token}`,
+           "Content-Type": "application/json",
+         },
+       }
+    );
+    return response.data;
+    } catch (error) {
+      throw error;
+    }
+}

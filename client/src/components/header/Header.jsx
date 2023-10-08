@@ -3,9 +3,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Header.css';
 import Logo from '../../assets/Logo.svg';
 import Avatar from '../../assets/Avatar.svg';
-import Edit from '../../assets/Edit.svg';
-import AvatarGray from '../../assets/AvatarGray.svg';
-import Logout from '../../assets/Logout.svg';
+// import Edit from '../../assets/Edit.svg';
+// import AvatarGray from '../../assets/AvatarGray.svg';
+// import Logout from '../../assets/Logout.svg';
 import MenuBurguer from '../menu-burguer/MenuBurguer';
 
 
@@ -50,7 +50,7 @@ const Header = () => {
         <img className='logo-header' src={Logo} alt='Logo Foodtraveller' />
       </Link>
 
-      {isLoggedIn && (currentPage === '/' || currentPage === '/profile' || currentPage === '/result' || currentPage === '/create-recipe' || currentPage.match(/^\/edit-recipe\/\d+$/)) && (
+      {isLoggedIn && (currentPage === '/' || currentPage === '/profile' || currentPage === '/search' || currentPage === '/create-recipe' || currentPage.match(/^\/edit-recipe\/\d+$/)) && (
         <MenuBurguer currentPage={currentPage} />
       )}
 

@@ -9,6 +9,7 @@ import EditProfile from "../pages/editProfile/EditProfile";
 import Profile from "../pages/profile/Profile";
 import { PrivateRoutes } from "../utils/PrivateRoutes";
 import Result from "../pages/result/Result";
+import Rating from "../components/rating/Rating";
 
 
 const router = createBrowserRouter([
@@ -54,7 +55,12 @@ const router = createBrowserRouter([
 
     {
         path: '/search',
-        element: <Result />
+        element: <PrivateRoutes><Result /></PrivateRoutes>
+    },
+
+    {
+        path: '/recipe-reviews',
+        element: <Rating />
     }
 
 ]);
