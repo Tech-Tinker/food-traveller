@@ -65,4 +65,8 @@
     gap: 5px;
 }
 
-
+@media (min-width: 1080px) and (min-height: 720px) {
+.w-desktop{
+    width: 50%;
+    }
+}

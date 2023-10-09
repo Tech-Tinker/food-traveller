@@ -34,7 +34,7 @@ const RecipeDetails = () => {
   ));
 
   const renderPreparation = preparation && preparation.split('\n').map((step, index) => (
-    <li key={index}>{step}</li>
+    <li key={index} className="list-style-none">{step}</li>
   ));
 
   return (
@@ -42,34 +42,41 @@ const RecipeDetails = () => {
       <div className="pb-desktop padding-b-3">
         <Link to={`/`}><img src={Back} alt="Go back icon" /></Link>
       </div>
-      <h1 className="fw-bold">{title}</h1>
-      <img src={image} alt="" className="pt-2 pb-2 w-image" />
-      <h2>{username}</h2>
-      <p className="country">{country}</p>
-      <div className="d-flex justify-content-between buttons mt-2 mb-2">
-        <button className={selectedSection === 'description' ? 'recipe-btn active' : 'recipe-btn'} onClick={() => setSelectedSection('description')}>General</button>
-        <button className={selectedSection === 'ingredients' ? 'recipe-btn active' : 'recipe-btn'} onClick={() => setSelectedSection('ingredients')}>Ingredientes</button>
-        <button className={selectedSection === 'preparation' ? 'recipe-btn active' : 'recipe-btn'} onClick={() => setSelectedSection('preparation')}>Preparación</button>
-      </div>
-      <div className="general d-flex justify-content-evenly">
-        <div className="d-flex justify-content-around align-items-center gap">
-          <img src={Cookware} alt=""></img>
-          <p className="m-0">{difficulty}</p>
+      <h1 className="fw-bold center">{title}</h1>
+      <div className="flex-desktop">
+        <div className="width-40 margin-2-0">
+          <img src={image} alt="" className="pt-2 pb-2 w-image " />
         </div>
-        <div className="d-flex justify-content-around align-items-center gap">
-          <img src={Watch} alt=""></img>
-          <p className="m-0">{time}</p>
+        <div className="width-40 margin-2-0">
+          <h2 className="margin-top-0-5">{username}</h2>
+          <p className="country">{country}</p>
+          <div className="d-flex justify-content-between buttons mt-2 mb-2">
+            <button className={selectedSection === 'description' ? 'recipe-btn active' : 'recipe-btn'} onClick={() => setSelectedSection('description')}>General</button>
+            <button className={selectedSection === 'ingredients' ? 'recipe-btn active' : 'recipe-btn'} onClick={() => setSelectedSection('ingredients')}>Ingredientes</button>
+            <button className={selectedSection === 'preparation' ? 'recipe-btn active' : 'recipe-btn'} onClick={() => setSelectedSection('preparation')}>Preparación</button>
+          </div>
+          <div className="general d-flex justify-content-evenly margin-2-0">
+            <div className="d-flex justify-content-around align-items-center gap">
+              <img src={Cookware} alt=""></img>
+              <p className="m-0">{difficulty}</p>
+            </div>
+            <div className="d-flex justify-content-around align-items-center gap">
+              <img src={Watch} alt=""></img>
+              <p className="m-0">{time}</p>
+            </div>
+            <div className="d-flex justify-content-around align-items-center gap">
+              <p className="m-0">{category}</p>
+            </div>
+          </div>
+          <div className="show-text">
+            {selectedSection === 'description' && <p>{description}</p>}
+            {selectedSection === 'ingredients' && <ul>{renderIngredients}</ul>}
+            {selectedSection === 'preparation' && <ul className="pad-0">{renderPreparation}</ul>}
+          </div>
         </div>
-        <div className="d-flex justify-content-around align-items-center gap">
-          <p className="m-0">{category}</p>
-        </div>
-      </div>
-      <div className="show-text">
-        {selectedSection === 'description' && <p>{description}</p>}
-        {selectedSection === 'ingredients' && <ul>{renderIngredients}</ul>}
-        {selectedSection === 'preparation' && <ul>{renderPreparation}</ul>}
       </div>
     </div>
+
   );
 }
 

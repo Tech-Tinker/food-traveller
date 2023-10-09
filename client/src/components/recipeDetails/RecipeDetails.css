@@ -48,6 +48,14 @@
     text-align: justify;
 }
 
+.list-style-none{
+    list-style: none;
+}
+
+.pad-0{
+    padding: 0;
+}
+
 @media (min-width: 1280px) and (min-height: 832px) {
     .padding-2-4{
         padding: 2rem 4rem;

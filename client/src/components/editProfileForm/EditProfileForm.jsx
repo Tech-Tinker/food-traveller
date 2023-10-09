@@ -97,12 +97,12 @@ const EditProfileForm = () => {
             return selectedCountry.continent;
         }
         return null;
-      };
+    };
 
     useEffect(() => {
         if (country) {
-          const continent = getContinentByCountry(country);
-          setContinent(continent);
+            const continent = getContinentByCountry(country);
+            setContinent(continent);
         }
         // eslint-disable-next-line
     }, [country, countries]);
@@ -160,7 +160,7 @@ const EditProfileForm = () => {
 
     return (
         <div className="d-flex flex-column align-items-center mt-5">
-            <form className="edit-profile-form rounded-1" style={{ margin: '20px' }} onSubmit={handleSaveChanges}>
+            <form className="w-desktop edit-profile-form rounded-1" style={{ margin: '20px' }} onSubmit={handleSaveChanges}>
                 <h2 className="text-center bold mb-3" style={{ color: '#2F93A9' }}>
                     Editar Perfil
                 </h2>
@@ -175,7 +175,7 @@ const EditProfileForm = () => {
                             width: '120px',
                             height: '120px',
                             borderRadius: '50%',
-                            border: `5px solid ${getBorderColor()}`, 
+                            border: `5px solid ${getBorderColor()}`,
                             overflow: 'hidden',
                         }}
                     >
