@@ -27,6 +27,7 @@ const User = ({ continent }) => {
 
   const profileImageUrl = profileData.image_url;
 
+  // eslint-disable-next-line
   const getBorderColor = () => {
     const continentColors = {
       Africa: 'red',
