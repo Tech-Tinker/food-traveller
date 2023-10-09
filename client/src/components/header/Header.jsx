@@ -14,7 +14,7 @@ const Header = (props) => {
   const currentPage = location.pathname;
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1280);
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 1080);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const Header = (props) => {
   }, []);
 
   const handleResize = () => {
-    setIsLargeScreen(window.innerWidth >= 1280);
+    setIsLargeScreen(window.innerWidth >= 1080);
   };
 
   const handleLogoClick = () => {
