@@ -38,11 +38,11 @@ La idea surgió después de ver la serie "Street Food" en Netflix, donde se elab
  ### Mockup
  
 <div style="display: flex;">
-<img src="/client/src/assets/mockup/Home1.png" alt="Home" width="180"/>
-<img src="/client/src/assets/mockup/Home2.png" alt="Home" width="180"/>
-<img src="/client/src/assets/mockup/Menu.png" alt="Menu" width="180"/>
-<img src="/client/src/assets/mockup/Profile.png" alt="Profile" width="180"/>
-<img src="/client/src/assets/mockup/Recipe.png" alt="Recipe" width="180"/>
+<img src="/client/src/assets/mockup/Home1.png" alt="Home" width="160"/>
+<img src="/client/src/assets/mockup/Home2.png" alt="Home" width="160"/>
+<img src="/client/src/assets/mockup/Menu.png" alt="Menu" width="160"/>
+<img src="/client/src/assets/mockup/Profile.png" alt="Profile" width="160"/>
+<img src="/client/src/assets/mockup/Recipe.png" alt="Recipe" width="160"/>
 </div>
 
 
