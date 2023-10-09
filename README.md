@@ -157,7 +157,7 @@ DrawSql: https://drawsql.app/teams/lea-2/diagrams/foodtravel
     </td>
      <td>
             <a href="https://www.linkedin.com/in/rousmedina/">
-                <img src="https://media.licdn.com/dms/image/D4E35AQHD4eMaP3p7lQ/profile-displayphoto-shrink_200_200/0/1674229921215?e=1696428000&v=beta&t=bWUWvb5NI6z8E_Al4b5MeAfZ2QXfEoaGogR7aVI3qs8"
+                <img src="/client/src/assets/mockup/Rous.jpeg"
                     alt="Foto de perfil" width="100">
                 Rosemary Medina
             </a>
