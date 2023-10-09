@@ -6,9 +6,7 @@ import Back from '../../assets/Back.svg';
 import Cookware from '../../assets/Cookware.svg';
 import Watch from '../../assets/Watch.svg';
 
-
 const RecipeDetails = () => {
-
   const [show, setShow] = useState({});
   const [selectedSection, setSelectedSection] = useState('description');
   const { id } = useParams();
@@ -17,9 +15,7 @@ const RecipeDetails = () => {
     const fetchData = async () => {
       try {
         const showData = await getRecipeById(id);
-        // console.log(showData.image_url);
         setShow(showData);
-        // console.log(show);
       } catch (error) {
         console.error('Error fetching show info:', error);
       }
@@ -28,13 +24,18 @@ const RecipeDetails = () => {
     fetchData();
   }, [id]);
 
-  const { title, country, difficulty, time, description, ingredients, preparation } = show.recipe || {}
+  const { title, country, difficulty, time, description, ingredients, preparation } = show.recipe || {};
+  const username = show.username || '';
+  const category = show.category || '';
+  const image = show.image_url;
 
-  const username = show.username || ''
+  const renderIngredients = ingredients && ingredients.split('\n').map((ingredient, index) => (
+    <li key={index}>{ingredient}</li>
+  ));
 
-  const category = show.category || ''
-
-  const image = show.image_url
+  const renderPreparation = preparation && preparation.split('\n').map((step, index) => (
+    <li key={index}>{step}</li>
+  ));
 
   return (
     <div className="padding">
@@ -65,12 +66,12 @@ const RecipeDetails = () => {
       </div>
       <div className="show-text">
         {selectedSection === 'description' && <p>{description}</p>}
-        {selectedSection === 'ingredients' && <p>{ingredients}</p>}
-        {selectedSection === 'preparation' && <p>{preparation}</p>}
+        {selectedSection === 'ingredients' && <ul>{renderIngredients}</ul>}
+        {selectedSection === 'preparation' && <ul>{renderPreparation}</ul>}
       </div>
     </div>
-  )
+  );
 }
 
+export default RecipeDetails;
 
-export default RecipeDetails

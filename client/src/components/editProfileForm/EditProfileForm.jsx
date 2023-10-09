@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import swal from 'sweetalert';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../button/Button';
@@ -81,11 +81,10 @@ const EditProfileForm = () => {
                     continent: country.region, // Asumiendo que la región representa el continente
                 }));
 
-                // Ordena la lista de países alfabéticamente
                 countryOptions.sort((a, b) => a.name.localeCompare(b.name));
 
                 setCountries(countryOptions);
-                setIsLoading(false); // Indica que la carga ha finalizado
+                setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching countries:', error);
             }
@@ -99,12 +98,11 @@ const EditProfileForm = () => {
         if (selectedCountry) {
           return selectedCountry.continent;
         }
-        return null; // Si no se encuentra el continente, retornamos null
+        return null;
       };
 
       useEffect(() => {
         if (country) {
-          // Utiliza la función getContinentByCountry para obtener el continente
           const continent = getContinentByCountry(country);
           setContinent(continent);
         }
@@ -158,7 +156,7 @@ const EditProfileForm = () => {
         if (continent && continentColors.hasOwnProperty(continent)) {
             return continentColors[continent];
         }
-        // Si no se encuentra un continente válido, usa el color verde original
+
         return 'grey';
     };
 
@@ -179,7 +177,7 @@ const EditProfileForm = () => {
                             width: '120px',
                             height: '120px',
                             borderRadius: '50%',
-                            border: `5px solid ${getBorderColor()}`, // Usa el color del borde dinámicamente
+                            border: `5px solid ${getBorderColor()}`, 
                             overflow: 'hidden',
                         }}
                     >
