@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Login from "../pages/login/Login";
-import RegisterView from "../pages/registerView/RegisterView";
+import Register from "../pages/register/Register";
 import Recipe from "../pages/recipe/Recipe";
 import CreateRecipe from "../pages/createRecipe/CreateRecipe";
 import EditRecipe from "../pages/editRecipe/EditRecipe";
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
 
     {
         path: "/register",
-        element: <RegisterView />,
+        element: <Register />,
     },
 
     {

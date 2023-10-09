@@ -17,24 +17,13 @@ const RegisterForm = () => {
         error_list: [],
     });
 
-    const [aceptado, setAceptado] = useState(false);
-
-
-
     const handleInput = (e) => {
         e.persist();
         setRegisterInput({ ...registerInput, [e.target.name]: e.target.value });
     }
 
-    const handleAceptoCambio = () => {
-        setAceptado(!aceptado);
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!aceptado) {
-            return;
-        }
 
         const formData = {
             name: registerInput.name,
@@ -50,7 +39,6 @@ const RegisterForm = () => {
                     localStorage.setItem('auth_name', res.data.username);
                     localStorage.setItem('auth_user_id', res.data.id);
                     swal("Success", res.data.message, "success");
-                    // navigate('/login');
                     navigate('/');
 
                 } else {
@@ -61,73 +49,51 @@ const RegisterForm = () => {
     }
 
     return (
-        <div className="container">
-            <form onSubmit={handleSubmit} className="reg-form rounded-0" action="/register" method="POST">
-                <h2 className="title-register text-center bold mb-3">¡Te damos la bienvenida <br></br>a bordo!</h2>
-                <div className="container-input">
-                    <div className="mb-3 text-center">
-
-                        <input
-                            onChange={handleInput}
-                            value={registerInput.name}
-                            type="text"
-                            name="name"
-                            className="input-register text-left border-0 border-bottom border-2 border-dark"
-                            placeholder="Nombre"
-                        />
-
-                        <span className="error-required">{registerInput.error_list.name}</span>
-                    </div>
-
-                    <div className="mb-3 text-center input-login">
-                        <input
-                            onChange={handleInput}
-                            value={registerInput.email}
-                            type="text"
-                            name="email"
-                            className="input-register text-left border-0 border-bottom border-2 border-dark"
-                            placeholder="Email"
-                        />
-                        <span className="error-required">{registerInput.error_list.email}</span>
-                    </div>
-
-
-
-                    <div className="mb-3 text-center">
-                        <input
-                            onChange={handleInput}
-                            value={registerInput.password}
-                            type="password"
-                            name="password"
-                            className="input-register text-left border-0 border-bottom border-2 border-dark"
-                            placeholder="Contraseña"
-                        />
-                        <span className="error-required">{registerInput.error_list.password}</span>
-                        <br></br>
-                    </div>
+        <div className="d-flex flex-column justify-content-center align-items-center">
+            <h2 className="p-5 fw-bold text-center headline-form-color headline-form-size margin-2 font-size-desktop">¡Te damos la bienvenida a bordo!</h2>
+            <form onSubmit={handleSubmit} className="form-register">
+                <div className="d-flex flex-column gap-0-5">
+                    <label htmlFor="name" className="fw-bold fs-5 label-text text">Nombre</label>
+                    <input
+                        onChange={handleInput}
+                        value={registerInput.name}
+                        type="text"
+                        name="name"
+                        className="input-none-style border-b"
+                    />
                 </div>
-                <div className="terminos-y-condiciones-container">
-                    <label>
-                        <input className="checkbox"
-                            type="checkbox"
-                            checked={aceptado}
-                            onChange={handleAceptoCambio}
-                        />
-                    </label>
-                    <span className="terminos-y-condiciones-text">
-                        Acepto los <Link to="">términos y condiciones </Link> de la política de protección de datos.<br></br> Recibirás confirmación del registro por correo electrónico.
-                    </span>
+                <span className="error-text text-center">{registerInput.error_list.name}</span>
+
+                <div className="d-flex flex-column gap-0-5">
+                    <label htmlFor="email" className="fw-bold fs-5 label-text text">Email</label>
+                    <input
+                        onChange={handleInput}
+                        value={registerInput.email}
+                        type="email"
+                        name="email"
+                        className="input-none-style border-b"
+                    />
                 </div>
+                <span className="error-text text-center">{registerInput.error_list.email}</span>
 
-
-
-                <div className="d-flex justify-content-evenly">
-                    <Button backgroundColorClass="button-register bttn-secondary" id="aceptButton" text="Regístrate" />
+                <div className="d-flex flex-column gap-0-5">
+                    <label htmlFor="password" className="fw-bold fs-5 label-text text">Contraseña</label>
+                    <input
+                        onChange={handleInput}
+                        value={registerInput.password}
+                        type="password"
+                        name="password"
+                        className="input-none-style border-b"
+                    />
                 </div>
+                <span className="error-text text-center">{registerInput.error_list.password}</span>
 
-                <p className="text-black-50 accede bold " >¿Ya eres miembro? <Link to={`/login`} className="aqui">Inicia tu sesión</Link></p>
-            </form>
-        </div>
+                <div className="d-flex flex-column justify-content-around align-items-center gap1">
+                    <Button backgroundColorClass="bttn-secondary" text="Regístrate" widthClass="dobleW" />
+                    <p className="text-center">¿Ya eres miembro? <Link to={`/login`} className="fw-bold  link-none-style">Inicia tu sesión</Link></p>
+                </div>
+            </form >
+        </div >
     )
 }
 

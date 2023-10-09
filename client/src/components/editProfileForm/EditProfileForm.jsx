@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import swal from 'sweetalert';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../button/Button';
@@ -121,7 +121,6 @@ const EditProfileForm = () => {
 
         try {
             const response = await updateProfile(formData);
-            console.log(response);
             if (response.errors) {
                 console.log('Errors:', response.errors);
             } else {
@@ -160,7 +159,7 @@ const EditProfileForm = () => {
 
     return (
         <div className="d-flex flex-column align-items-center mt-5">
-            <form className="edit-profile-form rounded-1" style={{ margin: '20px' }} onSubmit={handleSaveChanges}>
+            <form className="w-desktop edit-profile-form rounded-1" style={{ margin: '20px' }} onSubmit={handleSaveChanges}>
                 <h2 className="text-center bold mb-3" style={{ color: '#2F93A9' }}>
                     Editar Perfil
                 </h2>

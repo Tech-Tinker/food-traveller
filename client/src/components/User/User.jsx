@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Foto from '../../assets/Foto.png';
+import AvatarGray from '../../assets/AvatarGray.svg';
 import { getProfile } from '../../services/ApiServices';
+import './User.css';
 
-const User = ({ country, continent }) => {
+const User = ({ continent }) => {
   const [profileData, setProfileData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -26,6 +27,7 @@ const User = ({ country, continent }) => {
 
   const profileImageUrl = profileData.image_url;
 
+  // eslint-disable-next-line
   const getBorderColor = () => {
     const continentColors = {
       Africa: 'red',
@@ -38,39 +40,17 @@ const User = ({ country, continent }) => {
   };
 
   return (
-    <div className="d-flex flex-column">
+    <div className="d-flex flex-column pad-2">
       {isLoading ? (
         <div>Cargando perfil de usuario...</div>
       ) : (
-        <div className="d-flex flex-column align-items-start mb-4"> {/* Aplicamos la clase "mb-4" para agregar espacio inferior */}
-          <div
-            className="avatar-upload"
-            style={{
-              maxWidth: '120px',
-              maxHeight: '120px',
-              overflow: 'hidden',
-              marginRight: '15px',
-              marginBottom: '15px',
-            }}
-          >
-            <div
-              className="d-flex justify-content-center align-items-center selected-image-container"
-              style={{
-                border: `5px solid ${getBorderColor()}`,
-                borderRadius: '50%',
-                width: '100%',
-                height: '100%',
-              }}
-            >
+        <div className="d-flex flex-column mb-4 align-mobile align-desktop">
+          <div className="avatar-upload" >
+            <div className="d-flex justify-content-center sel-image-container">
               <img
-                src={profileImageUrl || Foto}
+                src={profileImageUrl || AvatarGray}
                 alt="Avatar"
                 className="selected-image b-r50"
-                style={{
-                  maxWidth: '100%',
-                  maxHeight: '100%',
-                  borderRadius: '50%',
-                }}
               />
             </div>
           </div>

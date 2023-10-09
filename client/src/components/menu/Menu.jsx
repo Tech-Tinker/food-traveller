@@ -55,7 +55,7 @@ const Menu = ({ currentPage, recipeId, recipes, setRecipes }) => {
                         <div className="close" onClick={toggleMenu}>
                             <span><img src={Cruz} alt="" /></span>
                         </div>
-                        <ul className="menu-ls">
+                        <ul className="menu-ls d-flex flex-column justify-content-around">
                             {currentPage === '/profile' && (
                                 <>
                                     <li className="list-item"><Link to={`/edit-recipe/${recipeId}`} className="link-style-none">

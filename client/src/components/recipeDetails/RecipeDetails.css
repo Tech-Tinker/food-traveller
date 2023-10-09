@@ -1,5 +1,9 @@
-.padding{
+.padding-1-5{
     padding: 1.5rem;
+}
+
+.padding-b-3{
+    padding-bottom: 1rem;
 }
 
 .w-image{
@@ -42,4 +46,55 @@
 .show-text{
     padding-bottom: 3rem;
     text-align: justify;
+}
+
+.list-style-none{
+    list-style: none;
+}
+
+.pad-0{
+    padding: 0;
+}
+
+@media (min-width: 1280px) and (min-height: 832px) {
+    .padding-2-4{
+        padding: 2rem 4rem;
+    }
+
+    .center{
+        text-align: center;
+    }
+
+    .margin-1{
+        margin: 1rem;
+    }
+
+    .width-40{
+        width: 40%;
+    }
+
+    .flex-desktop{
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .margin-2-0{
+        margin: 2rem 0;
+    }
+
+    .margin-top-0-5{
+        margin-top: 0.5rem;
+    }
+
+    .country{
+        margin-bottom: 1.5rem;
+    }
+
+    .pb-desktop{
+        padding-bottom: 0;
+    }
+
+    .padding-1-5-4{
+        padding: 1.5rem 4rem;
+    }
 }

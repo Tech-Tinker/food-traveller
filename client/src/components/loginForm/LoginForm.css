@@ -42,3 +42,25 @@
 .gap1{
     gap: 1rem;
 }
+
+@media (min-width: 1080px) and (min-height: 720px) {
+    .font-size-desktop{
+        font-size: 2.5rem;
+    }
+    
+    .margin-2{
+        margin: 2rem;
+    }
+    
+    .form-login{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 1.5rem;
+        width: 35%;
+    }
+
+    .gap-0-5{
+        gap: 0.5rem;
+    }
+}

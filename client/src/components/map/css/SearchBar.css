@@ -13,6 +13,18 @@
     text-align: center;
 }
 
+.country-list-item{
+    text-align: center;
+    list-style: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.country-list{
+    padding-bottom: 2rem;
+    margin: 0;
+}
+
 @media (min-width: 400px) {
 
     .search-map {
@@ -64,4 +76,20 @@
     margin-top: 3%;
     list-style: none;
     padding-left: 40px;
+}
+
+@media (min-width: 1080px) and (min-height: 720px) {
+    .container-search-map{
+        margin: 4rem;
+    }   
+
+    .search-map{
+        margin: 0;
+        text-align: center;
+        width: 35rem;
+    }
+
+    .btn-search{
+        right: 22rem;
+    }
 }
