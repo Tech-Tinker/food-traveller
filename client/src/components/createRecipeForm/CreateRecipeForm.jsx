@@ -1,114 +1,160 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 import Button from '../button/Button';
 import '../createRecipeForm/CreateRecipeForm.css';
 import { storeRecipe } from '../../services/ApiServices';
-import axios from 'axios'
+import axios from 'axios';
+
+
 
 const CreateRecipeForm = () => {
 
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [time, setTime] = useState('')
-    const [category, setCategory] = useState('')
-    const [difficulty, setDifficulty] = useState('')
-    const [ingredients, setIngredients] = useState('')
-    const [preparation, setPreparation] = useState('')
-    const [country, setCountry] = useState('')
-    const [image, setImage] = useState('')
-    const [countryOptions, setCountryOptions] = useState([]);
-    const [countryInput, setCountryInput] = useState('');
-    const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
 
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [time, setTime] = useState('');
+  const [category, setCategory] = useState('');
+  const [difficulty, setDifficulty] = useState('');
+  const [ingredients, setIngredients] = useState('');
+  const [preparation, setPreparation] = useState('');
+  const [country, setCountry] = useState('');
+  const [image, setImage] = useState('');
+  const [countryOptions, setCountryOptions] = useState([]);
+  const [countryInput, setCountryInput] = useState('');
+  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
+  const [coordinates, setCoordinates] = useState({ longitude: null, latitude: null });
 
-    const [errors, setErrors] = useState({
-        title: null,
-        description: null,
-        time: null,
-        category: null,
-        difficulty: null,
-        ingredients: null,
-        preparation: null,
-        country: null,
-        image: null
-    })
-    const [selectedFile, setSelectedFile] = useState(null);
+  const [errors, setErrors] = useState({
+    title: null,
+    description: null,
+    time: null,
+    category: null,
+    difficulty: null,
+    ingredients: null,
+    preparation: null,
+    country: null,
+    image: null,
+  });
+  const [selectedFile, setSelectedFile] = useState(null);
 
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const handleImageChange = (e) => {
-        const selectedFile = e.target.files[0];
-        setImage(selectedFile);
-        setSelectedFile(selectedFile);
-    };
+  const handleImageChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage(selectedFile);
+    setSelectedFile(selectedFile);
+  };
 
-    const handleCountryInputChange = async (e) => {
-        const input = e.target.value;
-        setCountryInput(input);
-      
-        try {
-          const response = await axios.get(
-            `https://restcountries.com/v3/name/${input}`
-          );
-      
-          if (Array.isArray(response.data)) {
-            const options = response.data.map((country) => ({
-              label: country.name.common,
-              value: country.name.common,
-              
-            }));
-            setCountryOptions(options);
-            setIsCountryDropdownOpen(true); // Abre la ventana de sugerencias
-    
-          } else {
-            setCountryOptions([]);
-            setIsCountryDropdownOpen(false); // Cierra la ventana de sugerencias
+  const getCoordinates = async (locationName) => {
+    try {
+      const accessToken = 'pk.eyJ1IjoiZ2VuZW5mIiwiYSI6ImNsbXN2MmJ1ZzAzaTEyaXM0aGhvcWVmZDEifQ.nBufcYLKUJUZb0yobUyJWg'; // Reemplaza 'TU_ACCESS_TOKEN' con tu token de Mapbox
+      const geocodeUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+        locationName
+      )}.json?access_token=${accessToken}`;
 
-          }
-        } catch (error) {
-          console.error('Error fetching countries:', error);
-        }
-      };
+      const response = await axios.get(geocodeUrl);
+      const features = response.data.features;
 
-      const handleCountryOptionClick = (option) => {
-        setCountryInput(option.value);
+      if (features.length > 0) {
+        const [longitude, latitude] = features[0].center;
+        return { longitude, latitude };
+      } else {
+        console.log('Ubicación no encontrada.');
+        return null;
+      }
+    } catch (error) {
+      console.error('Error al geocodificar la ubicación:', error);
+      return null;
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('time', time);
+    formData.append('category', category);
+    formData.append('difficulty', difficulty);
+    formData.append('ingredients', ingredients);
+    formData.append('preparation', preparation);
+    formData.append('country', countryInput);
+    formData.append('image', image);
+
+    try {
+      // Obtener coordenadas del país ingresado
+      const countryCoordinates = await getCoordinates(countryInput);
+
+      if (countryCoordinates) {
+        // countryCoordinates contiene las coordenadas de longitud y latitud
+        const { longitude, latitude } = countryCoordinates;
+        setCoordinates({ longitude, latitude }); // Actualiza el estado de coordenadas
+        formData.append('longitude', longitude);
+        formData.append('latitude', latitude);
+      }
+
+      const response = await storeRecipe(formData);
+
+      if (response.errors) {
+        console.log('Errors:', response.errors);
+      } else {
+        swal('Success', response.message, 'success');
+        navigate(`/recipe/${response.id}`);
+            //   addMarkerToMap(parseFloat(latitude), parseFloat(longitude), title);
+
+      }
+    } catch (error) {
+      console.error('Error creating recipe:', error);
+      const errors = error.response.data.errors;
+
+      setErrors({
+        title: errors.title && errors.title[0],
+        description: errors.description && errors.description[0],
+        time: errors.time && errors.time[0],
+        category: errors.category && errors.category[0],
+        difficulty: errors.difficulty && errors.difficulty[0],
+        ingredients: errors.ingredients && errors.ingredients[0],
+        preparation: errors.preparation && errors.preparation[0],
+        country: errors.country && errors.country[0],
+        image: errors.image && errors.image[0],
+      });
+    }
+  };
+
+  const handleCountryInputChange = async (e) => {
+    const input = e.target.value;
+    setCountryInput(input);
+
+    try {
+      const response = await axios.get(
+        `https://restcountries.com/v3/name/${input}`
+      );
+
+      if (Array.isArray(response.data)) {
+        const options = response.data.map((country) => ({
+          label: country.name.common,
+          value: country.name.common,
+        }));
+        setCountryOptions(options);
+        setIsCountryDropdownOpen(true); // Abre la ventana de sugerencias
+      } else {
+        setCountryOptions([]);
         setIsCountryDropdownOpen(false); // Cierra la ventana de sugerencias
-      };
-      
-      
+      }
+    } catch (error) {
+      console.error('Error fetching countries:', error);
+    }
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+  const handleCountryOptionClick = (option) => {
+    setCountryInput(option.value);
+    setIsCountryDropdownOpen(false); // Cierra la ventana de sugerencias
+  };
 
-        const formData = new FormData();
-        formData.append('title', title);
-        formData.append('description', description);
-        formData.append('time', time);
-        formData.append('category', category);
-        formData.append('difficulty', difficulty);
-        formData.append('ingredients', ingredients);
-        formData.append('preparation', preparation);
-        formData.append('country', countryInput);
-        formData.append('image', image);
-
-        try {
-            const response = await storeRecipe(formData);
-
-            if (response.errors) {
-                console.log('Errors:', response.errors);
-            } else {
-                swal("Success", response.message, "success");
-                navigate(`/recipe/${response.id}`);
-            }
-        } catch (error) {
-            console.error('Error creating recipe:', error);
-            const errors = error.response.data.errors
-
-            setErrors({ title: errors.title && errors.title[0], description: errors.description && errors.description[0], time: errors.time && errors.time[0], category: errors.category && errors.category[0], difficulty: errors.difficulty && errors.difficulty[0], ingredients: errors.ingredients && errors.ingredients[0], preparation: errors.preparation && errors.preparation[0], country: errors.country && errors.country[0], image: errors.image && errors.image[0], });
-        }
-    };
+  
 
     return (
         <div className="d-flex flex-column justify-content-around align-items-center display-h">

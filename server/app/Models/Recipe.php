@@ -12,13 +12,16 @@ class Recipe extends Model
         'title',
         'description',
         'time',
-        'çategory_id',
+        'category_id',
         'difficulty',
         'ingredients',
         'preparation',
         'country',
         'image',
+        'longitude', // Agregar longitud
+        'latitude',
         'user_id'
+        
     ];
 
     protected $hidden = [

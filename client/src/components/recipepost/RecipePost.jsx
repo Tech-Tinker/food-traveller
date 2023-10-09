@@ -6,7 +6,7 @@ const RecipePost = ({ recipe }) => {
   const { title, country, image_url } = recipe;
 
   return (
-    <div className="recipe-post">
+    <div className="recipe-post recipe-marker">
       <Link to={`/recipe/${recipe.id}`} className="link-style-none">
         <div className='image-container'>
           <img src={image_url} alt={title} />

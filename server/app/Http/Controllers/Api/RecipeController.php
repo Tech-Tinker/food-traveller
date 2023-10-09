@@ -42,6 +42,9 @@ class RecipeController extends Controller
             'ingredients' => 'required|string',
             'preparation' => 'required|string',
             'country' => 'required|string',
+            // 'longitude' => 'nullable|numeric',
+            // 'latitude' => 'nullable|numeric',
+
             // 'image' => 'required', // podemos ajustar la reglas
         ]);
 
@@ -65,6 +68,9 @@ class RecipeController extends Controller
             $category->save();
         }
 
+      
+    $longitude = $countryCoordinates['longitude'] ?? null;
+    $latitude = $countryCoordinates['latitude'] ?? null;
         $recipe = new Recipe();
         $recipe->title = $request->title;
         $recipe->description = $request->description;
@@ -74,6 +80,8 @@ class RecipeController extends Controller
         $recipe->ingredients = $request->ingredients;
         $recipe->preparation = $request->preparation;
         $recipe->country = $request->country;
+        $recipe->longitude = $longitude;
+        $recipe->latitude = $latitude;
         $recipe->image = $imagePath;
 
         $request->user()->recipe()->save($recipe);
@@ -87,6 +95,28 @@ class RecipeController extends Controller
             'image_url' => $imageUrl,
             'message' => '¡Genial! Acabas de publicar tu receta.'
         ], 201);
+    }
+
+
+    private function getCoordinates($locationName)
+    {
+        try {
+            $accessToken = 'pk.eyJ1IjoiZ2VuZW5mIiwiYSI6ImNsbXN2MmJ1ZzAzaTEyaXM0aGhvcWVmZDEifQ.nBufcYLKUJUZb0yobUyJWg'; // Reemplaza 'TU_ACCESS_TOKEN' con tu token de Mapbox
+            $geocodeUrl = "https://api.mapbox.com/geocoding/v5/mapbox.places/" . urlencode($locationName) . ".json?access_token=" . $accessToken;
+
+            $response = file_get_contents($geocodeUrl);
+            $data = json_decode($response, true);
+
+            if (!empty($data['features']) && count($data['features']) > 0) {
+                $longitude = $data['features'][0]['center'][0];
+                $latitude = $data['features'][0]['center'][1];
+                return ['longitude' => $longitude, 'latitude' => $latitude];
+            } else {
+                return null;
+            }
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     public function show(Request $request, $id)

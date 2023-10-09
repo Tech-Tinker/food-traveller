@@ -9,10 +9,14 @@ import './css/MapboxMap.css'
 function MapboxMap() {
   const [map, setMap] = useState(null);
   const [isFlatMode, setIsFlatMode] = useState(false);
+  const [markers, setMarkers] = useState(null);
   const [marker, setMarker] = useState(null);
+
   const toggleMode = () => {
     setIsFlatMode(!isFlatMode);
   };
+
+  
 
   useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoiZ2VuZW5mIiwiYSI6ImNsbXN2MmJ1ZzAzaTEyaXM0aGhvcWVmZDEifQ.nBufcYLKUJUZb0yobUyJWg';
@@ -59,16 +63,20 @@ function MapboxMap() {
       });
   
       setMap(mapInstance);
+      
     }
 
   }, [isFlatMode]);
+  
+
+
   
 
   return (
     <div style={{ position: 'relative' }}>
       <h1 className='banner-map'>Where Food Meets Culture</h1>
       <MapToggle isFlatMode={isFlatMode} toggleMode={toggleMode} />
-      <MapDisplay map={map} marker={marker} />
+      <MapDisplay map={map} markers={markers} />
       <SearchBar map={map} setMarker={setMarker} marker={marker} /> 
 
     </div>
