@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 import Button from '../button/Button';
 import '../createRecipeForm/CreateRecipeForm.css';
 import { getRecipeById, updateRecipe } from '../../services/ApiServices';
 import './EditRecipeForm.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios'; 
 
 const EditRecipeForm = () => {
 
@@ -16,8 +19,10 @@ const EditRecipeForm = () => {
     const [time, setTime] = useState('')
     const [category, setCategory] = useState('')
     const [difficulty, setDifficulty] = useState('')
-    const [ingredients, setIngredients] = useState('')
-    const [preparation, setPreparation] = useState('')
+    const [ingredient, setIngredient] = useState('');
+    const [ingredientsList, setIngredientsList] = useState([]);
+    const [preparationStep, setPreparationStep] = useState('');
+    const [preparationSteps, setPreparationSteps] = useState([]);
     const [country, setCountry] = useState('')
     const [image, setImage] = useState('')
     const [selectedFile, setSelectedFile] = useState(null);
@@ -42,6 +47,60 @@ const EditRecipeForm = () => {
         setSelectedFile(selectedFile);
     };
 
+    const handleAddIngredient = () => {
+        if (ingredient) {
+          setIngredientsList([...ingredientsList, ingredient]);
+          setIngredient('');
+        }
+      };
+    
+      const handleRemoveIngredient = (index) => {
+        const updatedIngredientsList = [...ingredientsList];
+        updatedIngredientsList.splice(index, 1);
+        setIngredientsList(updatedIngredientsList);
+      };
+
+      const handleAddStep = () => {
+        setPreparationSteps([...preparationSteps, '']);
+      };
+    
+      const handleRemoveStep = (index) => {
+        const updatedSteps = [...preparationSteps];
+        updatedSteps.splice(index, 1);
+        setPreparationSteps(updatedSteps);
+      };
+    
+      const handleStepChange = (index, value) => {
+        const updatedSteps = [...preparationSteps];
+        updatedSteps[index] = value;
+        setPreparationSteps(updatedSteps);
+      };
+
+      const [countries, setCountries] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+  
+    useEffect(() => {
+      const fetchCountries = async () => {
+        try {
+          const response = await axios.get('https://restcountries.com/v3.1/all');
+          const data = response.data;
+          const countryOptions = data.map((country) => ({
+            code: country.cca2,
+            name: country.name.common,
+          }));
+  
+          countryOptions.sort((a, b) => a.name.localeCompare(b.name));
+  
+          setCountries(countryOptions);
+          setIsLoading(false);
+        } catch (error) {
+          console.error('Error fetching countries:', error);
+        }
+      };
+  
+      fetchCountries();
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -51,8 +110,8 @@ const EditRecipeForm = () => {
         formData.append('time', time);
         formData.append('category', category);
         formData.append('difficulty', difficulty);
-        formData.append('ingredients', ingredients);
-        formData.append('preparation', preparation);
+        formData.append('ingredients', ingredientsList.join('\n'));
+        formData.append('preparation', preparationSteps.join('\n'));
         formData.append('country', country);
         formData.append('image', image);
 
@@ -84,8 +143,8 @@ const EditRecipeForm = () => {
                 setTime(data.recipe.time)
                 setCategory(data.category)
                 setDifficulty(data.recipe.difficulty)
-                setIngredients(data.recipe.ingredients)
-                setPreparation(data.recipe.preparation)
+                setIngredientsList(data.recipe.ingredients.split('\n'));
+                setPreparationSteps(data.recipe.preparation.split('\n'));
                 setCountry(data.recipe.country)
             } catch (error) {
                 console.error('Error fetching recipe by ID:', error);
@@ -96,184 +155,293 @@ const EditRecipeForm = () => {
     }, [id]);
 
     return (
-        <div className="d-flex flex-column justify-content-around align-items-center display-h">
-            <h2 className="p-3 m-0 fw-bold text-center headline-form-color headline-form-size">Editar receta</h2>
-            <form className="d-flex flex-column justify-content-around reg-form" onSubmit={handleSubmit} encType="multipart/form-data">
-
-                <div className="d-flex flex-column">
-                    <label htmlFor="title" className="fw-bold label-text text">Título</label>
+      <div className="container mt-5">
+        <div className="row justify-content-center">
+          <div className="col-md-8">
+            <div className="card">
+              <div className="card-header">Editar receta</div>
+              <div className="card-body">
+                <form onSubmit={handleSubmit} encType="multipart/form-data">
+                  <div className="mb-3">
+                    <label htmlFor="title" className="form-label">
+                      Título
+                    </label>
                     <input
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        type="text"
-                        name="title"
-                        className="input-style-1 input-height-1 b-r"
+                      type="text"
+                      className={`form-control ${
+                        errors.title ? "is-invalid" : ""
+                      }`}
+                      id="title"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
                     />
-                </div>
+                  </div>
 
-                {
-                    errors.title && <div className="error-text text-center">
-                        <p>{errors.title}</p>
+                  {errors.title && (
+                    <div className="error-text text-center">
+                      <p>{errors.title}</p>
                     </div>
-                }
+                  )}
 
-                <div className="d-flex flex-column">
-                    <label htmlFor="description" className="fw-bold label-text text">Descripción</label>
+                  <div className="mb-3">
+                    <label htmlFor="description" className="form-label">
+                      Descripción
+                    </label>
                     <textarea
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        type="text"
-                        name="description"
-                        className="input-style-1 input-height-2 b-r"
-                    />
-                </div>
+                      className={`form-control ${
+                        errors.description ? "is-invalid" : ""
+                      }`}
+                      id="description"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                    ></textarea>
+                  </div>
 
-                {
-                    errors.description && <div className="error-text text-center">
-                        <p>{errors.description}</p>
+                  {errors.description && (
+                    <div className="error-text text-center">
+                      <p>{errors.description}</p>
                     </div>
-                }
+                  )}
 
-                <div className="d-flex flex-column">
-                    <label htmlFor="time" className="fw-bold label-text text">Tiempo de preparación</label>
+                  <div className="mb-3">
+                    <label htmlFor="time" className="form-label">
+                      Tiempo de preparación
+                    </label>
                     <input
-                        value={time}
-                        onChange={(e) => setTime(e.target.value)}
-                        type="text"
-                        name="time"
-                        className="input-style-1 input-height-1 b-r"
+                      type="text"
+                      className={`form-control ${
+                        errors.time ? "is-invalid" : ""
+                      }`}
+                      id="time"
+                      value={time}
+                      onChange={(e) => setTime(e.target.value)}
                     />
-                </div>
+                  </div>
 
-                {
-                    errors.time && <div className="error-text text-center">
-                        <p>{errors.time}</p>
+                  {errors.time && (
+                    <div className="error-text text-center">
+                      <p>{errors.time}</p>
                     </div>
-                }
+                  )}
 
-                <div className="d-flex justify-content-between align-items-center">
-                    <label htmlFor="category" className="fw-bold label-text text">Categoría</label>
+                  <div className="mb-3">
+                    <label htmlFor="category" className="form-label">
+                      Categoría
+                    </label>
                     <select
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        type="text"
-                        name="category"
-                        className="select"
+                      className={`form-select ${
+                        errors.category ? "is-invalid" : ""
+                      }`}
+                      id="category"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
                     >
-                        <option value="Selecciona">Selecciona</option>
-                        <option value="Entrante">Entrante</option>
-                        <option value="Primero">Primero</option>
-                        <option value="Segundo">Segundo</option>
-                        <option value="Postre">Postre</option>
+                      <option value="Selecciona">Selecciona</option>
+                      <option value="Entrante">Entrante</option>
+                      <option value="Primer Plato">Primer Plato</option>
+                      <option value="Segundo Plato">Segundo Plato</option>
+                      <option value="Postre">Postre</option>
                     </select>
-                </div>
+                  </div>
 
-                {
-                    errors.category && <div className="error-text text-center">
-                        <p>{errors.category}</p>
+                  {errors.category && (
+                    <div className="error-text text-center">
+                      <p>{errors.category}</p>
                     </div>
-                }
+                  )}
 
-                <div className="d-flex justify-content-between align-items-center">
-                    <label htmlFor="difficulty" className="fw-bold label-text text">Dificultad</label>
+                  <div className="mb-3">
+                    <label htmlFor="difficulty" className="form-label">
+                      Dificultad
+                    </label>
                     <select
-                        value={difficulty}
-                        onChange={(e) => setDifficulty(e.target.value)}
-                        type="text"
-                        name="difficulty"
-                        className="select"
+                      className={`form-select ${
+                        errors.difficulty ? "is-invalid" : ""
+                      }`}
+                      id="difficulty"
+                      value={difficulty}
+                      onChange={(e) => setDifficulty(e.target.value)}
                     >
-                        <option value="Selecciona">Selecciona</option>
-                        <option value="Fácil">Fácil</option>
-                        <option value="Intermedia">Intermedia</option>
-                        <option value="Difícil">Difícil</option>
+                      <option value="Selecciona">Selecciona</option>
+                      <option value="Fácil">Fácil</option>
+                      <option value="Intermedia">Intermedia</option>
+                      <option value="Difícil">Difícil</option>
                     </select>
-                </div>
+                    {errors.difficulty && (
+                      <div className="invalid-feedback">
+                        {errors.difficulty}
+                      </div>
+                    )}
+                  </div>
 
-                {
-                    errors.difficulty && <div className="error-text text-center">
-                        <p>{errors.difficulty}</p>
-                    </div>
-                }
-
-                <div className="d-flex flex-column">
-                    <label htmlFor="ingredients" className="fw-bold label-text text">Ingredientes</label>
-                    <textarea
-                        value={ingredients}
-                        onChange={(e) => setIngredients(e.target.value)}
+                  <div className="mb-3">
+                    <label htmlFor="ingredient" className="form-label">
+                      Ingredientes
+                    </label>
+                    <div className="input-group">
+                      <input
                         type="text"
-                        name="ingredients"
-                        className="input-style-1 input-height-2 b-r"
-                    />
-                </div>
-
-                {
-                    errors.ingredients && <div className="error-text text-center">
-                        <p>{errors.ingredients}</p>
+                        className={`form-control ${
+                          errors.ingredients ? "is-invalid" : ""
+                        }`}
+                        id="ingredient"
+                        value={ingredient}
+                        onChange={(e) => setIngredient(e.target.value)}
+                      />
+                      <button
+                        type="button"
+                        className="btn btn-danger ingredient-button"
+                        onClick={handleAddIngredient}
+                      >
+                        <FontAwesomeIcon icon={faPlus} />
+                      </button>
                     </div>
-                }
+                  </div>
 
-                <div className="d-flex flex-column">
-                    <label htmlFor="preparation" className="fw-bold label-text text">Preparación</label>
-                    <textarea
-                        value={preparation}
-                        onChange={(e) => setPreparation(e.target.value)}
-                        type="text"
-                        name="preparation"
-                        className="input-style-1 input-height-3 b-r"
-                    />
-                </div>
-
-                {
-                    errors.preparation && <div className="error-text text-center">
-                        <p>{errors.preparation}</p>
+                  {errors.ingredients && (
+                    <div className="error-text text-center">
+                      <p>{errors.ingredients}</p>
                     </div>
-                }
+                  )}
 
-                <div className="d-flex flex-column">
-                    <label htmlFor="country" className="fw-bold label-text text">País</label>
+                  <div className="mb-3">
+                    <label className="form-label">Lista de Ingredientes</label>
+                    <ul className="list-group">
+                      {ingredientsList.map((item, index) => (
+                        <li
+                          key={index}
+                          className="list-group-item d-flex justify-content-between align-items-center"
+                        >
+                          {item}
+                          <button
+                            type="button"
+                            className="btn btn-danger ingredient-button"
+                            onClick={() => handleRemoveIngredient(index)}
+                          >
+                            <FontAwesomeIcon icon={faMinus} />
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label">Preparación</label>
+                    <ul className="list-group">
+                      {preparationSteps.map((step, index) => (
+                        <li
+                          key={index}
+                          className="list-group-item d-flex justify-content-between align-items-center"
+                        >
+                          <div className="input-group">
+                            <input
+                              type="text"
+                              className={`form-control ${
+                                errors.preparation ? "is-invalid" : ""
+                              }`}
+                              value={step}
+                              onChange={(e) =>
+                                handleStepChange(index, e.target.value)
+                              }
+                            />
+                            <button
+                              type="button"
+                              className="btn btn-danger ingredient-button"
+                              onClick={() => handleRemoveStep(index)}
+                            >
+                              <FontAwesomeIcon icon={faMinus} />
+                            </button>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    <button
+                      type="button"
+                      className="btn btn-step"
+                      onClick={handleAddStep}
+                    >
+                      <FontAwesomeIcon icon={faPlus} />
+                      Agregar Paso
+                    </button>
+                  </div>
+
+                  {errors.preparation && (
+                    <div className="error-text text-center">
+                      <p>{errors.preparation}</p>
+                    </div>
+                  )}
+
+                  <div className="mb-3">
+                    <label htmlFor="country" className="form-label">
+                      País
+                    </label>
+                    <br />
+                    <select
+                      onChange={(e) => setCountry(e.target.value)}
+                      value={country}
+                      name="country"
+                      className=" w-100 p-2 rounded-2"
+                    >
+                      <option value="">Selecciona un país</option>
+                      {isLoading ? (
+                        <option value="" disabled>
+                          Cargando países...
+                        </option>
+                      ) : (
+                        countries.map((country) => (
+                          <option key={country.code} value={country.code}>
+                            {country.name}
+                          </option>
+                        ))
+                      )}
+                    </select>
+                  </div>
+
+                  {errors.country && (
+                    <div className="error-text text-center">
+                      <p>{errors.country}</p>
+                    </div>
+                  )}
+
+                  <div className="mb-3">
+                    <label htmlFor="image" className="form-label">
+                      Imagen
+                    </label>
                     <input
-                        value={country}
-                        onChange={(e) => setCountry(e.target.value)}
-                        type="text"
-                        name="image"
-                        className="input-style-1 input-height-1 b-r"
+                      className="form-control"
+                      type="file"
+                      name="image"
+                      accept="image/*"
+                      onChange={handleFileInputChange}
                     />
-                </div>
+                  </div>
 
-                {
-                    errors.country && <div className="error-text text-center">
-                        <p>{errors.country}</p>
+                  {errors.image && (
+                    <div className="error-text text-center">
+                      <p>{errors.image}</p>
                     </div>
-                }
+                  )}
 
-                <div className="d-flex flex-column">
-                    <label htmlFor="image" className="fw-bold label-text text">Imagen</label>
-                    <div className='select d-active'>Selecciona</div>
-                    <input
-                        onChange={handleFileInputChange}
-                        type="file"
-                        name="image"
-                        accept="image/*"
-                        className="display-none top-42"
+                  <div className="d-flex justify-content-between">
+                    <Link to={`/profile`}>
+                      <Button
+                        backgroundColorClass="bttn-primary"
+                        text="Cancelar"
+                        widthClass="simpleW"
+                      />
+                    </Link>
+                    <Button
+                      backgroundColorClass="bttn-secondary"
+                      text="Añadir"
                     />
-                    {selectedFile && <p>Archivo seleccionado: {selectedFile.name}</p>}
-                </div>
-
-                {
-                    errors.image && <div className="error-text text-center">
-                        <p>{errors.image}</p>
-                    </div>
-                }
-
-                <div className="d-flex justify-content-between">
-                    <Link to={`/profile`}><Button backgroundColorClass="bttn-primary" text="Cancelar" widthClass="simpleW" /></Link>
-                    <Button backgroundColorClass="bttn-secondary" text="Añadir" />
-                </div>
-
-            </form>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-    )
-}
+      </div>
+    );
+};
 
-export default EditRecipeForm
+export default EditRecipeForm;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import swal from 'sweetalert';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../button/Button';
@@ -97,12 +97,12 @@ const EditProfileForm = () => {
             return selectedCountry.continent;
         }
         return null;
-    };
+      };
 
     useEffect(() => {
         if (country) {
-            const continent = getContinentByCountry(country);
-            setContinent(continent);
+          const continent = getContinentByCountry(country);
+          setContinent(continent);
         }
         // eslint-disable-next-line
     }, [country, countries]);
@@ -154,6 +154,7 @@ const EditProfileForm = () => {
         if (continent && continentColors.hasOwnProperty(continent)) {
             return continentColors[continent];
         }
+
         return 'grey';
     };
 
@@ -174,7 +175,7 @@ const EditProfileForm = () => {
                             width: '120px',
                             height: '120px',
                             borderRadius: '50%',
-                            border: `5px solid ${getBorderColor()}`,
+                            border: `5px solid ${getBorderColor()}`, 
                             overflow: 'hidden',
                         }}
                     >

@@ -1,58 +1,25 @@
-.b-r{
-    border-radius: 5px;
-}
+ .card-header{
+    font-weight: bold;
+    color: #2F93A9;
+ }
+ .card {
+    box-shadow: 0px 0px 5px #BB9B8E;
+  }
+  
+ .ingredient-button {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #333;
+    border: none;
+    margin-left: 5px;
+  }
+  
+  .ingredient-button:hover {
+    background-color: #f0f0f0;
+  }
 
-.input-style-1{
-    border: 1px solid #676565;
-}
+  .btn-step{
+    border: 2px solid #2F93A9;
+  }
 
-.input-height-1{
-    height: 1.75rem;
-}
-
-.input-height-2{
-    height: 3.18rem;
-}
-
-.input-height-3{
-    height: 6.375rem;
-}
-
-.select{
-    width: 8rem;
-    height: 1.31rem;
-    border-radius: 10px;
-    border: 1px solid #BB9B8E;
-    background: #BB9B8E;  
-    color: white;
-    font-size: 0.9rem;
-    font-weight: 500;  
-    text-align: center;
-}
-
-.create-form {
-    width: 80%;
-}
-
-.display-none{
-    position: absolute;
-    left: 2.4rem;
-    opacity: 0;
-    width: 100%;
-    cursor: pointer;
-}
-.top-40{
-    top: 40rem;
-}
-
-.d-active{
-    position: relative;
-    display: inline-block;
-}
-@media (min-width: 400px) {
-
-    .create-form {
-        width: 40%;
-       
-    }
-}    
+ 
