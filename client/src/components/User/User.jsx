@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AvatarGray from '../../assets/AvatarGray.svg';
 import { getProfile } from '../../services/ApiServices';
 
-const User = ({ country, continent }) => {
+const User = ({ continent }) => {
   const [profileData, setProfileData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 

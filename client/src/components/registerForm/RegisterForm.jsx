@@ -39,7 +39,6 @@ const RegisterForm = () => {
                     localStorage.setItem('auth_name', res.data.username);
                     localStorage.setItem('auth_user_id', res.data.id);
                     swal("Success", res.data.message, "success");
-                    // navigate('/login');
                     navigate('/');
 
                 } else {

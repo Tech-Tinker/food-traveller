@@ -1,7 +1,7 @@
 
 import Header from '../../components/header/Header';
 import RegisterForm from '../../components/registerForm/RegisterForm';
-import './RegisterView.css';
+import './Register.css';
 
 const RegisterView = () => {
 

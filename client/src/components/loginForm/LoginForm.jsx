@@ -10,7 +10,7 @@ import { login } from '../../services/AuthServices';
 const LoginForm = () => {
   const navigate = useNavigate();
 
-  const [login, setLogin] = useState({
+  const [loginData, setLoginData] = useState({
     email: '',
     password: '',
     error_list: [],
@@ -18,18 +18,18 @@ const LoginForm = () => {
 
   const handleOnChange = (e) => {
     e.persist();
-    setLogin({ ...login, [e.target.name]: e.target.value });
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
     const data = {
-      email: login.email,
-      password: login.password,
+      email: loginData.email,
+      password: loginData.password,
     };
 
-    axios.get('http://localhost:8000/sanctum/csrf-cookie').then((response) => {
+    axios.get('http://localhost:8000/sanctum/csrf-cookie').then(() => {
       axios.post(`http://localhost:8000/api/login`, data).then((res) => {
         if (res.data.status === 200) {
           localStorage.setItem('auth_token', res.data.token);
@@ -38,9 +38,9 @@ const LoginForm = () => {
           swal('Success', res.data.message, 'success');
           navigate('/');
         } else if (res.data.status === 401) {
-          swal('Warning', res.data.message, 'warning');
+          alert('Warning', res.data.message, 'warning');
         } else {
-          setLogin({ ...login, error_list: res.data.validation_errors });
+          setLoginData({ ...loginData, error_list: res.data.validation_errors });
         }
       });
     });
@@ -52,19 +52,19 @@ const LoginForm = () => {
       <form onSubmit={handleOnSubmit} className="form-login">
         <div className="d-flex flex-column gap-0-5">
           <label htmlFor="email" className="fw-bold fs-5 label-text text">Email</label>
-          <input type="email" name="email" onChange={handleOnChange} value={login.email} className="input-none-style border-b"></input>
+          <input type="email" name="email" onChange={handleOnChange} value={loginData.email} className="input-none-style border-b"></input>
         </div>
-        <span className="error-text text-center">{login.error_list.email}</span>
+        <span className="error-text text-center">{loginData.error_list.email}</span>
 
         <div className="d-flex flex-column gap-0-5">
           <label htmlFor="password" className="fw-bold fs-5 label-text text">Contraseña</label>
-          <input type="password" name="password" onChange={handleOnChange} value={login.password} className="input-none-style border-b"></input>
+          <input type="password" name="password" onChange={handleOnChange} value={loginData.password} className="input-none-style border-b"></input>
         </div>
-        <span className="error-text text-center">{login.error_list.password}</span>
+        <span className="error-text text-center">{loginData.error_list.password}</span>
 
-        <div className="d-flex flex-column justify-content-around align-items-center gap1">
+        <div className="d-flex flex-column justify-content-around align-items-center gap-1">
           <Button backgroundColorClass="bttn-secondary" text="Iniciar sesión" widthClass="dobleW" />
-          <p className="text-center">No tienes cuenta? <Link to="/register" className="fw-bold  link-none-style">Regístrate</Link></p>
+          <p className="text-center">¿No tienes cuenta? <Link to="/register" className="fw-bold link-none-style">Regístrate</Link></p>
         </div>
       </form>
     </div>
