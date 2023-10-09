@@ -59,7 +59,7 @@ const router = createBrowserRouter([
     },
 
     {
-        path: '/recipe-reviews',
+        path: '/rating',
         element: <Rating />
     }
 
