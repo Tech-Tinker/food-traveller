@@ -53,3 +53,28 @@
     text-decoration: none;
     color: inherit;
 }
+
+@media (min-width: 1080px) and (min-height: 720px) {
+    .recipe-card{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .recipe-image{
+        width: 24rem;
+        height: 18rem;
+        margin: 0;
+    }
+
+    .recipe-title-menu{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 17rem;
+        margin: 0;
+        padding: 1.5rem;
+    }
+}

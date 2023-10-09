@@ -24,3 +24,9 @@
 .pointer{
     cursor: pointer;
 }
+
+@media (min-width: 1080px) and (min-height: 720px) {
+    .header-margin{
+        padding: 1.5rem 6rem;
+    }
+}

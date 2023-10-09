@@ -23,9 +23,9 @@ const Profilerecipes = () => {
     return (
         <div className="recipe-grid">
             {recipes.map((recipe, index) => (
-                <div className="recipe-card" key={index}>
+                <div className="recipe-card pad-2" key={index}>
                     <Link to={`/recipe/${recipe.id}`} className="link-style-none">
-                        <div className="recipe-image">
+                        <div className="recipe-image image-container">
                             <img src={recipe.image_url} alt={recipe.title} />
                         </div>
                     </Link>
